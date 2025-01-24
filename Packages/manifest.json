@@ -58,6 +58,14 @@
         "org.nuget"
       ],
       "overrideBuiltIns": false
+    },
+    {
+      "name": "OpenUPM",
+      "url": "https://package.openupm.com",
+      "scopes": [
+        "com.serilog.sinks.unity3d"
+      ],
+      "overrideBuiltIns": false
     }
   ]
 }
