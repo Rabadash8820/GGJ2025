@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: bfb012fb0f98b354d95990351edf10b3
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 94578
+  packageName: Session Restore
+  packageVersion: 2.0.0
+  assetPath: Assets/Plugins/RenderHeads/SessionRestore/Scripts/HierarchyRestore.cs
+  uploadId: 509584

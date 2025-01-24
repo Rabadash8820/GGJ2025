@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 2bcd0d6e264ce6542aa27e8766d0a168
+AssemblyDefinitionImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 94578
+  packageName: Session Restore
+  packageVersion: 2.0.0
+  assetPath: Assets/Plugins/RenderHeads/SessionRestore/Scripts/SessionRestore.Runtime.asmdef
+  uploadId: 509584
