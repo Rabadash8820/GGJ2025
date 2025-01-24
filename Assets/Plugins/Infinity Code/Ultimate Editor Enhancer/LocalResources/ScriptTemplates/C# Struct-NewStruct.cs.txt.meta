@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 9199602996258f04598913feaf243ff3
+TextScriptImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 141831
+  packageName: Ultimate Editor Enhancer
+  packageVersion: 3.15.1
+  assetPath: Assets/Plugins/Infinity Code/Ultimate Editor Enhancer/LocalResources/ScriptTemplates/C#
+    Struct-NewStruct.cs.txt
+  uploadId: 633492

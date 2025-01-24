@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: fd24a30fb0993f343ad9986334601bd3
+TextScriptImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 141831
+  packageName: Ultimate Editor Enhancer
+  packageVersion: 3.15.1
+  assetPath: Assets/Plugins/Infinity Code/Ultimate Editor Enhancer/LocalResources/ScriptTemplates/C#
+    Enum-NewEnum.cs.txt
+  uploadId: 633492

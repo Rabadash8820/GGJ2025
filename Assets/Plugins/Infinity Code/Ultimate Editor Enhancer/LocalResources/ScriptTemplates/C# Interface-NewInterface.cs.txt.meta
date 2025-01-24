@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 7a16fb91ee674844f94754cd02a637fe
+TextScriptImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 141831
+  packageName: Ultimate Editor Enhancer
+  packageVersion: 3.15.1
+  assetPath: Assets/Plugins/Infinity Code/Ultimate Editor Enhancer/LocalResources/ScriptTemplates/C#
+    Interface-NewInterface.cs.txt
+  uploadId: 633492

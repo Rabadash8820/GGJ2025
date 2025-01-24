@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 180097728f43f2a4ea0ef8d39db36f62
+TextScriptImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 141831
+  packageName: Ultimate Editor Enhancer
+  packageVersion: 3.15.1
+  assetPath: Assets/Plugins/Infinity Code/Ultimate Editor Enhancer/LocalResources/ScriptTemplates/Assembly
+    Definition-NewAssembly.asmdef.txt
+  uploadId: 633492

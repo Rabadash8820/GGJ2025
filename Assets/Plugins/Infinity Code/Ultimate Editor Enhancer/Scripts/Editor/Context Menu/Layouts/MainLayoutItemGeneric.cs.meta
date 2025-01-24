@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 983832c6596d45ed9ec862fb2d5ebe15
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 141831
+  packageName: Ultimate Editor Enhancer
+  packageVersion: 3.15.1
+  assetPath: Assets/Plugins/Infinity Code/Ultimate Editor Enhancer/Scripts/Editor/Context
+    Menu/Layouts/MainLayoutItemGeneric.cs
+  uploadId: 633492

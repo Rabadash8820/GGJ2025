@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 2ecf6041f1cb4e479a7303248208fa08
+AssemblyDefinitionImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 141831
+  packageName: Ultimate Editor Enhancer
+  packageVersion: 3.15.1
+  assetPath: Assets/Plugins/Infinity Code/Ultimate Editor Enhancer/Scripts/Editor/Ultimate
+    Editor Enhancer-Editor.asmdef
+  uploadId: 633492

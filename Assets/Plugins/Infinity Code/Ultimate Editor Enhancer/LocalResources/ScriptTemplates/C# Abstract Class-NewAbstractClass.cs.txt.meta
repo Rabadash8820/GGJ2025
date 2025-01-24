@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: f6ebe6e335ff21b4dbbe32ba0bcf2734
+TextScriptImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 141831
+  packageName: Ultimate Editor Enhancer
+  packageVersion: 3.15.1
+  assetPath: Assets/Plugins/Infinity Code/Ultimate Editor Enhancer/LocalResources/ScriptTemplates/C#
+    Abstract Class-NewAbstractClass.cs.txt
+  uploadId: 633492
