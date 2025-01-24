@@ -353,6 +353,51 @@
       },
       "url": "https://packages.unity.com"
     },
+    "org.nuget.microsoft.extensions.logging.abstractions": {
+      "version": "2.2.0",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://unitynuget-registry.azurewebsites.net"
+    },
+    "rabadash8820.unityutil": {
+      "version": "https://github.com/DerploidEntertainment/UnityUtil.git?path=/UnityUtil/Assets/UnityUtil#unity6-dev",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "org.nuget.microsoft.extensions.logging.abstractions": "2.2.0",
+        "com.unity.modules.androidjni": "1.0.0",
+        "com.unity.modules.animation": "1.0.0",
+        "com.unity.modules.physics": "1.0.0"
+      },
+      "hash": "4528ff5030ae6c7d33ee6be26a547279d0ac705f"
+    },
+    "rabadash8820.unityutil.triggers": {
+      "version": "https://github.com/DerploidEntertainment/UnityUtil.git?path=/UnityUtil/Assets/UnityUtil.Triggers#unity6-dev",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "org.nuget.microsoft.extensions.logging.abstractions": "2.2.0",
+        "com.unity.modules.animation": "1.0.0",
+        "com.unity.modules.physics": "1.0.0",
+        "com.unity.modules.physics2d": "1.0.0",
+        "rabadash8820.unityutil": "https://github.com/DerploidEntertainment/UnityUtil.git?path=/UnityUtil/Assets/UnityUtil"
+      },
+      "hash": "4528ff5030ae6c7d33ee6be26a547279d0ac705f"
+    },
+    "rabadash8820.unityutil.ui": {
+      "version": "https://github.com/DerploidEntertainment/UnityUtil.git?path=/UnityUtil/Assets/UnityUtil.UI#unity6-dev",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "org.nuget.microsoft.extensions.logging.abstractions": "2.2.0",
+        "com.unity.modules.audio": "1.0.0",
+        "com.unity.modules.ui": "1.0.0",
+        "rabadash8820.unityutil": "https://github.com/DerploidEntertainment/UnityUtil.git?path=/UnityUtil/Assets/UnityUtil",
+        "rabadash8820.unityutil.triggers": "https://github.com/DerploidEntertainment/UnityUtil.git?path=/UnityUtil/Assets/UnityUtil.Triggers"
+      },
+      "hash": "4528ff5030ae6c7d33ee6be26a547279d0ac705f"
+    },
     "com.unity.modules.accessibility": {
       "version": "1.0.0",
       "depth": 0,
