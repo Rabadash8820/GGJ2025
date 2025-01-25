@@ -4,7 +4,7 @@ using UnityUtil.Updating;
 
 namespace GGJ2025
 {
-    public class PhysicsMover : Updatable
+    public class PhysicsPlanePushMover : Updatable
     {
         private InputSystemActions _inputSystemActions;
 
