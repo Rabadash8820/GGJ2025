@@ -185,13 +185,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 862279510118615749}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
-  m_LocalPosition: {x: 0, y: 5, z: -5}
+  m_LocalRotation: {x: 0.2588191, y: 0, z: 0, w: 0.9659258}
+  m_LocalPosition: {x: 0, y: 5, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8472096987984285446}
-  m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 30, y: 0, z: 0}
 --- !u!20 &7828102190255640516
 Camera:
   m_ObjectHideFlags: 0
@@ -226,7 +226,7 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 34
-  orthographic: 1
+  orthographic: 0
   orthographic size: 5
   m_Depth: -1
   m_CullingMask:
@@ -544,7 +544,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3686817088031569618}
   - component: {fileID: 7630352508344203285}
-  - component: {fileID: 3508726567585144923}
+  - component: {fileID: 2734217554644328845}
+  - component: {fileID: 4838815422322940494}
   m_Layer: 0
   m_Name: collect-trigger
   m_TagString: Untagged
@@ -586,9 +587,9 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 1.02
+  m_Radius: 1.05
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3508726567585144923
+--- !u!114 &2734217554644328845
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -602,5 +603,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ScaledBubbleObject: {fileID: 4214180908611633256}
   BubbleCollected:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &4838815422322940494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5557722376475652614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e38ef5489b28ef459f5eeea23c51770, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PersonHit:
     m_PersistentCalls:
       m_Calls: []
