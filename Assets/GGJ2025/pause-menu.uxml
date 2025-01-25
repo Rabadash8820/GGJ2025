@@ -1,0 +1,6 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:Label text="Paused" name="hdr" style="-unity-text-align: upper-center; color: rgb(255, 255, 255);" />
+    <ui:Button text="Resume" name="btn-resume" />
+    <ui:Button text="Main Menu" name="btn-main-menu" />
+    <ui:Button text="Quit" name="btn-quit" />
+</ui:UXML>

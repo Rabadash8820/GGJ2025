@@ -340,7 +340,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1070358806
+--- !u!1 &1149357189
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -348,42 +348,135 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1070358807}
-  - component: {fileID: 1070358808}
+  - component: {fileID: 1149357190}
+  - component: {fileID: 1149357191}
+  - component: {fileID: 1149357192}
+  - component: {fileID: 1149357193}
   m_Layer: 0
-  m_Name: service-updater
+  m_Name: ui
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1070358807
+--- !u!4 &1149357190
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1070358806}
+  m_GameObject: {fileID: 1149357189}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1433935723}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1070358808
+--- !u!114 &1149357191
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1070358806}
+  m_GameObject: {fileID: 1149357189}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -1749439603, guid: 060ff4596bd93044693a70cc6d313304, type: 3}
+  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_PanelSettings: {fileID: 11400000, guid: 5d3d419e177b53f4092b7904406adc5e, type: 2}
+  m_ParentUI: {fileID: 0}
+  sourceAsset: {fileID: 9197481963319205126, guid: 9f156c4aca911264091e6f759359a03d, type: 3}
+  m_SortingOrder: 0
+  m_WorldSpaceSizeMode: 1
+  m_WorldSpaceWidth: 1920
+  m_WorldSpaceHeight: 1080
+--- !u!114 &1149357192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1149357189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d722091e695fa14e8ff512a1e3c0dc0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UIDocument: {fileID: 1149357191}
+  GrpPauseMenuName: pause-menu
+  BtnResumeName: btn-resume
+  BtnMainMenuName: btn-main-menu
+  BtnQuitName: btn-quit
+  ResumeSelected:
+    m_PersistentCalls:
+      m_Calls: []
+  MainMenuSelected:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 5aec2b046375a63479b35442f54254f6, type: 2}
+        m_TargetAssemblyTypeName: UnityUtil.SceneLoadManager, UnityUtil
+        m_MethodName: LoadSingleSceneAsync
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: main-menu
+          m_BoolArgument: 0
+        m_CallState: 2
+  QuitSelected:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 03da9732bca018e4e9e9c981db6f528c, type: 2}
+        m_TargetAssemblyTypeName: UnityUtil.ApplicationQuitter, rabadash8820.unitydsf
+        m_MethodName: Quit
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  Paused:
+    m_PersistentCalls:
+      m_Calls: []
+  Resumed:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &1149357193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1149357189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1631925470, guid: 89e0cc21ccdf0144598f97a3ed77427a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Event>k__BackingField: {fileID: 11400000, guid: bcf980443a5d8474094183d73da3108b, type: 2}
+  _eventInvoked:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1149357192}
+        m_TargetAssemblyTypeName: GGj2025.PauseMenuController, GGJ2025
+        m_MethodName: TogglePaused
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1433935722
 GameObject:
   m_ObjectHideFlags: 0
@@ -413,8 +506,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1070358807}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1433935724
@@ -429,7 +521,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92a1186e53545b5478cb6a14cafb5a01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Updater: {fileID: 1070358808}
+  Updater: {fileID: 0}
 --- !u!1 &1642630827
 GameObject:
   m_ObjectHideFlags: 27
@@ -482,3 +574,4 @@ SceneRoots:
   - {fileID: 619394802}
   - {fileID: 1642630829}
   - {fileID: 1433935723}
+  - {fileID: 1149357190}

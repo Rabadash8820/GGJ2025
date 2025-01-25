@@ -1,0 +1,6 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:Template name="pause-menu" src="project://database/Assets/GGJ2025/pause-menu.uxml?fileID=9197481963319205126&amp;guid=e90f33b08daeef44a8307ac3d67f0eb9&amp;type=3#pause-menu" />
+    <ui:VisualElement name="grp-center" style="flex-grow: 1; justify-content: center; align-self: center;">
+        <ui:Instance template="pause-menu" name="pause-menu" style="width: 150px; height: 170px; background-color: rgba(0, 0, 0, 0.78); padding-left: 5px; padding-right: 5px; padding-top: 5px; padding-bottom: 5px; display: none;" />
+    </ui:VisualElement>
+</ui:UXML>
