@@ -44,8 +44,10 @@ namespace InfinityCode.UltimateEditorEnhancer
                 return "Toolbar";
             }
 
-            public void SetState(bool state)
+            public override void SetState(bool state)
             {
+                base.SetState(state);
+                
                 toolbar = state;
             }
         }

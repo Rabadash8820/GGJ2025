@@ -5,6 +5,7 @@ namespace InfinityCode.UltimateEditorEnhancer
 {
     public static class ComponentHeaderButtonOrder
     {
+        public const float MoveComponentUpDown = -500;
         public const float SaveButton = -100;
         public const float BoxColliderDetectSize = -90;
         public const float CameraAlignWith = -85;

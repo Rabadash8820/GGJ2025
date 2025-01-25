@@ -6,6 +6,7 @@ using UnityEngine;
 
 namespace InfinityCode.UltimateEditorEnhancer
 {
+    [AddComponentMenu("")]
     public class SaveOnExitPlayMode : MonoBehaviour
     {
         public List<Component> saveComponents = new List<Component>();

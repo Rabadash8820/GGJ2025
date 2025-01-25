@@ -14,7 +14,7 @@ namespace InfinityCode.UltimateEditorEnhancer.ProjectTools
 
         static ProjectPlayAudio()
         {
-            ProjectItemDrawer.Register("PLAY_AUDIO", DrawButton, 10);
+            ProjectItemDrawer.Register("PLAY_AUDIO", DrawButton, ProjectToolOrder.PlayAudio);
         }
 
         private static void DrawButton(ProjectItem item)

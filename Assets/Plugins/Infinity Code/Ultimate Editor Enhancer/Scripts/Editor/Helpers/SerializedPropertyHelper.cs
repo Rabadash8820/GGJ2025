@@ -387,23 +387,46 @@ namespace InfinityCode.UltimateEditorEnhancer
             switch (prop.propertyType)
             {
                 case SerializedPropertyType.Generic:
+                    string path = prop.propertyPath + ".";
+                    SerializedProperty propCopy;
+                    
                     if (prop.isArray)
                     {
                         JsonArray array = new JsonArray();
-                        for (int i = 0; i < prop.arraySize; i++)
+                        int arraySize = prop.arraySize;
+                        
+                        prop.NextVisible(true);
+                        if (arraySize == 0) return array;
+                        
+                        propCopy = prop.Copy();
+                        
+                        while (propCopy.NextVisible(true))
                         {
-                            array.Add(ToJson(prop.GetArrayElementAtIndex(i)));
+                            if (propCopy.propertyPath.StartsWith(path))
+                            {
+                                prop.NextVisible(true);
+                                array.Add(ToJson(prop));
+                                propCopy = prop.Copy();
+                            }
+                            else break;
                         }
 
                         return array;
                     }
                     
                     JsonObject obj = new JsonObject();
-                    IEnumerator enumerator = prop.GetEnumerator();
-                    while (enumerator.MoveNext())
+                    propCopy = prop.Copy();
+                    
+                    while (propCopy.NextVisible(true))
                     {
-                        SerializedProperty current = (SerializedProperty)enumerator.Current;
-                        obj.Add(current.name, ToJson(current));
+                        if (propCopy.propertyPath.StartsWith(path))
+                        {
+                            prop.NextVisible(true);
+                            string propName = prop.name;
+                            obj.Add(propName, ToJson(prop));
+                            propCopy = prop.Copy();
+                        }
+                        else break;
                     }
 
                     return obj;

@@ -317,6 +317,21 @@ namespace InfinityCode.UltimateEditorEnhancer
             Undo.CollapseUndoOperations(group);
         }
 
+        public static GameObject[] GetChildren(GameObject target)
+        {
+            Transform t = target.transform;
+            GameObject[] children = new GameObject[t.childCount];
+            for (int i = 0; i < t.childCount; i++) children[i] = t.GetChild(i).gameObject;
+            return children;
+        }
+
+        public static Transform[] GetChildren(Transform target)
+        {
+            Transform[] children = new Transform[target.childCount];
+            for (int i = 0; i < target.childCount; i++) children[i] = target.GetChild(i);
+            return children;
+        }
+
         public static StringBuilder GetGameObjectPath(GameObject go)
         {
             return GetTransformPath(go.transform);

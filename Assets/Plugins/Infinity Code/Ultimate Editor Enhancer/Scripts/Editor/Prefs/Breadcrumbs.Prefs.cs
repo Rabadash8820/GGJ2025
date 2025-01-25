@@ -17,7 +17,7 @@ namespace InfinityCode.UltimateEditorEnhancer
         public static EventModifiers breadcrumbsParentShowAllModifiers = EventModifiers.Control;
 
         public static bool breadcrumbsNeighbors = true;
-        public static bool breadcrumbsChilds = true;
+        public static bool breadcrumbsChildren = true;
 
         private class BreadcrumbsManager : StandalonePrefManager<BreadcrumbsManager>, IHasShortcutPref
         {
@@ -40,7 +40,7 @@ namespace InfinityCode.UltimateEditorEnhancer
                 DrawParent();
 
                 breadcrumbsNeighbors = EditorGUILayout.ToggleLeft("Neighbors", breadcrumbsNeighbors);
-                breadcrumbsChilds = EditorGUILayout.ToggleLeft("Children", breadcrumbsChilds);
+                breadcrumbsChildren = EditorGUILayout.ToggleLeft("Children", breadcrumbsChildren);
 
                 EditorGUI.indentLevel--;
                 EditorGUI.EndDisabledGroup();
@@ -76,8 +76,10 @@ namespace InfinityCode.UltimateEditorEnhancer
                 };
             }
 
-            public static void SetState(bool state)
+            public override void SetState(bool state)
             {
+                base.SetState(state);
+                
                 breadcrumbs = state;
             }
         }

@@ -185,8 +185,10 @@ I would be very grateful for the help.", MessageType.Warning);
                 ReferenceManager.Save();
             }
 
-            public static void SetState(bool state)
+            public override void SetState(bool state)
             {
+                base.SetState(state);
+                
                 projectFolderIcons = state;
             }
         }

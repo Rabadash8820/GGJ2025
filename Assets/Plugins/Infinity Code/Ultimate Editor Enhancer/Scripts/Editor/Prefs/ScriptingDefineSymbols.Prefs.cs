@@ -40,6 +40,13 @@ namespace InfinityCode.UltimateEditorEnhancer
                     if (OnAddSymbolsChanged != null) OnAddSymbolsChanged();
                 }
             }
+
+            public override void SetState(bool state)
+            {
+                base.SetState(state);
+                
+                addScriptingDefineSymbols = state;
+            }
         }
     }
 }

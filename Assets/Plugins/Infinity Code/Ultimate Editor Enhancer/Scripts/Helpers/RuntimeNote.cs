@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace InfinityCode.UltimateEditorEnhancer
 {
+    [AddComponentMenu("")]
     public class RuntimeNote : MonoBehaviour
     {
         public string text;

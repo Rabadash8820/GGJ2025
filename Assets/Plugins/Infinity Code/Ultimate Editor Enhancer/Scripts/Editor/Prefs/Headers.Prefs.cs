@@ -30,8 +30,10 @@ namespace InfinityCode.UltimateEditorEnhancer
                 EditorGUI.EndDisabledGroup();
             }
             
-            public static void SetState(bool state)
+            public override void SetState(bool state)
             {
+                base.SetState(state);
+                
                 hierarchyHeaders = state;
             }
         }

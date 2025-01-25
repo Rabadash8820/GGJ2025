@@ -6,6 +6,7 @@ using UnityEngine;
 
 namespace InfinityCode.UltimateEditorEnhancer 
 {
+    [AddComponentMenu("")]
     public class ViewState: MonoBehaviour
     {
         public Vector3 pivot;

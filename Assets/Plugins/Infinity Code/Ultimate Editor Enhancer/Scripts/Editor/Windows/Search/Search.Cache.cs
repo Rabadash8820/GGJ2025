@@ -41,12 +41,12 @@ namespace InfinityCode.UltimateEditorEnhancer.Windows
 
         private static void CacheProject()
         {
-            Dictionary<int, Record> tempRecords = new Dictionary<int, Record>();
+            Dictionary<string, Record> tempRecords = new Dictionary<string, Record>();
             string[] assets = AssetDatabase.GetAllAssetPaths();
 
             if (projectRecords != null)
             {
-                foreach (KeyValuePair<int, Record> pair in projectRecords) pair.Value.used = false;
+                foreach (KeyValuePair<string, Record> pair in projectRecords) pair.Value.used = false;
             }
 
             char[] validPrefix = {'A', 's', 's', 'e', 't', 's', '/'};
@@ -72,17 +72,15 @@ namespace InfinityCode.UltimateEditorEnhancer.Windows
 
                     if (!hasValidPrefix) continue;
 
-                    int hashCode = assetPath.GetHashCode();
-
                     if (projectRecords != null)
                     {
                         Record r;
 
-                        if (projectRecords.TryGetValue(hashCode, out r))
+                        if (projectRecords.TryGetValue(assetPath, out r))
                         {
-                            if (!tempRecords.ContainsKey(hashCode))
+                            if (!tempRecords.ContainsKey(assetPath))
                             {
-                                tempRecords.Add(hashCode, r);
+                                tempRecords.Add(assetPath, r);
                                 r.used = true;
                             }
 
@@ -90,9 +88,9 @@ namespace InfinityCode.UltimateEditorEnhancer.Windows
                         }
                     }
 
-                    if (!tempRecords.ContainsKey(hashCode))
+                    if (!tempRecords.ContainsKey(assetPath))
                     {
-                        tempRecords.Add(hashCode, new ProjectRecord(assetPath));
+                        tempRecords.Add(assetPath, new ProjectRecord(assetPath));
                     }
                 }
                 catch

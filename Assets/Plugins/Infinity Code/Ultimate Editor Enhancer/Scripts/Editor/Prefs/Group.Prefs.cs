@@ -41,8 +41,10 @@ namespace InfinityCode.UltimateEditorEnhancer
                 };
             }
 
-            public static void SetState(bool state)
+            public override void SetState(bool state)
             {
+                base.SetState(state);
+                
                 group = state;
             }
         }

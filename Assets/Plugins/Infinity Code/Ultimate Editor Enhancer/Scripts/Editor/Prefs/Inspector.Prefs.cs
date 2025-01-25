@@ -22,6 +22,7 @@ namespace InfinityCode.UltimateEditorEnhancer
         public static bool hidePresetButton = false;
         public static bool inspectorBar = true;
         public static bool inspectorBarShowMaterials = false;
+        public static bool inspectorMoveAboveBelow = true;
         public static bool inspectorNotes = true;
         //public static bool inspectorBarRelatedComponents = true;
         public static bool nestedEditors = true;
@@ -49,6 +50,7 @@ namespace InfinityCode.UltimateEditorEnhancer
                         "Hide Empty Help Buttons",
                         "Hide Preset Button",
                         "Inspector Bar",
+                        "Move Above/Below",
                         "Nested Editor",
                         "Note",
                         "Object Field Selector",
@@ -70,6 +72,9 @@ namespace InfinityCode.UltimateEditorEnhancer
                 _expandLongTextFields = EditorGUILayout.ToggleLeft("Expand Long Text Fields", _expandLongTextFields);
 
                 DrawInspectorBar();
+                
+                inspectorMoveAboveBelow = EditorGUILayout.ToggleLeft("Move Above/Below", inspectorMoveAboveBelow);
+                
                 DrawNestedEditor();
 
                 inspectorNotes = EditorGUILayout.ToggleLeft("Notes", inspectorNotes);
@@ -152,8 +157,10 @@ namespace InfinityCode.UltimateEditorEnhancer
                 return "Inspector";
             }
 
-            public void SetState(bool state)
+            public override void SetState(bool state)
             {
+                base.SetState(state);
+                
                 _expandLongTextFields = state;
                 animatorInspectorClips = state;
                 boxColliderDetect = state;
@@ -164,12 +171,14 @@ namespace InfinityCode.UltimateEditorEnhancer
                 inspectorBar = state;
                 inspectorBarShowMaterials = state;
                 inspectorNotes = state;
+                inspectorMoveAboveBelow = state;
                 nestedEditors = state;
                 objectFieldSelector = state;
                 saveComponentRuntime = state;
                 transformInspectorGlobalValues = state;
+                transformAlignDistribute = state;
                 
-                EmptyInspectorManager.SetState(state);
+                GetManager<EmptyInspectorManager>().SetState(state);
                 
                 HelpIconButtonInterceptor.Refresh();
                 DrawPresetButtonInterceptor.Refresh();

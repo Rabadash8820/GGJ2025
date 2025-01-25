@@ -10,6 +10,7 @@ namespace InfinityCode.UltimateEditorEnhancer
 {
     public static partial class Prefs
     {
+        public static bool dragAndDropToTab = true;
         public static bool improveAddComponentBehaviour = true;
         public static bool improveDragAndDropBehaviour = true;
         public static bool improveMaximizeGameViewBehaviour = true;
@@ -26,6 +27,7 @@ namespace InfinityCode.UltimateEditorEnhancer
                         "Improve Behaviours",
                         "Add Component By Shortcut",
                         "Drag And Drop To Canvas",
+                        "Drag And Drop To Tab",
                         "Maximize Game View By Shortcut (SHIFT + Space)",
                         "Number Fields",
                         "Curve Editor",
@@ -33,10 +35,7 @@ namespace InfinityCode.UltimateEditorEnhancer
                 }
             }
 
-            public override float order
-            {
-                get { return Order.ImproveBehaviors; }
-            }
+            public override float order => Order.ImproveBehaviors;
 
             public override void Draw()
             {
@@ -46,6 +45,7 @@ namespace InfinityCode.UltimateEditorEnhancer
 
                 improveAddComponentBehaviour = EditorGUILayout.ToggleLeft("Add Component By Shortcut", improveAddComponentBehaviour);
                 improveDragAndDropBehaviour = EditorGUILayout.ToggleLeft("Drag And Drop To Canvas", improveDragAndDropBehaviour);
+                dragAndDropToTab = EditorGUILayout.ToggleLeft("Drag And Drop To Tab", dragAndDropToTab);
                 _improveCurveEditor = EditorGUILayout.ToggleLeft("Improve Curve Editor", _improveCurveEditor);
                 improveMaximizeGameViewBehaviour = EditorGUILayout.ToggleLeft("Maximize Game View By Shortcut (SHIFT + Space)", improveMaximizeGameViewBehaviour);
 
@@ -88,7 +88,22 @@ namespace InfinityCode.UltimateEditorEnhancer
                     shortcuts.Add(new Shortcut("Decrease Value By 100", "Number Field", m2, KeyCode.DownArrow));
                 }
 
+                if (changeNumberFieldValueByMouseWheel)
+                {
+                    shortcuts.Add(new Shortcut("Change Value By 1", "Number Field", "Mouse Wheel " + ModifierToString(changeNumberFieldValueByWheelModifiers)));
+                }
+
                 return shortcuts;
+            }
+
+            public override void SetState(bool state)
+            {
+                base.SetState(state);
+                
+                dragAndDropToTab = state;
+                improveAddComponentBehaviour = state;
+                improveDragAndDropBehaviour = state;
+                improveMaximizeGameViewBehaviour = state;
             }
         }
     }

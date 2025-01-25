@@ -123,30 +123,33 @@ namespace InfinityCode.UltimateEditorEnhancer
                 // Packages
                 packageGroup
             });
-
-            bool skip = true;
+            
             EmptyInspector.Group lastGroup = packageGroup;
 
             foreach (string submenu in Unsupported.GetSubmenus("Window"))
             {
-                string upper = Culture.textInfo.ToUpper(submenu);
-                if (skip)
-                {
-                    if (upper == "WINDOW/PACKAGE MANAGER")
-                    {
-                        skip = false;
-                    }
-                    else
-                    {
-                        continue;
-                    }
-                }
+                if (!ValidateEmptyInspectorMenuItem(submenu)) continue;
 
                 string[] parts = submenu.Split('/');
                 string firstPart = parts[1];
 
                 if (parts.Length == 2)
                 {
+                    if (firstPart == "Package Manager" || firstPart == "Asset Store" || firstPart == "My Assets")
+                    {
+                        lastGroup = groups.FirstOrDefault(g => g.title == "Packages");
+                        if (lastGroup == null)
+                        {
+                            lastGroup = new EmptyInspector.Group("Packages");
+                            groups.Add(lastGroup);
+                        }
+                    }
+                    else
+                    {
+                        lastGroup = new EmptyInspector.Group(firstPart);
+                        groups.Add(lastGroup);
+                    }
+                    
                     lastGroup.Add(new EmptyInspector.Item
                     {
                         menuPath = submenu,
@@ -403,6 +406,19 @@ namespace InfinityCode.UltimateEditorEnhancer
                     item.customWindowSize = new Vector2(500, 300);
                 } 
             }
+        }
+
+        private static bool ValidateEmptyInspectorMenuItem(string submenu)
+        {
+            string upper = Culture.textInfo.ToUpper(submenu);
+            //Debug.Log(upper);
+            //if (!upper.StartsWith("WINDOW/")) return false;
+            if (upper.StartsWith("WINDOW/PANELS/")) return false;
+            if (upper.StartsWith("WINDOW/LAYOUTS/")) return false;
+            if (upper == "WINDOW/NEXT WINDOW") return false;
+            if (upper == "WINDOW/PREVIOUS WINDOW") return false;
+            //if (upper == "WINDOW/PACKAGE MANAGER") return false;
+            return true;
         }
     }
 }

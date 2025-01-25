@@ -62,7 +62,7 @@ namespace InfinityCode.UltimateEditorEnhancer.SceneTools
 
         private static void EditorUpdate()
         {
-            var wnd = EditorWindow.mouseOverWindow;
+            var wnd = WindowsHelper.mouseOverWindow;
             if (wnd != null && wnd.GetType() == SceneHierarchyWindowRef.type && !wnd.wantsMouseMove)
             {
                 wnd.wantsMouseMove = true;
@@ -73,7 +73,14 @@ namespace InfinityCode.UltimateEditorEnhancer.SceneTools
         {
             bool state = false;
             HighlightUI(go, ref state);
-            if (GraphicsSettings.defaultRenderPipeline == null) HighlightRenderers(go, ref state);
+#if UNITY_6000_0_OR_NEWER
+            if (GraphicsSettings.defaultRenderPipeline == null)
+#else
+            if (GraphicsSettings.renderPipelineAsset == null)
+#endif
+            {
+                HighlightRenderers(go, ref state);
+            }
             HighlightWithoutRenderer(go, ref state);
 
             if (state) SceneView.RepaintAll();
@@ -187,7 +194,7 @@ namespace InfinityCode.UltimateEditorEnhancer.SceneTools
             if (Event.current.type != EventType.Repaint) return;
 
             if (lastRectTransform != null) DrawRectTransformBounds();
-            else if (Prefs.highlightNoRenderer && lastNoRendererTransform != null && !(EditorWindow.mouseOverWindow is SceneView))
+            else if (Prefs.highlightNoRenderer && lastNoRendererTransform != null && !(WindowsHelper.mouseOverWindow is SceneView))
             {
                 Vector3 position = lastNoRendererTransform.position;
                 float size = HandleUtility.GetHandleSize(position);
@@ -204,7 +211,7 @@ namespace InfinityCode.UltimateEditorEnhancer.SceneTools
         public static void RepaintAllHierarchies()
         {
             if (!Prefs.highlightHierarchyRow) return;
-            if (!(EditorWindow.mouseOverWindow is SceneView)) return;
+            if (!(WindowsHelper.mouseOverWindow is SceneView)) return;
             if (Event.current == null) return;
 
             EditorApplication.RepaintHierarchyWindow();

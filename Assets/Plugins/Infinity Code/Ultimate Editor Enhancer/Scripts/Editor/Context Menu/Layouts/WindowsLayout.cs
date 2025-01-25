@@ -33,9 +33,10 @@ namespace InfinityCode.UltimateEditorEnhancer.EditorMenus.Layouts
 #if !UNITY_EDITOR_OSX
             Resolution resolution = Screen.currentResolution;
             int width = resolution.width;
+            int height = resolution.height;
 
             if (rect.xMin % width + rect.width > width - 10) flipHorizontal = true;
-            if (rect.yMax > resolution.height - 30) flipVertical = true;
+            if (rect.yMax % height > height - 30) flipVertical = true;
 #endif
             if (position.y < 10) offset.y = Mathf.Max(offset.y, 10);
         }

@@ -45,22 +45,22 @@ namespace InfinityCode.UltimateEditorEnhancer.Windows
 
         private static Texture2D emptyTexture { get; set; }
 
+        public string filter
+        {
+            get => _filter;
+            set
+            {
+                _filter = value;
+                UpdateFilteredItems();
+            }
+        }
+
         private static ProjectFolderBookmark[] folders
         {
             get
             {
                 if (_folders == null) InitProjectFolders();
                 return _folders;
-            }
-        }
-
-        public string filter
-        {
-            get { return _filter; }
-            set
-            {
-                _filter = value;
-                UpdateFilteredItems();
             }
         }
 
@@ -110,13 +110,7 @@ namespace InfinityCode.UltimateEditorEnhancer.Windows
             }
         }
 
-        public static List<ProjectBookmark> projectItems
-        {
-            get
-            {
-                return ReferenceManager.bookmarks;
-            }
-        }
+        public static List<ProjectBookmark> projectItems => ReferenceManager.bookmarks;
 
         public static Dictionary<SceneReferences, List<SceneBookmark>> sceneItems
         {
@@ -128,7 +122,7 @@ namespace InfinityCode.UltimateEditorEnhancer.Windows
                     _sceneItems = new Dictionary<SceneReferences, List<SceneBookmark>>();
                     foreach (SceneReferences sr in sceneReferences)
                     {
-                        if (sr == null) continue;
+                        if (!sr) continue;
                         if (sr.bookmarks.Count > 0) _sceneItems.Add(sr, sr.bookmarks);
                     }
 
@@ -147,12 +141,12 @@ namespace InfinityCode.UltimateEditorEnhancer.Windows
 
             KeyManager.KeyBinding binding = KeyManager.AddBinding();
             binding.OnValidate += OnValidate;
-            binding.OnPress += () => ShowWindow();
+            binding.OnPress += () => ToggleWindow();
         }
 
         public static void Add(Object target) 
         {
-            if (target == null) return;
+            if (!target) return;
 
             Scene? scene = GetScene(target);
             if (scene.HasValue && scene.Value.name != null)
@@ -171,6 +165,7 @@ namespace InfinityCode.UltimateEditorEnhancer.Windows
                 if (projectItems.Any(i => i.target == target)) return;
                 ProjectBookmark item = new ProjectBookmark(target);
                 projectItems.Add(item);
+                projectItems.Sort(new ProjectBookmarkComparer());
                 cachedLabels = null;
                 _folders = null;
                 Save();
@@ -204,13 +199,13 @@ namespace InfinityCode.UltimateEditorEnhancer.Windows
 
         public static bool Contain(Object target)
         {
-            if (target == null) return false;
+            if (!target) return false;
 
             Scene? scene = GetScene(target);
             if (scene.HasValue && scene.Value.name != null)
             {
                 SceneReferences sceneReferences = SceneReferences.Get(scene.Value, false);
-                return sceneReferences != null && sceneReferences.bookmarks.Any(i => i.target == target);
+                return sceneReferences && sceneReferences.bookmarks.Any(i => i.target == target);
             }
 
             return projectItems.Any(i => i.target == target);
@@ -427,16 +422,8 @@ namespace InfinityCode.UltimateEditorEnhancer.Windows
 
         private static Scene? GetScene(Object target)
         {
-            if (target is GameObject)
-            {
-                return (target as GameObject).scene;
-            }
-
-            if (target is Component)
-            {
-                return (target as Component).gameObject.scene;
-            }
-
+            if (target is GameObject) return (target as GameObject).scene;
+            if (target is Component) return (target as Component).gameObject.scene;
             return null;
         }
 
@@ -453,7 +440,7 @@ namespace InfinityCode.UltimateEditorEnhancer.Windows
                 if (entry.EndsWith(".meta")) continue;
 
                 Object asset = AssetDatabase.LoadAssetAtPath<Object>(entry);
-                if (asset == null) continue;
+                if (!asset) continue;
 
                 ProjectBookmark item = new ProjectBookmark(asset);
                 tempItems.Add(item);
@@ -476,7 +463,7 @@ namespace InfinityCode.UltimateEditorEnhancer.Windows
                     else
                     {
                         item.preview = AssetPreview.GetAssetPreview(item.target);
-                        if (item.preview == null) item.preview = AssetPreview.GetMiniThumbnail(item.target);
+                        if (!item.preview) item.preview = AssetPreview.GetMiniThumbnail(item.target);
                         item.previewLoaded = true;
                     }
                     
@@ -486,7 +473,7 @@ namespace InfinityCode.UltimateEditorEnhancer.Windows
                 if (item.target is UnityEngine.Tilemaps.Tile)
                 {
                     UnityEngine.Tilemaps.Tile tile = item.target as UnityEngine.Tilemaps.Tile;
-                    if (tile != null && tile.sprite != null)
+                    if (tile && tile.sprite)
                     {
                         item.preview = tile.sprite.texture;
                         item.previewLoaded = true;
@@ -547,9 +534,9 @@ namespace InfinityCode.UltimateEditorEnhancer.Windows
 
         private void OnGUI()
         {
-            if (instance == null) instance = this;
-            if (emptyTexture == null) emptyTexture = Resources.CreateSinglePixelTexture(1f, 0f);
-            if (showContentStyle == null || showContentStyle.normal.background == null)
+            if (!instance) instance = this;
+            if (!emptyTexture) emptyTexture = Resources.CreateSinglePixelTexture(1f, 0f);
+            if (showContentStyle == null || !showContentStyle.normal.background)
             {
                 showContentStyle = new GUIStyle(Styles.transparentButton);
                 showContentStyle.margin.top = 6;
@@ -592,7 +579,7 @@ namespace InfinityCode.UltimateEditorEnhancer.Windows
         private static void OnUpdateSceneReferences()
         {
             _sceneItems = null;
-            if (instance != null) instance.UpdateFilteredItems();
+            if (instance) instance.UpdateFilteredItems();
         }
 
         private static bool OnValidate()
@@ -602,7 +589,7 @@ namespace InfinityCode.UltimateEditorEnhancer.Windows
 
         private void ProcessEvents()
         {
-            if (mouseOverWindow != this) return;
+            if (WindowsHelper.mouseOverWindow != this) return;
             if (selectedFolderItems != null) return;
 
             Event e = Event.current;
@@ -674,18 +661,18 @@ namespace InfinityCode.UltimateEditorEnhancer.Windows
 
         public static void Redraw()
         {
-            if (instance != null) instance.Repaint();
+            if (instance) instance.Repaint();
         }
 
         public static void Remove(Object item)
         {
-            if (item == null) return;
+            if (!item) return;
 
             Scene? scene = GetScene(item);
             if (scene.HasValue && scene.Value.name != null)
             {
                 SceneReferences sceneReferences = SceneReferences.Get(scene.Value, false);
-                if (sceneReferences == null) return;
+                if (!sceneReferences) return;
 
                 if (sceneReferences.bookmarks.RemoveAll(i => i.target == item) > 0)
                 {
@@ -701,17 +688,17 @@ namespace InfinityCode.UltimateEditorEnhancer.Windows
                 Save();
             }
 
-            if (instance != null)
+            if (instance)
             {
                 instance.UpdateFilteredItems();
             }
         }
-        
+
         private static void Remove(BookmarkItem item)
         {
             if (item == null) return;
 
-            if (item.target == null)
+            if (!item.target)
             {
                 if (item.isProjectItem) projectItems.Remove(item as ProjectBookmark);
                 else
@@ -865,6 +852,12 @@ namespace InfinityCode.UltimateEditorEnhancer.Windows
             Vector2 size = Prefs.defaultWindowSize;
             wnd.position = new Rect(GUIUtility.GUIToScreenPoint(mousePosition.Value) - size / 2, size);
             return wnd;
+        }
+
+        private static void ToggleWindow()
+        {
+            if (instance) instance.Close();
+            else ShowWindow();
         }
 
         private void Toolbar()

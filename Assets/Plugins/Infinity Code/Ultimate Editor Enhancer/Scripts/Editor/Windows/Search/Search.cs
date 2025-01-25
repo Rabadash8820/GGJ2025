@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using InfinityCode.UltimateEditorEnhancer.UnityTypes;
 using UnityEditor;
 using UnityEngine;
 
@@ -17,7 +18,7 @@ namespace InfinityCode.UltimateEditorEnhancer.Windows
         
         public static int searchMode = 0;
 
-        private static Dictionary<int, Record> projectRecords;
+        private static Dictionary<string, Record> projectRecords;
         private static Dictionary<int, Record> sceneRecords;
         private static Dictionary<int, Record> windowRecords;
         
@@ -74,6 +75,10 @@ namespace InfinityCode.UltimateEditorEnhancer.Windows
 
             if (e.keyCode != Prefs.searchKeyCode) return false;
             if (e.modifiers != Prefs.searchModifiers) return false;
+            
+#if UNITY_2021_3_OR_NEWER
+            if (EditorApplication.isPlaying && ShortcutIntegrationRef.GetIgnoreWhenPlayModeFocused()) return false;
+#endif           
 
             if (Prefs.SearchDoNotShowOnWindows()) return false;
             return true;
@@ -131,13 +136,9 @@ namespace InfinityCode.UltimateEditorEnhancer.Windows
             };
         }
 
-        private int TakeBestRecords(IEnumerable<KeyValuePair<int, Record>> tempBestRecords)
+        private int TakeBestRecords(IEnumerable<Record> tempBestRecords)
         {
-            bestRecords = tempBestRecords.Take(MaxRecords)
-                .Select(r => r.Value)
-                //.OrderBy(r => r.label.Length)
-                //.ThenBy(r => r.label)
-                .ToArray();
+            bestRecords = tempBestRecords.Take(MaxRecords).ToArray();
 
             return bestRecords.Length;
         }
@@ -155,12 +156,12 @@ namespace InfinityCode.UltimateEditorEnhancer.Windows
             string assetType;
             string search = SearchableItem.GetPattern(searchText, out assetType);
 
-            IEnumerable <KeyValuePair<int, Record>> tempBestRecords;
+            IEnumerable <Record> tempBestRecords;
 
             if (searchMode == 0)
             {
                 int currentMode = 0;
-                tempBestRecords = new List<KeyValuePair<int, Record>>();
+                tempBestRecords = new List<Record>();
                 if (search.Length > 0)
                 {
                     if (search[0] == '@') currentMode = 1;
@@ -169,27 +170,36 @@ namespace InfinityCode.UltimateEditorEnhancer.Windows
 
                 if (currentMode != 0) search = search.Substring(1);
 
-                if (Prefs.searchByWindow && currentMode == 0) tempBestRecords = tempBestRecords.Concat(windowRecords.Where(r => r.Value.Update(search, assetType)));
-                if (currentMode == 0 || currentMode == 1) tempBestRecords = tempBestRecords.Concat(sceneRecords.Where(r => r.Value.Update(search, assetType)));
+                if (Prefs.searchByWindow && currentMode == 0)
+                {
+                    var windows = windowRecords.Where(r => r.Value.Update(search, assetType)).Select(r => r.Value);
+                    tempBestRecords = tempBestRecords.Concat(windows);
+                }
+
+                if (currentMode == 0 || currentMode == 1)
+                {
+                    var scenes = sceneRecords.Where(r => r.Value.Update(search, assetType)).Select(r => r.Value);
+                    tempBestRecords = tempBestRecords.Concat(scenes);
+                }
                 if (Prefs.searchByProject && (currentMode == 0 || currentMode == 2))
                 {
-                    var tempProjectRecords = projectRecords.Where(r => r.Value.Update(search, assetType));
+                    var tempProjectRecords = projectRecords.Where(r => r.Value.Update(search, assetType)).Select(r => r.Value);
                     tempBestRecords = tempBestRecords.Concat(tempProjectRecords);
                 }
             }
             else if (searchMode == 1)
             {
-                tempBestRecords = sceneRecords.Where(r => r.Value.Update(search, assetType));
+                tempBestRecords = sceneRecords.Where(r => r.Value.Update(search, assetType)).Select(r => r.Value);
             }
             else
             {
                 if (string.IsNullOrEmpty(pathStartsWith))
                 {
-                    tempBestRecords = projectRecords.Where(r => r.Value.Update(search, assetType));
+                    tempBestRecords = projectRecords.Where(r => r.Value.Update(search, assetType)).Select(r => r.Value);
                 }
                 else
                 {
-                    tempBestRecords = projectRecords.Where(r => (r.Value as ProjectRecord).path.StartsWith(pathStartsWith) && r.Value.Update(search, assetType));
+                    tempBestRecords = projectRecords.Where(r => (r.Value as ProjectRecord).path.StartsWith(pathStartsWith) && r.Value.Update(search, assetType)).Select(r => r.Value);
                 }
             }
 

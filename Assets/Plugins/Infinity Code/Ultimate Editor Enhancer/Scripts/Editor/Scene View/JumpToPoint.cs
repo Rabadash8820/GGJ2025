@@ -54,7 +54,7 @@ namespace InfinityCode.UltimateEditorEnhancer.SceneTools
             Event e = Event.current;
             bool isJump = e.type == EventType.MouseUp && e.button == 2 && e.modifiers == EventModifiers.Shift;
 
-            if (!isJump && Prefs.alternativeJumpShortcut && EditorWindow.mouseOverWindow is SceneView)
+            if (!isJump && Prefs.alternativeJumpShortcut && WindowsHelper.mouseOverWindow is SceneView)
             {
                 bool isAlternativeShortcut = e.type == EventType.MouseUp && e.button == 1 && e.alt && !e.shift && !e.control && !e.command;
                 isJump = isAlternativeShortcut;

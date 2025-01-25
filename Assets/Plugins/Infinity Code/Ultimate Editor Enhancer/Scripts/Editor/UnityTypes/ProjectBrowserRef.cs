@@ -10,19 +10,16 @@ namespace InfinityCode.UltimateEditorEnhancer.UnityTypes
 {
     public static class ProjectBrowserRef
     {
-        private static Type _type;
+        #region FIELDS
+        
         private static FieldInfo _assetTreeStateField;
         private static FieldInfo _folderTreeStateField;
         private static MethodInfo _isTwoColumnsMethod;
+        private static Type _type;
+        
+        #endregion
 
-        public static Type type
-        {
-            get
-            {
-                if (_type == null) _type = Reflection.GetEditorType("ProjectBrowser");
-                return _type;
-            }
-        }
+        #region PROPERTIES
 
         private static FieldInfo assetTreeStateField
         {
@@ -41,7 +38,7 @@ namespace InfinityCode.UltimateEditorEnhancer.UnityTypes
                 return _folderTreeStateField;
             }
         }
-        
+
         private static MethodInfo isTwoColumnsMethod
         {
             get
@@ -51,19 +48,34 @@ namespace InfinityCode.UltimateEditorEnhancer.UnityTypes
             }
         }
 
+        public static Type type
+        {
+            get
+            {
+                if (_type == null) _type = Reflection.GetEditorType("ProjectBrowser");
+                return _type;
+            }
+        }
+        
+        #endregion
+
+        #region METHODS
+
         public static TreeViewState GetAssetTreeViewState(Object projectWindow)
         {
             return assetTreeStateField.GetValue(projectWindow) as TreeViewState;
         }
-        
+
         public static TreeViewState GetFolderTreeViewState(Object projectWindow)
         {
             return folderTreeStateField.GetValue(projectWindow) as TreeViewState;
         }
-        
+
         public static bool IsTwoColumns(Object projectWindow)
         {
             return (bool) isTwoColumnsMethod.Invoke(projectWindow, null);
         }
+        
+        #endregion
     }
 }

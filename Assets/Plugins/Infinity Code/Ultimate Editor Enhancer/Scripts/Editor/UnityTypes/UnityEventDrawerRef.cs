@@ -39,7 +39,7 @@ namespace InfinityCode.UltimateEditorEnhancer.UnityTypes
             {
                 if (_generatePopUpForTypeMethod == null)
                 {
-#if UNITY_2021_3_OR_NEWER
+#if UNITY_2021_3_OR_NEWER || UNITY_2020_3
                     Type[] types = new[] { typeof(GenericMenu), typeof(Object), typeof(string), typeof(SerializedProperty), typeof(Type[]) };
 #else
                     Type[] types = new[] { typeof(GenericMenu), typeof(Object), typeof(bool), typeof(SerializedProperty), typeof(Type[]) };
@@ -101,7 +101,7 @@ namespace InfinityCode.UltimateEditorEnhancer.UnityTypes
             {
                 menu, 
                 target, 
-#if UNITY_2021_3_OR_NEWER
+#if UNITY_2021_2_OR_NEWER || UNITY_2020_3
                 targetName,
 #else
                 true,

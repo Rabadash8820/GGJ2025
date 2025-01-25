@@ -37,6 +37,13 @@ namespace InfinityCode.UltimateEditorEnhancer
                 showExceptionsInConsole = EditorGUILayout.ToggleLeft("Show Exceptions", showExceptionsInConsole);
                 EditorGUI.indentLevel--;
             }
+
+            public override void SetState(bool state)
+            {
+                base.SetState(state);
+
+                showExceptionsInConsole = state;
+            }
         }
     }
 }

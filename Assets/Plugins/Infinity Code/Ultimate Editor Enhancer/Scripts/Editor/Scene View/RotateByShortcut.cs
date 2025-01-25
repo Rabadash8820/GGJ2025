@@ -108,7 +108,7 @@ namespace InfinityCode.UltimateEditorEnhancer.SceneTools
             Event e = Event.current;
             KeyCode k = e.keyCode;
 
-            if (EditorWindow.mouseOverWindow is SceneView &&
+            if (WindowsHelper.mouseOverWindow is SceneView &&
                 (e.control || e.command) && e.shift &&
                 (
                     k == KeyCode.UpArrow || k == KeyCode.DownArrow || 

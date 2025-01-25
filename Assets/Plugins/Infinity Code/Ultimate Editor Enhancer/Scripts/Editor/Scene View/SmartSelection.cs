@@ -240,13 +240,11 @@ namespace InfinityCode.UltimateEditorEnhancer.SceneTools
 
         private static void OnInvoke()
         {
-            SceneView view = EditorWindow.mouseOverWindow as SceneView;
+            SceneView view = WindowsHelper.mouseOverWindow as SceneView;
             if (view == null) return;
 
             Waila.SceneViewItem sceneViewItem = Waila.GetSceneViewItem(view);
-            if (sceneViewItem == null) return;
-
-            if (sceneViewItem.mode != 0) return;
+            if (sceneViewItem == null || sceneViewItem.mode != 0 || sceneViewItem.targets.Count == 0) return;
 
             Event e = Event.current;
 
@@ -331,7 +329,7 @@ namespace InfinityCode.UltimateEditorEnhancer.SceneTools
 
         public static void ShowSmartSelection(Waila.SceneViewItem sceneViewItem)
         {
-            if (EditorWindow.mouseOverWindow != null && !(EditorWindow.mouseOverWindow is SceneView)) return;
+            if (WindowsHelper.mouseOverWindow != null && !(WindowsHelper.mouseOverWindow is SceneView)) return;
 
             List<GameObject> targets = sceneViewItem.targets;
 

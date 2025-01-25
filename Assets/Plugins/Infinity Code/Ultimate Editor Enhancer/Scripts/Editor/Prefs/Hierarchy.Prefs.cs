@@ -14,6 +14,7 @@ namespace InfinityCode.UltimateEditorEnhancer
     public static partial class Prefs
     {
         public static bool hierarchyBookmarks = true;
+        public static bool hierarchyDropScriptToCreateGameObject = true;
         public static bool hierarchyEnableGameObject = true;
         public static bool hierarchyEnableMiddleClick = true;
         public static bool hierarchyErrorIcons = true;
@@ -21,7 +22,9 @@ namespace InfinityCode.UltimateEditorEnhancer
         public static bool hierarchyIconsHideDefault = false;
         public static HierarchyIconsDisplayRule hierarchyIconsDisplayRule = HierarchyIconsDisplayRule.onHoverWithModifiers;
         public static bool hierarchyNote = true;
+        public static bool hierarchyOddEven = true;
         public static bool hierarchyOverrideMainIcon = true;
+        public static bool hierarchySoloPickability = true;
         public static bool hierarchySoloVisibility = true;
         public static float hierarchyMarginRight = 0;
 
@@ -44,25 +47,28 @@ namespace InfinityCode.UltimateEditorEnhancer
                 { 
                     return new[] 
                     { 
-                        "Hierarchy Icons", 
-                        "Max Items",
-                        "Show Error Icon When GameObject Has an Error or Exception",
                         "Enable / Disable GameObject",
                         "Filter by Type",
+                        "Hierarchy Icons",
                         "Icon Right Margin",
                         "Note",
+                        "Max Items",
+                        "Odd Even",
                         "Show Bookmark Button",
-                        "Tree",
-                        "Solo Visibility",
                         "Show Bookmark Button",
                         "Show Best Component Icon Before Name",
-                        "Show Components In Hierarchy"
+                        "Show Components In Hierarchy",
+                        "Show Error Icon When GameObject Has an Error or Exception",
+                        "Solo Pickability",
+                        "Solo Visibility",
+                        "Tree",
                     };
                 }
             }
 
             public override void Draw()
             {
+                hierarchyDropScriptToCreateGameObject = EditorGUILayout.ToggleLeft("Drop Script To Create GameObject", hierarchyDropScriptToCreateGameObject);
                 hierarchyEnableGameObject = EditorGUILayout.ToggleLeft("Enable / Disable GameObject", hierarchyEnableGameObject);
                 hierarchyEnableMiddleClick = EditorGUILayout.ToggleLeft("Enable / Disable By Middle Click", hierarchyEnableMiddleClick);
                 EditorGUI.BeginDisabledGroup(!unsafeFeatures);
@@ -72,14 +78,16 @@ namespace InfinityCode.UltimateEditorEnhancer
                 EditorGUI.EndDisabledGroup();
 
                 hierarchyMarginRight = EditorGUILayout.FloatField("Icon Right Margin", hierarchyMarginRight);
-
+                hierarchyOddEven = EditorGUILayout.ToggleLeft("Odd / Even Rows", hierarchyOddEven);
+                
                 DrawBestComponents();
                 DrawHierarchyIcons();
-
+                
                 hierarchyBookmarks = EditorGUILayout.ToggleLeft("Show Bookmark Button", hierarchyBookmarks);
                 hierarchyNote = EditorGUILayout.ToggleLeft("Show Note", hierarchyNote);
                 hierarchyErrorIcons = EditorGUILayout.ToggleLeft("Show Error Icon When GameObject Has an Error or Exception", hierarchyErrorIcons);
                 hierarchySoloVisibility = EditorGUILayout.ToggleLeft("Solo Visibility", hierarchySoloVisibility);
+                hierarchySoloPickability = EditorGUILayout.ToggleLeft("Solo Pickability", hierarchySoloPickability);
                 hierarchyTree = EditorGUILayout.ToggleLeft("Tree", hierarchyTree);
             }
 
@@ -147,8 +155,10 @@ namespace InfinityCode.UltimateEditorEnhancer
                 return shortcuts;
             }
 
-            public void SetState(bool state)
+            public override void SetState(bool state)
             {
+                base.SetState(state);
+                
                 _hierarchyTypeFilter = state;
                 hierarchyBookmarks = state;
                 hierarchyEnableGameObject = state;
@@ -157,11 +167,12 @@ namespace InfinityCode.UltimateEditorEnhancer
                 hierarchyIcons = state;
                 hierarchyNote = state;
                 hierarchyOverrideMainIcon = state;
+                hierarchyOddEven = state;
                 hierarchyRowBackground = state;
                 hierarchySoloVisibility = state;
                 hierarchyTree = state;
 
-                HeadersManager.SetState(state);
+                GetManager<HeadersManager>().SetState(state);
             }
         }
 

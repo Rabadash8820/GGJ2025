@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace InfinityCode.UltimateEditorEnhancer
 {
+    [AddComponentMenu("")]
     public class TemporaryContainer : MonoBehaviour
     {
         private void Awake()

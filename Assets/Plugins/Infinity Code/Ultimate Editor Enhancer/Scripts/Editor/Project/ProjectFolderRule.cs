@@ -3,6 +3,7 @@
 
 using System;
 using InfinityCode.UltimateEditorEnhancer.JSON;
+using InfinityCode.UltimateEditorEnhancer.UnityTypes;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -67,33 +68,11 @@ namespace InfinityCode.UltimateEditorEnhancer.ProjectTools
 
         public void Draw(Rect rect, bool expanded, bool isEmpty)
         {
-            Rect r;
             Rect r2 = new Rect();
             bool drawIcon = false;
             Texture folderTexture = Icons.folder;
             
-            if (rect.height > 20)
-            {
-                r = new Rect(rect.x - 1, rect.y - 1, rect.width + 2, rect.width + 2);
-                r2 = new Rect(rect.x + rect.width / 2, rect.y + rect.width / 2.2f, rect.width / 3, rect.width / 3);
-                drawIcon = true;
-            }
-            else if (rect.x > 20)
-            {
-                r = new Rect(rect.x - 1, rect.y - 1, rect.height + 2, rect.height + 2);
-                /*r2 = new Rect(rect.x + 3, rect.y + 5, rect.height - 6, rect.height - 6);
-                drawIcon = true;*/
-                if (isEmpty) folderTexture = Icons.folderEmpty;
-                else if (expanded) folderTexture = Icons.folderOpen;
-            }
-            else
-            {
-                r = new Rect(rect.x + 2, rect.y - 1, rect.height + 2, rect.height + 2);
-                if (isEmpty) folderTexture = Icons.folderEmpty;
-                else if (expanded) folderTexture = Icons.folderOpen;
-                /*r2 = new Rect(rect.x + 6, rect.y + 5, rect.height - 6, rect.height - 6);
-                drawIcon = true;*/
-            }
+            Rect r = GetRect(rect, expanded, isEmpty, ref r2, ref drawIcon, ref folderTexture);
 
             if (Prefs.projectFolderIconsDrawColors)
             {
@@ -112,6 +91,31 @@ namespace InfinityCode.UltimateEditorEnhancer.ProjectTools
                     GUI.DrawTexture(r2, img);
                 }
             }
+        }
+
+        private Rect GetRect(Rect rect, bool expanded, bool isEmpty, ref Rect r2, ref bool drawIcon, ref Texture folderTexture)
+        {
+            if (rect.height > 20)
+            {
+                r2 = new Rect(rect.x + rect.width / 2, rect.y + rect.width / 2.2f, rect.width / 3, rect.width / 3);
+                drawIcon = true;
+                return new Rect(rect.x - 1, rect.y - 1, rect.width + 2, rect.width + 2);
+            }
+            
+            if (isEmpty) folderTexture = Icons.folderEmpty;
+            else if (expanded) folderTexture = Icons.folderOpen;
+
+            if (rect.x == 16 && rect.height == 16)
+            {
+                return new Rect(rect.x, rect.y - 1, rect.height + 2, rect.height + 2);
+            }
+            
+            if (rect.x > 20)
+            {
+                return new Rect(rect.x - 1, rect.y - 1, rect.height + 2, rect.height + 2);
+            }
+
+            return new Rect(rect.x + 2, rect.y - 1, rect.height + 2, rect.height + 2);
         }
 
         public void SetDirty()

@@ -15,7 +15,7 @@ namespace InfinityCode.UltimateEditorEnhancer.ProjectTools
     {
         static ProjectCreateCustomEditor()
         {
-            ProjectItemDrawer.Register("CREATE_CUSTOM_EDITOR", DrawButton, 10);
+            ProjectItemDrawer.Register("CREATE_CUSTOM_EDITOR", DrawButton, ProjectToolOrder.CreateCustomEditor);
         }
 
         private static void DrawButton(ProjectItem item)

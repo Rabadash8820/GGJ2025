@@ -32,7 +32,7 @@ namespace InfinityCode.UltimateEditorEnhancer.ProjectTools
 
         static ProjectCreateFolder()
         {
-            ProjectItemDrawer.Register("CREATE_FOLDER", DrawButton);
+            ProjectItemDrawer.Register("CREATE_FOLDER", DrawButton, ProjectToolOrder.CreateFolder);
         }
 
         private static void CreateFolder(Object asset, string folderName)

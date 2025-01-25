@@ -11,7 +11,14 @@ namespace InfinityCode.UltimateEditorEnhancer.ProjectTools
     {
         static ProjectCreateMaterial()
         {
-            ProjectItemDrawer.Register("CREATE_MATERIAL", DrawButton, 10);
+            ProjectItemDrawer.Register("CREATE_MATERIAL", DrawButton, ProjectToolOrder.CreateMaterial);
+        }
+
+        private static void CreateMaterial(ProjectItem item)
+        {
+            Selection.activeObject = item.asset;
+            Material material = new Material(RenderPipelineHelper.GetDefaultShader());
+            ProjectWindowUtil.CreateAsset(material, "New Material.mat");
         }
 
         private static void DrawButton(ProjectItem item)
@@ -30,9 +37,7 @@ namespace InfinityCode.UltimateEditorEnhancer.ProjectTools
 
             if (GUI.Button(r, TempContent.Get(EditorIconContents.material.image, "Create Material"), GUIStyle.none))
             {
-                Selection.activeObject = item.asset;
-                Material material = new Material(Shader.Find("Standard"));
-                ProjectWindowUtil.CreateAsset(material, "New Material.mat");
+                CreateMaterial(item);
             }
         }
     }

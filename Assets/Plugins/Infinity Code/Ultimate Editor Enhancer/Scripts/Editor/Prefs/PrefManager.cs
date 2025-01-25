@@ -78,6 +78,11 @@ namespace InfinityCode.UltimateEditorEnhancer
                 EditorGUI.EndDisabledGroup();
                 EditorGUILayout.EndHorizontal();
             }
+
+            public virtual void SetState(bool state)
+            {
+                
+            }
         }
     }
 }

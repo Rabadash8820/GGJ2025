@@ -15,7 +15,7 @@ namespace InfinityCode.UltimateEditorEnhancer.ProjectTools
         
         static FileExtensions()
         {
-            ProjectItemDrawer.Register("FILE_EXTENSION", DrawButton, -10);
+            ProjectItemDrawer.Register("FILE_EXTENSION", DrawButton, ProjectToolOrder.FileExtension);
         }
 
         private static void DrawButton(ProjectItem item)

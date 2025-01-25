@@ -1,6 +1,7 @@
 ﻿/*           INFINITY CODE          */
 /*     https://infinity-code.com    */
 
+using InfinityCode.UltimateEditorEnhancer.Interceptors;
 using InfinityCode.UltimateEditorEnhancer.PropertyDrawers;
 using UnityEditor;
 using UnityEngine;
@@ -12,7 +13,7 @@ namespace InfinityCode.UltimateEditorEnhancer.InspectorTools
     {
         static ObjectFieldDragAndDrop()
         {
-            ObjectFieldDrawer.OnGUIBefore += OnGUIBefore;
+            if (Interceptor.isAppleM) ObjectFieldDrawer.OnGUIBefore += OnGUIBefore;
         }
 
         private static void OnGUIBefore(Rect area, SerializedProperty property, GUIContent label)

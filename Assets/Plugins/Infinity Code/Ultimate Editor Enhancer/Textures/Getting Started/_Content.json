@@ -447,6 +447,13 @@
         "updated": 3.05
       },
       {
+        "title": "Move Component Above and Below",
+        "image": "Move Component Above and Below.png",
+        "help": "move-component-above--below-other-component",
+        "added": 4.01,
+        "updated": 4.01
+      },
+      {
         "title": "Nested Editors",
         "image": "Nested Editors.png",
         "help": "nested-editors",
@@ -557,6 +564,13 @@
         "updated": 1.10
       },
       {
+        "title": "Create GameObject By Drop Script",
+        "image": "Create GameObject By Drop Script.png",
+        "help": "create-gameobject-by-drop-script",
+        "added": 4.02,
+        "updated": 4.02
+      },
+      {
         "title": "Enable / Disable GameObject",
         "image": "Hierachy Enable Disable.png",
         "help": "enabledisable-gameobjects",
@@ -606,6 +620,13 @@
         "updated": 2.06
       },
       {
+        "title": "Solo Pickability",
+        "image": "Hierarchy Solo Pickability.png",
+        "help": "solo-pickability",
+        "added": 4.01,
+        "updated": 4.01
+      },
+      {
         "title": "Solo Visibility",
         "image": "Hierarchy Solo Visibility.png",
         "help": "solo-visibility",
@@ -642,14 +663,14 @@
       {
         "title": "Create Folder",
         "image": "Project Create Folder.png",
-        "help": "create-folder-button",
+        "help": "create-folder",
         "added": 3.08,
         "updated": 3.08
       },
       {
         "title": "Create Material",
         "image": "Project Create Material.png",
-        "help": "create-material-button",
+        "help": "create-material",
         "added": 3.09,
         "updated": 3.09
       },
@@ -663,9 +684,16 @@
       {
         "title": "Create Script",
         "image": "Project Create Scripts.png",
-        "help": "create-script-button",
+        "help": "create-script",
         "added": 3.09,
         "updated": 3.09
+      },
+      {
+        "title": "Create Shader",
+        "image": "Create Shader.png",
+        "help": "create-shader",
+        "added": 4.01,
+        "updated": 4.01
       },
       {
         "title": "File Extensions",
@@ -755,6 +783,13 @@
         "help": "drag-and-drop-from-project-to-canvas",
         "added": 1.01,
         "updated": 1.01
+      },
+      {
+        "title": "Drag And Drop to Tab",
+        "image": "Drag and Drop to Tab.png",
+        "help": "drag-and-drop-to-tab",
+        "added": 4.00,
+        "updated": 4.00
       },
       {
         "title": "Enum Field Search",

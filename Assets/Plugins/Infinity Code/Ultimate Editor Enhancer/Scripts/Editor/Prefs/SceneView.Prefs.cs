@@ -60,21 +60,21 @@ namespace InfinityCode.UltimateEditorEnhancer
                 return "Scene View";
             }
 
-            public void SetState(bool state)
+            public override void SetState(bool state)
             {
                 moveToPoint = state;
                 selectCollectionAsOne = state;
                 selectLODGroupAsOne = state;
                 
-                DistanceToolManager.SetState(state);
-                HighlightManager.SetState(state);
-                NavigationManager.SetState(state);
-                ObjectToolbarManager.SetState(state);
-                QuickAccessBarManager.SetState(state);
-                SwitchCustomToolManager.SetState(state);
-                TerrainBrushSizeManager.SetState(state);
-                ToolValuesManager.SetState(state);
-                WailaManager.SetState(state);
+                GetManager<DistanceToolManager>().SetState(state);
+                GetManager<HighlightManager>().SetState(state);
+                GetManager<NavigationManager>().SetState(state);
+                GetManager<ObjectToolbarManager>().SetState(state);
+                GetManager<QuickAccessBarManager>().SetState(state);
+                GetManager<SwitchCustomToolManager>().SetState(state);
+                GetManager<TerrainBrushSizeManager>().SetState(state);
+                GetManager<ToolValuesManager>().SetState(state);
+                GetManager<WailaManager>().SetState(state);
             }
         }
     }

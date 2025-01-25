@@ -25,7 +25,7 @@ namespace InfinityCode.UltimateEditorEnhancer.ProjectTools
 
         static ProjectFolderIconDrawer()
         {
-            ProjectItemDrawer.Register("ICON_DRAWER", Draw, -1000);
+            ProjectItemDrawer.Register("ICON_DRAWER", Draw, ProjectToolOrder.FolderIconDrawer);
         }
 
         private static void Draw(ProjectItem item)

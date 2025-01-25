@@ -96,8 +96,10 @@ namespace InfinityCode.UltimateEditorEnhancer
                 EditorGUILayout.EndScrollView();
             }
 
-            public static void SetState(bool state)
+            public override void SetState(bool state)
             {
+                base.SetState(state);
+                
                 emptyInspector = state;
             }
         }

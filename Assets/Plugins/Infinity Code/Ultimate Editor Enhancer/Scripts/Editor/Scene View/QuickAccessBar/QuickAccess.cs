@@ -169,7 +169,7 @@ namespace InfinityCode.UltimateEditorEnhancer.SceneTools
 
         private static void DrawCollapseArea(SceneView view, float minIntend, float maxIntend)
         {
-            if (!(EditorWindow.mouseOverWindow is SceneView)) return;
+            if (!(WindowsHelper.mouseOverWindow is SceneView)) return;
 
             Event e = Event.current;
             Vector2 p = e.mousePosition;

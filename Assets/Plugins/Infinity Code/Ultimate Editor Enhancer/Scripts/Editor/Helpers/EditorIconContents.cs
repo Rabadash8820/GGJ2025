@@ -35,6 +35,7 @@ namespace InfinityCode.UltimateEditorEnhancer
         private static GUIContent _popup;
         private static GUIContent _preAudioPlayOn;
         private static GUIContent _prefabIcon;
+        private static GUIContent _prefabVariantIcon;
         private static GUIContent _project;
         private static GUIContent _rectTransformBlueprint;
         private static GUIContent _refresh;
@@ -46,6 +47,7 @@ namespace InfinityCode.UltimateEditorEnhancer
         private static GUIContent _sceneVisibilityVisibleHover;
         private static GUIContent _search;
         private static GUIContent _settings;
+        private static GUIContent _shader;
         private static GUIContent _stepButton;
         private static GUIContent _textAsset;
         private static GUIContent _toolHandleGlobal;
@@ -55,6 +57,7 @@ namespace InfinityCode.UltimateEditorEnhancer
         private static GUIContent _unityLogo;
         private static GUIContent _unlinked;
         private static GUIContent _verticalLayoutGroup;
+
 
         public static GUIContent alignHorizontallyCenterActive
         {
@@ -334,6 +337,30 @@ namespace InfinityCode.UltimateEditorEnhancer
             }
         }
 
+        public static GUIContent playButtonOn
+        {
+            get
+            {
+                if (_playButtonOn == null)
+                {
+                    _playButtonOn = EditorGUIUtility.IconContent("d_PlayButton On");
+                }
+                return _playButtonOn;
+            }
+        }
+
+        public static GUIContent popup
+        {
+            get
+            {
+                if (_popup == null)
+                {
+                    _popup = EditorGUIUtility.IconContent("_Popup");
+                }
+                return _popup;
+            }
+        }
+
         public static GUIContent preAudioPlayOn
         {
             get
@@ -358,27 +385,15 @@ namespace InfinityCode.UltimateEditorEnhancer
             }
         }
 
-        public static GUIContent playButtonOn
+        public static GUIContent prefabVariant
         {
             get
             {
-                if (_playButtonOn == null)
+                if (_prefabVariantIcon == null)
                 {
-                    _playButtonOn = EditorGUIUtility.IconContent("d_PlayButton On");
+                    _prefabVariantIcon = EditorGUIUtility.IconContent("PrefabVariant Icon");
                 }
-                return _playButtonOn;
-            }
-        }
-
-        public static GUIContent popup
-        {
-            get
-            {
-                if (_popup == null)
-                {
-                    _popup = EditorGUIUtility.IconContent("_Popup");
-                }
-                return _popup;
+                return _prefabVariantIcon;
             }
         }
 
@@ -502,6 +517,18 @@ namespace InfinityCode.UltimateEditorEnhancer
                     _settings = EditorGUIUtility.IconContent("Settings");
                 }
                 return _settings;
+            }
+        }
+
+        public static GUIContent shader
+        {
+            get
+            {
+                if (_shader == null)
+                {
+                    _shader = EditorGUIUtility.IconContent("Shader Icon");
+                }
+                return _shader;
             }
         }
 

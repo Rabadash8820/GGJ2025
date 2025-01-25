@@ -10,23 +10,79 @@ namespace InfinityCode.UltimateEditorEnhancer.InspectorTools
     [InitializeOnLoad]
     public static class AnimatorInspectorClips
     {
-        private static bool showClips = false;
-        private static bool inited;
         private static GUIContent pauseContent;
         private static GUIContent playContent;
         private static GUIContent resumeContent;
         private static GUIContent selectContent;
         private static GUIContent stopContent;
+        
+        private static bool showClips = false;
+        private static bool inited;
         private static int playIndex = -1;
         private static Animator animator;
         private static AnimationClip clip;
         private static double startTime;
         private static int frame;
         private static bool isPaused;
+        private static Vector3 position;
+        private static Quaternion rotation;
+        private static Vector3 scale;
 
         static AnimatorInspectorClips()
         {
             AnimatorInspectorInterceptor.OnInspectorGUI += OnInspectorGUI;
+        }
+
+        private static void DrawClip(AnimationClip clip, int i, Animator animator)
+        {
+            if (clip == null) return;
+            EditorGUILayout.BeginHorizontal();
+
+            bool isPlayed = playIndex == i;
+            if (isPlayed)
+            {
+                if (GUILayout.Button(stopContent, GUILayout.Width(30), GUILayout.Height(20)))
+                {
+                    Stop();
+                }
+            }
+            else
+            {
+                if (GUILayout.Button(playContent, GUILayout.Width(30), GUILayout.Height(20)))
+                {
+                    Play(animator, clip, i);
+                }
+            }
+
+            if (GUILayout.Button(selectContent, GUILayout.Width(30), GUILayout.Height(20)))
+            {
+                Selection.activeObject = clip;
+            }
+
+            EditorGUILayout.LabelField(clip.name, EditorStyles.textField);
+
+            EditorGUILayout.EndHorizontal();
+
+            if (isPlayed)
+            {
+                EditorGUILayout.BeginHorizontal();
+
+                GUIContent content = isPaused ? resumeContent : pauseContent;
+
+                if (GUILayout.Button(content, GUILayout.Width(30), GUILayout.Height(20)))
+                {
+                    isPaused = !isPaused;
+                }
+
+                int total = Mathf.RoundToInt(clip.length * clip.frameRate);
+                EditorGUI.BeginChangeCheck();
+                frame = EditorGUILayout.IntSlider($"Frame ({frame}/{total})", frame, 0, total);
+                if (EditorGUI.EndChangeCheck())
+                {
+                    isPaused = true;
+                }
+                EditorGUILayout.EndHorizontal();
+            }
         }
 
         private static void EditorUpdate()
@@ -43,6 +99,10 @@ namespace InfinityCode.UltimateEditorEnhancer.InspectorTools
                 current = frame / clip.frameRate;
             }
             clip.SampleAnimation(animator.gameObject, current);
+
+            Transform t = animator.transform;
+            t.position = rotation * t.position + position;
+            t.Rotate(rotation.eulerAngles);
         }
 
         private static void Init()
@@ -80,55 +140,7 @@ namespace InfinityCode.UltimateEditorEnhancer.InspectorTools
 
             for (int i = 0; i < clips.Length; i++)
             {
-                AnimationClip clip = clips[i];
-                if (clip == null) continue;
-                EditorGUILayout.BeginHorizontal();
-
-                bool isPlayed = playIndex == i;
-                if (isPlayed)
-                {
-                    if (GUILayout.Button(stopContent, GUILayout.Width(30), GUILayout.Height(20)))
-                    {
-                        Stop();
-                    }
-                }
-                else
-                {
-                    if (GUILayout.Button(playContent, GUILayout.Width(30), GUILayout.Height(20)))
-                    {
-                        Play(animator, clip, i);
-                    }
-                }
-
-                if (GUILayout.Button(selectContent, GUILayout.Width(30), GUILayout.Height(20)))
-                {
-                    Selection.activeObject = clip;
-                }
-
-                EditorGUILayout.LabelField(clip.name, EditorStyles.textField);
-
-                EditorGUILayout.EndHorizontal();
-
-                if (isPlayed)
-                {
-                    EditorGUILayout.BeginHorizontal();
-
-                    GUIContent content = isPaused ? resumeContent : pauseContent;
-
-                    if (GUILayout.Button(content, GUILayout.Width(30), GUILayout.Height(20)))
-                    {
-                        isPaused = !isPaused;
-                    }
-
-                    int total = Mathf.RoundToInt(clip.length * clip.frameRate);
-                    EditorGUI.BeginChangeCheck();
-                    frame = EditorGUILayout.IntSlider("Frame (" + frame + "/" + total + ")", frame, 0, total);
-                    if (EditorGUI.EndChangeCheck())
-                    {
-                        isPaused = true;
-                    }
-                    EditorGUILayout.EndHorizontal();
-                }
+                DrawClip(clips[i], i, animator);
             }
 
             EditorGUILayout.EndVertical();
@@ -144,6 +156,9 @@ namespace InfinityCode.UltimateEditorEnhancer.InspectorTools
             playIndex = index;
             animator = _animator;
             clip = _clip;
+            position = _animator.transform.position;
+            rotation = _animator.transform.rotation;
+            scale = _animator.transform.localScale;
 
             startTime = EditorApplication.timeSinceStartup;
             frame = 0;
@@ -163,7 +178,10 @@ namespace InfinityCode.UltimateEditorEnhancer.InspectorTools
             if (clip == null) return;
             if (animator == null) return;
 
-            clip.SampleAnimation(animator.gameObject, 0);
+            animator.Rebind();
+            animator.transform.position = position;
+            animator.transform.rotation = rotation;
+            animator.transform.localScale = scale;
 
             playIndex = -1;
             clip = null;

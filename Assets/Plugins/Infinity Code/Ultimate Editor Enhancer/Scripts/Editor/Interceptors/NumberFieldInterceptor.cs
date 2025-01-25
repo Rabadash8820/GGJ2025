@@ -106,7 +106,10 @@ namespace InfinityCode.UltimateEditorEnhancer.Interceptors
 
         private static void ProcessScrollWheel(ref int v, ref float d)
         {
+            if (!Prefs.changeNumberFieldValueByMouseWheel) return;
             Event e = Event.current;
+            
+            if (e.modifiers != Prefs.changeNumberFieldValueByWheelModifiers) return;
             v = e.delta.y > 0? 1: -1;
             e.Use();
         }

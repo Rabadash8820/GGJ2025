@@ -6,26 +6,39 @@ using System.Collections.Generic;
 using System.IO;
 using InfinityCode.UltimateEditorEnhancer.Interceptors;
 using UnityEditor;
+using UnityEngine;
 
 namespace InfinityCode.UltimateEditorEnhancer
 {
     public static partial class Prefs
     {
         public static bool _changeNumberFieldValueByArrow = true;
+        public static bool _changeNumberFieldValueByMouseWheel = true;
         public static bool _expandLongTextFields = true;
         public static bool _hierarchyTypeFilter = true;
         public static bool _improveCurveEditor = true;
         public static bool _searchInEnumFields = true;
+        public static bool _treeControllerCollapse = true;
         public static bool _unsafeFeatures = true;
         public static bool longTextFieldsInVisualScripting = false;
         public static int searchInEnumFieldsMinValues = 10;
-        public static bool _treeControllerCollapse = true;
 
+#if !UNITY_EDITOR_OSX
+        public static EventModifiers changeNumberFieldValueByWheelModifiers = EventModifiers.Control;
+#else
+        public static EventModifiers changeNumberFieldValueByWheelModifiers = EventModifiers.Command;
+#endif
+        
         private static int hasUnsafeBlock = -1; // -1 - unknown, 0 - no block, 1 - has block
 
         public static bool changeNumberFieldValueByArrow
         {
             get => _changeNumberFieldValueByArrow && unsafeFeatures;
+        }
+        
+        public static bool changeNumberFieldValueByMouseWheel
+        {
+            get => _changeNumberFieldValueByMouseWheel && unsafeFeatures;
         }
 
         public static bool expandLongTextFields
@@ -83,13 +96,6 @@ namespace InfinityCode.UltimateEditorEnhancer
                 }
             }
 
-            private void DrawToggleField(string label, ref bool value, Action OnChange)
-            {
-                EditorGUI.BeginChangeCheck();
-                value = EditorGUILayout.ToggleLeft(label, value);
-                if (EditorGUI.EndChangeCheck() && OnChange != null) OnChange();
-            }
-
             public override void Draw()
             {
                 EditorGUI.BeginChangeCheck();
@@ -100,7 +106,11 @@ namespace InfinityCode.UltimateEditorEnhancer
 
                 EditorGUI.BeginDisabledGroup(!_unsafeFeatures);
 
-                DrawToggleField("Change Number Fields Value By Arrows And Mouse Wheel", ref _changeNumberFieldValueByArrow, NumberFieldInterceptor.Refresh);
+                DrawToggleField("Change Number Fields Value By Arrows", ref _changeNumberFieldValueByArrow, NumberFieldInterceptor.Refresh);
+                DrawToggleField("Change Number Fields Value By Mouse Wheel", ref _changeNumberFieldValueByMouseWheel, NumberFieldInterceptor.Refresh);
+                EditorGUI.BeginDisabledGroup(!_changeNumberFieldValueByMouseWheel);
+                changeNumberFieldValueByWheelModifiers = (EventModifiers)EditorGUILayout.EnumFlagsField("Modifiers", changeNumberFieldValueByWheelModifiers);
+                EditorGUI.EndDisabledGroup();
                 
                 _expandLongTextFields = EditorGUILayout.ToggleLeft("Expand Long Text Fields", _expandLongTextFields);
                 EditorGUI.indentLevel++;
@@ -136,9 +146,19 @@ namespace InfinityCode.UltimateEditorEnhancer
                 NumberFieldInterceptor.Refresh();
             }
 
-            public void SetState(bool state)
+            public override void SetState(bool state)
             {
+                base.SetState(state);
+                
                 _unsafeFeatures = state;
+                _changeNumberFieldValueByArrow = state;
+                _changeNumberFieldValueByMouseWheel = state;
+                _expandLongTextFields = state;
+                _hierarchyTypeFilter = state;
+                _improveCurveEditor = state;
+                _searchInEnumFields = state;
+                _treeControllerCollapse = state;
+                
                 RefreshFeatures();
             }
         }

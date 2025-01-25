@@ -93,7 +93,7 @@ namespace InfinityCode.UltimateEditorEnhancer.SceneTools
         {
             if (!Prefs.highlight || !Prefs.highlightOnWaila) return;
 
-            EditorWindow wnd = EditorWindow.mouseOverWindow;
+            EditorWindow wnd = WindowsHelper.mouseOverWindow;
             if (wnd == null || !(wnd is SceneView)) return;
 
             if (Highlighter.Highlight(go))
@@ -118,7 +118,7 @@ namespace InfinityCode.UltimateEditorEnhancer.SceneTools
             SceneViewItem sceneViewItem = null;
             sceneViewItems.TryGetValue(view.GetInstanceID(), out sceneViewItem);
 
-            if (sceneViewItem != null && EditorWindow.mouseOverWindow != view)
+            if (sceneViewItem != null && WindowsHelper.mouseOverWindow != view)
             {
                 if (sceneViewItem.mode == 0)
                 {

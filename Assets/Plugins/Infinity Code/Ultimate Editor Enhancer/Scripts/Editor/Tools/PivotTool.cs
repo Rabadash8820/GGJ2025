@@ -333,7 +333,7 @@ namespace InfinityCode.UltimateEditorEnhancer.Tools
             Selection.selectionChanged -= OnSelectionChanged;
         }
 
-        private static void ProcessEvents()
+        private void ProcessEvents()
         {
             Event e = Event.current;
             
@@ -357,7 +357,44 @@ namespace InfinityCode.UltimateEditorEnhancer.Tools
                 {
                     mode = Mode.Move;
                 }
+                if (e.keyCode == KeyCode.C && e.modifiers == EventModifiers.Alt)
+                {
+                    if (TryCenterPivot()) e.Use();
+                }
             }
+        }
+
+        private bool TryCenterPivot()
+        {
+            if (Selection.gameObjects.Length == 0) return false;
+
+            Bounds bounds = new Bounds(Selection.gameObjects[0].transform.position, Vector3.zero);
+            foreach (GameObject go in Selection.gameObjects)
+            {
+                Collider[] colliders = go.GetComponentsInChildren<Collider>();
+                if (colliders.Length > 0)
+                {
+                    foreach (Collider collider in colliders)
+                    {
+                        bounds.Encapsulate(collider.bounds);
+                    }
+                }
+                else
+                {
+                    Renderer[] renderers = go.GetComponentsInChildren<Renderer>();
+                    if (renderers.Length > 0)
+                    {
+                        foreach (Renderer renderer in renderers)
+                        {
+                            bounds.Encapsulate(renderer.bounds);
+                        }
+                    }
+                    else bounds.Encapsulate(go.transform.position);
+                }
+            }
+
+            ChangePivot(bounds.center, handleRotation);
+            return true;
         }
 
         private void SetOrientation(Vector3 v1, Vector3 v2, Vector3 axis)
