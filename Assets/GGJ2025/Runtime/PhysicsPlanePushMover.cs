@@ -33,15 +33,15 @@ namespace GGJ2025
 
         protected override void OnDisable()
         {
-            base.OnEnable();
+            base.OnDisable();
             _inputSystemActions.Player.Disable();
         }
 
         private void move(float deltaTime)
         {
-            Vector2 inputVect = _inputSystemActions.Player.Move.ReadValue<Vector2>();
-            _moveVector = new Vector3(inputVect.x, 0f, inputVect.y);
-            Rigidbody.AddForce(_moveVector, ForceMode.Force);
+            Vector2 inputVectLocal = _inputSystemActions.Player.Move.ReadValue<Vector2>();
+            _moveVector = Rigidbody.transform.TransformVector(new Vector3(inputVectLocal.x, 0f, inputVectLocal.y));
+            Rigidbody.AddForce(PushForce * _moveVector, ForceMode.Force);
         }
 
         private void OnDrawGizmos()
