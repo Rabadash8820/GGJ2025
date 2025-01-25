@@ -22,20 +22,20 @@ namespace GGJ2025.UI
 
         private void setupButtons(VisualElement root)
         {
-            Button btnPlayName = root.Query<Button>(BtnPlayName).First();
-            Button btnCreditsName = root.Query<Button>(BtnCreditsName).First();
-            Button btnQuitName = root.Query<Button>(BtnQuitName).First();
+            Button btnPlay = root.Query<Button>(BtnPlayName).First();
+            Button btnCredits = root.Query<Button>(BtnCreditsName).First();
+            Button btnQuit = root.Query<Button>(BtnQuitName).First();
 
-            btnPlayName.clicked += () => {
-                Debug.Log("Play button clicked");
+            btnPlay.clicked += () => {
+                Debug.Log("Play button clicked", context: this);
                 PlaySelected.Invoke();
             };
-            btnCreditsName.clicked += () => {
-                Debug.Log("Credits button clicked");
+            btnCredits.clicked += () => {
+                Debug.Log("Credits button clicked", context: this);
                 CreditsSelected.Invoke();
             };
-            btnQuitName.clicked += () => {
-                Debug.Log("Quit button clicked");
+            btnQuit.clicked += () => {
+                Debug.Log("Quit button clicked", context: this);
                 QuitSelected.Invoke();
             };
         }
