@@ -33,7 +33,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 8463086298965876097}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &860832380771596532
@@ -150,7 +151,121 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SphereCollider: {fileID: 4882467060305806153}
-  PopPrefab: {fileID: 4468205603690776806, guid: 109cf2c552f41504e98c14dc9e7e8e51, type: 3}
+  PopEffects: {fileID: 8463086298965876097}
   Collected:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7826652499378662403}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 7059345398809024600}
+        m_TargetAssemblyTypeName: UnityEngine.ParticleSystem, UnityEngine
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!1001 &7918382705038244389
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8528306907408756522}
+    m_Modifications:
+    - target: {fileID: 107635483856983590, guid: 109cf2c552f41504e98c14dc9e7e8e51, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 870437318285746813, guid: 109cf2c552f41504e98c14dc9e7e8e51, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1770287644089034660, guid: 109cf2c552f41504e98c14dc9e7e8e51, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1770287644089034660, guid: 109cf2c552f41504e98c14dc9e7e8e51, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1770287644089034660, guid: 109cf2c552f41504e98c14dc9e7e8e51, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1770287644089034660, guid: 109cf2c552f41504e98c14dc9e7e8e51, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1770287644089034660, guid: 109cf2c552f41504e98c14dc9e7e8e51, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1770287644089034660, guid: 109cf2c552f41504e98c14dc9e7e8e51, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1770287644089034660, guid: 109cf2c552f41504e98c14dc9e7e8e51, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1770287644089034660, guid: 109cf2c552f41504e98c14dc9e7e8e51, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1770287644089034660, guid: 109cf2c552f41504e98c14dc9e7e8e51, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1770287644089034660, guid: 109cf2c552f41504e98c14dc9e7e8e51, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4468205603690776806, guid: 109cf2c552f41504e98c14dc9e7e8e51, type: 3}
+      propertyPath: m_Name
+      value: bubble-pop-effects
+      objectReference: {fileID: 0}
+    - target: {fileID: 4468205603690776806, guid: 109cf2c552f41504e98c14dc9e7e8e51, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 109cf2c552f41504e98c14dc9e7e8e51, type: 3}
+--- !u!198 &7059345398809024600 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 870437318285746813, guid: 109cf2c552f41504e98c14dc9e7e8e51, type: 3}
+  m_PrefabInstance: {fileID: 7918382705038244389}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7826652499378662403 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 107635483856983590, guid: 109cf2c552f41504e98c14dc9e7e8e51, type: 3}
+  m_PrefabInstance: {fileID: 7918382705038244389}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1372746027, guid: 89e0cc21ccdf0144598f97a3ed77427a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &8463086298965876097 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1770287644089034660, guid: 109cf2c552f41504e98c14dc9e7e8e51, type: 3}
+  m_PrefabInstance: {fileID: 7918382705038244389}
+  m_PrefabAsset: {fileID: 0}
