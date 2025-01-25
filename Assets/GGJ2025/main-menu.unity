@@ -163,87 +163,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &418667161
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 418667162}
-  - component: {fileID: 418667163}
-  m_Layer: 0
-  m_Name: main-menu-controller
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &418667162
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 418667161}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &418667163
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 418667161}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0cf0f582c87682942bf2d4a48e3535ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  UIDocument: {fileID: 1332727035}
-  BtnPlayName: btn-play
-  BtnCreditsName: btn-credits
-  BtnQuitName: btn-quit
-  PlaySelected:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11400000, guid: 5aec2b046375a63479b35442f54254f6, type: 2}
-        m_TargetAssemblyTypeName: UnityUtil.SceneLoadManager, UnityUtil
-        m_MethodName: LoadSingleSceneAsync
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: main
-          m_BoolArgument: 0
-        m_CallState: 2
-  CreditsSelected:
-    m_PersistentCalls:
-      m_Calls: []
-  QuitSelected:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11400000, guid: 03da9732bca018e4e9e9c981db6f528c, type: 2}
-        m_TargetAssemblyTypeName: UnityUtil.ApplicationQuitter, rabadash8820.unitydsf
-        m_MethodName: Quit
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &1290757042
 GameObject:
   m_ObjectHideFlags: 0
@@ -391,8 +310,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1332727036}
   - component: {fileID: 1332727035}
+  - component: {fileID: 1332727037}
   m_Layer: 5
-  m_Name: UIDocument
+  m_Name: ui
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -432,6 +352,55 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1332727037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1332727034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cf0f582c87682942bf2d4a48e3535ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UIDocument: {fileID: 1332727035}
+  BtnPlayName: btn-play
+  BtnCreditsName: btn-credits
+  BtnQuitName: btn-quit
+  PlaySelected:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 5aec2b046375a63479b35442f54254f6, type: 2}
+        m_TargetAssemblyTypeName: UnityUtil.SceneLoadManager, UnityUtil
+        m_MethodName: LoadSingleSceneAsync
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: main
+          m_BoolArgument: 0
+        m_CallState: 2
+  CreditsSelected:
+    m_PersistentCalls:
+      m_Calls: []
+  QuitSelected:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 03da9732bca018e4e9e9c981db6f528c, type: 2}
+        m_TargetAssemblyTypeName: UnityUtil.ApplicationQuitter, rabadash8820.unitydsf
+        m_MethodName: Quit
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -439,4 +408,3 @@ SceneRoots:
   - {fileID: 1290757045}
   - {fileID: 280128403}
   - {fileID: 1332727036}
-  - {fileID: 418667162}
