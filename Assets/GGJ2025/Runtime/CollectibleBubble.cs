@@ -10,13 +10,15 @@ namespace GGJ2025
         public SphereCollider SphereCollider;
 
         [RequiredIn(PrefabKind.NonPrefabInstance)]
-        public GameObject PopPrefab;
+        public Transform PopEffects;
 
         public UnityEvent Collected = new();
 
         public void Collect()
         {
-            _ = Instantiate(PopPrefab, transform.position, Quaternion.identity);
+            // Re-parent the effects so they're still there after this object is destroyed
+            PopEffects.parent = transform.parent;
+
             Collected.Invoke();
             Destroy(gameObject);
         }
