@@ -1,5 +1,12 @@
 fileFormatVersion: 2
 guid: 455283f7489e48fab428295bacf13517
+AssetOrigin:
+  serializedVersion: 1
+  productId: 141831
+  packageName: Ultimate Editor Enhancer
+  packageVersion: 3.15.1
+  assetPath: Assets/Plugins/Infinity Code/Ultimate Editor Enhancer/Scripts/Editor/Prefs/ObjectToolbar.Prefs.cs
+  uploadId: 633492
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
@@ -9,10 +16,3 @@ MonoImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 141831
-  packageName: Ultimate Editor Enhancer
-  packageVersion: 3.15.1
-  assetPath: Assets/Plugins/Infinity Code/Ultimate Editor Enhancer/Scripts/Editor/Prefs/ObjectToolbar.Prefs.cs
-  uploadId: 633492

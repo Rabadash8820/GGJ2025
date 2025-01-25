@@ -1,10 +1,5 @@
 fileFormatVersion: 2
 guid: d999a4babbf17ac4296911ff8298789f
-TextScriptImporter:
-  externalObjects: {}
-  userData: 
-  assetBundleName: 
-  assetBundleVariant: 
 AssetOrigin:
   serializedVersion: 1
   productId: 141831
@@ -13,3 +8,8 @@ AssetOrigin:
   assetPath: Assets/Plugins/Infinity Code/Ultimate Editor Enhancer/LocalResources/ScriptTemplates/C#
     Editor Window-NewEditorWindow.cs.txt
   uploadId: 633492
+TextScriptImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

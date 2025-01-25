@@ -1,15 +1,5 @@
 fileFormatVersion: 2
 guid: d330196c659dc574387fa48a47dd3f91
-timeCreated: 1498664893
-licenseType: Store
-MonoImporter:
-  serializedVersion: 2
-  defaultReferences: []
-  executionOrder: 0
-  icon: {instanceID: 0}
-  userData: 
-  assetBundleName: 
-  assetBundleVariant: 
 AssetOrigin:
   serializedVersion: 1
   productId: 94578
@@ -17,3 +7,12 @@ AssetOrigin:
   packageVersion: 2.0.0
   assetPath: Assets/Plugins/RenderHeads/SessionRestore/Scripts/HierarchyUtils.cs
   uploadId: 509584
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

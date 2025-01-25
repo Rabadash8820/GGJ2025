@@ -1,5 +1,12 @@
 fileFormatVersion: 2
 guid: b1b3703a8d782aa4ea096a2526dfd65f
+AssetOrigin:
+  serializedVersion: 1
+  productId: 141831
+  packageName: Ultimate Editor Enhancer
+  packageVersion: 3.15.1
+  assetPath: Assets/Plugins/Infinity Code/Ultimate Editor Enhancer/Scripts/Editor/Project/ProjectCreateMaterialFromTexture.cs
+  uploadId: 633492
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
@@ -9,10 +16,3 @@ MonoImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 141831
-  packageName: Ultimate Editor Enhancer
-  packageVersion: 3.15.1
-  assetPath: Assets/Plugins/Infinity Code/Ultimate Editor Enhancer/Scripts/Editor/Project/ProjectCreateMaterialFromTexture.cs
-  uploadId: 633492

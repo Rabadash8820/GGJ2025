@@ -1,5 +1,12 @@
 fileFormatVersion: 2
 guid: 823e73e4be7e496db6418456da39923b
+AssetOrigin:
+  serializedVersion: 1
+  productId: 141831
+  packageName: Ultimate Editor Enhancer
+  packageVersion: 3.15.1
+  assetPath: Assets/Plugins/Infinity Code/Ultimate Editor Enhancer/Scripts/Editor/Managers/GlobalEventManager.cs
+  uploadId: 633492
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
@@ -9,10 +16,3 @@ MonoImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 141831
-  packageName: Ultimate Editor Enhancer
-  packageVersion: 3.15.1
-  assetPath: Assets/Plugins/Infinity Code/Ultimate Editor Enhancer/Scripts/Editor/Managers/GlobalEventManager.cs
-  uploadId: 633492

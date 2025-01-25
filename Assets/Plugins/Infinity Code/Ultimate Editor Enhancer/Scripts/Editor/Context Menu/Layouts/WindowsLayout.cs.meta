@@ -1,5 +1,13 @@
 fileFormatVersion: 2
 guid: ea0e26034c76469084713114638d7871
+AssetOrigin:
+  serializedVersion: 1
+  productId: 141831
+  packageName: Ultimate Editor Enhancer
+  packageVersion: 3.15.1
+  assetPath: Assets/Plugins/Infinity Code/Ultimate Editor Enhancer/Scripts/Editor/Context
+    Menu/Layouts/WindowsLayout.cs
+  uploadId: 633492
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
@@ -9,11 +17,3 @@ MonoImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 141831
-  packageName: Ultimate Editor Enhancer
-  packageVersion: 3.15.1
-  assetPath: Assets/Plugins/Infinity Code/Ultimate Editor Enhancer/Scripts/Editor/Context
-    Menu/Layouts/WindowsLayout.cs
-  uploadId: 633492

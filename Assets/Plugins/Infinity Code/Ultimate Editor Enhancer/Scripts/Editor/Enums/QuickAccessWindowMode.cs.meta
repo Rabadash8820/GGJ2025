@@ -1,5 +1,12 @@
 fileFormatVersion: 2
 guid: 0a985f3bb0f446ffa44c1a0096545651
+AssetOrigin:
+  serializedVersion: 1
+  productId: 141831
+  packageName: Ultimate Editor Enhancer
+  packageVersion: 3.15.1
+  assetPath: Assets/Plugins/Infinity Code/Ultimate Editor Enhancer/Scripts/Editor/Enums/QuickAccessWindowMode.cs
+  uploadId: 633492
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
@@ -9,10 +16,3 @@ MonoImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 141831
-  packageName: Ultimate Editor Enhancer
-  packageVersion: 3.15.1
-  assetPath: Assets/Plugins/Infinity Code/Ultimate Editor Enhancer/Scripts/Editor/Enums/QuickAccessWindowMode.cs
-  uploadId: 633492

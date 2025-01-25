@@ -1,10 +1,5 @@
 fileFormatVersion: 2
 guid: 1b63f792c8628f84ba9fa0bd8961871f
-TextScriptImporter:
-  externalObjects: {}
-  userData: 
-  assetBundleName: 
-  assetBundleVariant: 
 AssetOrigin:
   serializedVersion: 1
   productId: 141831
@@ -13,3 +8,8 @@ AssetOrigin:
   assetPath: Assets/Plugins/Infinity Code/Ultimate Editor Enhancer/LocalResources/ScriptTemplates/Assembly
     Definition Reference-NewAssemblyReference.asmref.txt
   uploadId: 633492
+TextScriptImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
