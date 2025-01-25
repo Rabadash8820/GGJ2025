@@ -17,6 +17,9 @@ namespace GGJ2025
 
         public UnityEvent BubbleCollected = new();
 
+        [ShowInInspector, ReadOnly]
+        public float CurrentRadius => _sphereCollider.radius - TRIGGER_OFFSET;
+
         private void Awake() => _sphereCollider = GetComponent<SphereCollider>();
 
         private void OnTriggerEnter(Collider other)
@@ -26,7 +29,7 @@ namespace GGJ2025
             if (collectibleBubble == null)
                 return;
 
-            float oldBubbleRadius = _sphereCollider.radius - TRIGGER_OFFSET;
+            float oldBubbleRadius = CurrentRadius;
             float collectedSurfaceArea = getSphereSurfaceArea(collectibleBubble.SphereCollider.radius);
             float currBubbleSurfaceArea = getSphereSurfaceArea(oldBubbleRadius);
             float newBubbleRadius = Mathf.Sqrt((currBubbleSurfaceArea + collectedSurfaceArea) / PI_X4);
