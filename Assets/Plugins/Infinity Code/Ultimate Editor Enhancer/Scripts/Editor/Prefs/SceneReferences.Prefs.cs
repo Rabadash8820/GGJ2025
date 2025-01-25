@@ -32,11 +32,21 @@ namespace InfinityCode.UltimateEditorEnhancer
             {
                 EditorGUI.BeginChangeCheck();
                 hideSceneReferences = EditorGUILayout.ToggleLeft("Hide Scene References", hideSceneReferences);
-                if (EditorGUI.EndChangeCheck())
-                {
-                    SceneManagerHelper.UpdateInstances();
-                    EditorApplication.RepaintHierarchyWindow();
-                }
+                if (EditorGUI.EndChangeCheck()) Refresh();
+            }
+
+            private static void Refresh()
+            {
+                SceneManagerHelper.UpdateInstances();
+                EditorApplication.RepaintHierarchyWindow();
+            }
+
+            public override void SetState(bool state)
+            {
+                base.SetState(state);
+                
+                hideSceneReferences = state;
+                Refresh();
             }
         }
     }

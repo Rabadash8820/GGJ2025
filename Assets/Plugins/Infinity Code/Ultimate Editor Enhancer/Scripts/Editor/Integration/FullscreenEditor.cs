@@ -43,8 +43,15 @@ namespace InfinityCode.UltimateEditorEnhancer.Integration
 
         public static object GetFullscreenFromView(ScriptableObject viewOrWindow, bool rootView = true)
         {
-            if (!isPresent) return null;
-            return getFullscreenFromViewMethod.Invoke(null, new object[] {viewOrWindow, rootView});
+            try
+            {
+                if (!isPresent) return null;
+                return getFullscreenFromViewMethod.Invoke(null, new object[] {viewOrWindow, rootView});
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         public static bool IsFullscreen(ScriptableObject viewOrWindow)
@@ -59,24 +66,46 @@ namespace InfinityCode.UltimateEditorEnhancer.Integration
 
         public static object MakeFullscreen(Type type, EditorWindow window = null, bool disposableWindow = false)
         {
-            if (!isPresent) return null;
-            return makeFullscreenMethod.Invoke(null, new object[] {type, window, disposableWindow});
+            try
+            {
+                if (!isPresent) return null;
+                return makeFullscreenMethod.Invoke(null, new object[] {type, window, disposableWindow});
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         public static void OpenFullscreenGameView()
         {
-            openGameViewMethod.Invoke(null, null);
+            try
+            {
+                openGameViewMethod.Invoke(null, null);
+            }
+            catch { }
         }
 
         public static void OpenFullscreenSceneView()
         {
-            openSceneViewMethod.Invoke(null, null);
+            try
+            {
+                openSceneViewMethod.Invoke(null, null);
+            }
+            catch { }
         }
 
         public static void ToggleFullscreen(ScriptableObject viewOrWindow)
         {
-            if (!isPresent) return;
-            toggleFullscreenMethod.Invoke(null, new[] { viewOrWindow });
+            try
+            {
+                if (!isPresent) return;
+                toggleFullscreenMethod.Invoke(null, new[] { viewOrWindow });
+            }
+            catch
+            {
+                
+            }
         }
     }
 }

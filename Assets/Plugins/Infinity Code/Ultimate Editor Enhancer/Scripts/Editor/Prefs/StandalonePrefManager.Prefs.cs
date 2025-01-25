@@ -42,10 +42,14 @@ namespace InfinityCode.UltimateEditorEnhancer
 
             public static void Draw(string filter)
             {
-                EditorGUI.BeginChangeCheck();
                 try
                 {
+                    EditorGUI.BeginChangeCheck();
                     instance.Draw();
+                    if (EditorGUI.EndChangeCheck())
+                    {
+                        Save();
+                    }
                 }
                 catch (ExitGUIException e)
                 {
@@ -54,10 +58,6 @@ namespace InfinityCode.UltimateEditorEnhancer
                 catch (Exception e) 
                 {
                     Log.Add(e);
-                }
-                if (EditorGUI.EndChangeCheck())
-                {
-                    Save();
                 }
             }
 

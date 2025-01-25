@@ -40,15 +40,17 @@ namespace InfinityCode.UltimateEditorEnhancer
                 return "Game Object";
             }
 
-            public void SetState(bool state)
+            public override void SetState(bool state)
             {
-                SelectionBoundsManager.SetState(state);
-                DropToFloorManager.SetState(state);
-                GroupManager.SetState(state);
-                UngroupManager.SetState(state);
-                RenameManager.SetState(state);
-                ReplaceManager.SetState(state);
-                RotateByShortcutManager.SetState(state);
+                base.SetState(state);
+                
+                GetManager<SelectionBoundsManager>().SetState(state);
+                GetManager<DropToFloorManager>().SetState(state);
+                GetManager<GroupManager>().SetState(state);
+                GetManager<UngroupManager>().SetState(state);
+                GetManager<RenameManager>().SetState(state);
+                GetManager<ReplaceManager>().SetState(state);
+                GetManager<RotateByShortcutManager>().SetState(state);
             }
         }
     }

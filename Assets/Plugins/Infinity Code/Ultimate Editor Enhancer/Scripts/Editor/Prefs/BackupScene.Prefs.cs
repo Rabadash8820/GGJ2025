@@ -33,6 +33,13 @@ namespace InfinityCode.UltimateEditorEnhancer
                 EditorGUI.EndDisabledGroup();
                 EditorGUI.indentLevel--;
             }
+
+            public override void SetState(bool state)
+            {
+                base.SetState(state);
+                
+                backupScene = state;
+            }
         }
     }
 }

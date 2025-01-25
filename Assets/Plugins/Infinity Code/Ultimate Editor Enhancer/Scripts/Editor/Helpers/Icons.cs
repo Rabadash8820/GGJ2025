@@ -47,6 +47,7 @@ namespace InfinityCode.UltimateEditorEnhancer
         private static Texture _history;
         private static Texture _maximize;
         private static Texture _minimize;
+        private static Texture _moveUpDown;
         private static Texture _note;
         private static Texture _noteEmpty;
         private static Texture _open;
@@ -392,7 +393,7 @@ namespace InfinityCode.UltimateEditorEnhancer
         {
             get
             {
-                if (_help == null) _help = ResourcesCache.GetIcon("Help");
+                if (_help == null) _help = ResourcesCache.GetIcon("HelpIcon");
                 return _help;
             }
         }
@@ -430,6 +431,15 @@ namespace InfinityCode.UltimateEditorEnhancer
             {
                 if (_minimize == null) _minimize = ResourcesCache.GetIcon("Minimize");
                 return _minimize;
+            }
+        }
+
+        public static Texture moveUpDown
+        {
+            get
+            {
+                if (_moveUpDown == null) _moveUpDown = ResourcesCache.GetIcon(Styles.isProSkin? "Move-UpDown-White": "Move-UpDown-Dark");
+                return _moveUpDown;
             }
         }
 
@@ -620,7 +630,7 @@ namespace InfinityCode.UltimateEditorEnhancer
                 return _updateAvailable;
             }
         }
-        
+
         public static Texture updateAvailable2
         {
             get

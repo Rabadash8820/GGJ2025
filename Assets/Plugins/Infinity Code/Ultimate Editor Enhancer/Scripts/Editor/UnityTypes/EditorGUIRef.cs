@@ -2,6 +2,7 @@
 /*     https://infinity-code.com    */
 
 using System;
+using System.Linq;
 using System.Reflection;
 using UnityEditor;
 using UnityEngine;
@@ -13,6 +14,7 @@ namespace InfinityCode.UltimateEditorEnhancer.UnityTypes
     {
         private static FieldInfo _activeEditorField;
         private static MethodInfo _doNumberFieldMethod;
+        private static MethodInfo _doObjectFieldMethod;
         private static MethodInfo _doObjectFoldoutMethod;
         private static MethodInfo _doPopupMethod;
         private static MethodInfo _doTextFieldMethod;
@@ -61,6 +63,22 @@ namespace InfinityCode.UltimateEditorEnhancer.UnityTypes
                 }
 
                 return _doNumberFieldMethod;
+            }
+        }
+
+        public static MethodInfo doObjectFieldMethod
+        {
+            get
+            {
+                if (_doObjectFieldMethod == null)
+                {
+                    _doObjectFieldMethod = type.GetMethods(Reflection.StaticLookup)
+                        .Where(m => m.Name == "DoObjectField")
+                        .OrderByDescending(m => m.GetParameters().Length)
+                        .FirstOrDefault();
+                }
+                
+                return _doObjectFieldMethod;
             }
         }
 
@@ -113,19 +131,19 @@ namespace InfinityCode.UltimateEditorEnhancer.UnityTypes
                         null,
                         new[]
                         {
-                            RecycledTextEditorRef.type,
-                            typeof(int),
-                            typeof(Rect),
-                            typeof(string),
-                            typeof(GUIStyle),
-                            typeof(string),
-                            typeof(bool).MakeByRefType(),
-                            typeof(bool),
-                            typeof(bool),
-                            typeof(bool)
+                            RecycledTextEditorRef.type, // editor
+                            typeof(int), // id
+                            typeof(Rect), // position
+                            typeof(string), // text
+                            typeof(GUIStyle), // style
+                            typeof(string), // allowedletters
+                            typeof(bool).MakeByRefType(), // changed
+                            typeof(bool), // reset
+                            typeof(bool), // multiline
+                            typeof(bool) // passwordField
 #if UNITY_2021_2_OR_NEWER
-                            , typeof(GUIStyle),
-                            typeof(bool)
+                            , typeof(GUIStyle), // cancelButtonStyle
+                            typeof(bool) // checkTextLimit
 #endif
                         },
                         null
@@ -221,7 +239,12 @@ namespace InfinityCode.UltimateEditorEnhancer.UnityTypes
         {
             get
             {
-                if (_recycledEditorField == null) _recycledEditorField = type.GetField("s_RecycledEditor", Reflection.StaticLookup);
+#if UNITY_6000_0_OR_NEWER
+                _recycledEditorField = type.GetField("s_RecycledEditorInternal", Reflection.StaticLookup);
+#else
+                _recycledEditorField = type.GetField("s_RecycledEditor", Reflection.StaticLookup);
+#endif
+
                 return _recycledEditorField;
             }
         }
@@ -245,10 +268,7 @@ namespace InfinityCode.UltimateEditorEnhancer.UnityTypes
             }
         }
 
-        private static Type type
-        {
-            get => typeof(EditorGUI);
-        }
+        private static Type type => typeof(EditorGUI);
 
         public static object GetRecycledEditor()
         {

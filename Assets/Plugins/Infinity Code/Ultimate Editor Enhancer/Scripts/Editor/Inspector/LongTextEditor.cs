@@ -7,6 +7,7 @@ using InfinityCode.UltimateEditorEnhancer.Interceptors;
 using InfinityCode.UltimateEditorEnhancer.Windows;
 using UnityEditor;
 using UnityEngine;
+using Debug = UnityEngine.Debug;
 
 namespace InfinityCode.UltimateEditorEnhancer.InspectorTools
 {
@@ -31,9 +32,9 @@ namespace InfinityCode.UltimateEditorEnhancer.InspectorTools
             if (!Prefs.expandLongTextFields) return;
 
             drawButton = false;
-            if (multiline || passwordfield || allowedletters != null) return;
+            if (multiline || passwordfield || allowedletters != null || string.IsNullOrEmpty(text)) return;
             if (EditorStyles.textField.CalcSize(TempContent.Get(text)).x < position.width - 10) return;
-
+            
             if (Prefs.longTextFieldsInVisualScripting)
             {
                 StackTrace stackTrace = new StackTrace();

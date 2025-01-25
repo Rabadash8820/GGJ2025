@@ -177,8 +177,10 @@ namespace InfinityCode.UltimateEditorEnhancer
                 };
             }
 
-            public void SetState(bool state)
+            public override void SetState(bool state)
             { 
+                base.SetState(state);
+                
                 search = state;
                 searchScript = state;
             }

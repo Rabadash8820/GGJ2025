@@ -57,7 +57,7 @@ namespace InfinityCode.UltimateEditorEnhancer.Behaviors
             if (e.modifiers != EventModifiers.Control && e.modifiers != EventModifiers.Command) return;
             if (e.type != EventType.DragUpdated && e.type != EventType.DragPerform) return;
 
-            EditorWindow wnd = EditorWindow.mouseOverWindow;
+            EditorWindow wnd = WindowsHelper.mouseOverWindow;
 
             if (wnd == null) return;
             if (!(wnd is SceneView)) return;

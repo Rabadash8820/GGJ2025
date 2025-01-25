@@ -10,11 +10,32 @@ namespace InfinityCode.UltimateEditorEnhancer.UnityTypes
 {
     public static class SceneVisibilityManagerRef
     {
+        private static MethodInfo _disablePickingMethod;
+        private static MethodInfo _enablePickingMethod;
         private static MethodInfo _hideMethod;
         private static PropertyInfo _instanceProp;
+        private static MethodInfo _isSelectableMethod;
         private static MethodInfo _showMethod;
         private static MethodInfo _toggleVisibilityMethod;
         private static Type _type;
+
+        private static MethodInfo disablePickingMethod
+        {
+            get
+            {
+                if (_disablePickingMethod == null) _disablePickingMethod = type.GetMethod("DisablePicking", Reflection.InstanceLookup, null, new[] { typeof(GameObject), typeof(bool) }, null);
+                return _disablePickingMethod;
+            }
+        }
+
+        private static MethodInfo enablePickingMethod
+        {
+            get
+            {
+                if (_enablePickingMethod == null) _enablePickingMethod = type.GetMethod("EnablePicking", Reflection.InstanceLookup, null, new[] { typeof(GameObject), typeof(bool) }, null);
+                return _enablePickingMethod;
+            }
+        }
 
         private static MethodInfo hideMethod
         {
@@ -22,6 +43,15 @@ namespace InfinityCode.UltimateEditorEnhancer.UnityTypes
             {
                 if (_hideMethod == null) _hideMethod = type.GetMethod("Hide", Reflection.InstanceLookup, null, new[] { typeof(GameObject), typeof(bool) }, null);
                 return _hideMethod;
+            }
+        }
+
+        private static MethodInfo isSelectableMethod
+        {
+            get
+            {
+                if (_isSelectableMethod == null) _isSelectableMethod = type.GetMethod("IsSelectable", Reflection.InstanceLookup, null, new[] { typeof(GameObject) }, null);
+                return _isSelectableMethod;
             }
         }
 
@@ -67,6 +97,18 @@ namespace InfinityCode.UltimateEditorEnhancer.UnityTypes
                 return _type;
             }
         }
+        
+        public static void DisablePicking(object instance, GameObject gameObject, bool includeChildren)
+        {
+            if (gameObject == null) return;
+            disablePickingMethod.Invoke(instance, new object[] {gameObject, includeChildren});
+        }
+        
+        public static void EnablePicking(object instance, GameObject gameObject, bool includeChildren)
+        {
+            if (gameObject == null) return;
+            enablePickingMethod.Invoke(instance, new object[] {gameObject, includeChildren});
+        }
 
         public static object GetInstance()
         {
@@ -77,6 +119,12 @@ namespace InfinityCode.UltimateEditorEnhancer.UnityTypes
         {
             if (gameObject == null) return;
             hideMethod.Invoke(instance, new object[] { gameObject, includeChildren });
+        }
+        
+        public static bool IsSelectable(object instance, GameObject gameObject)
+        {
+            if (gameObject == null) return false;
+            return (bool)isSelectableMethod.Invoke(instance, new object[] {gameObject});
         }
 
         public static void Show(object instance, GameObject gameObject, bool includeChildren)

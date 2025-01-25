@@ -23,27 +23,10 @@ namespace InfinityCode.UltimateEditorEnhancer.Interceptors
         public static DoTextFieldDelegate OnPrefix;
         public static DoTextFieldDelegate OnPostfix;
 
-        private MethodInfo _originalMethod;
-
-        protected override MethodInfo originalMethod
-        {
-            get { return EditorGUIRef.doTextFieldMethod; }
-        }
-
-        protected override string prefixMethodName
-        {
-            get => nameof(DoTextFieldPrefix);
-        }
-
-        protected override string postfixMethodName
-        {
-            get => nameof(DoTextFieldPostfix);
-        }
-
-        public override bool state
-        {
-            get => true;
-        }
+        protected override MethodInfo originalMethod => EditorGUIRef.doTextFieldMethod;
+        protected override string prefixMethodName => nameof(DoTextFieldPrefix);
+        protected override string postfixMethodName => nameof(DoTextFieldPostfix);
+        public override bool state => true;
 
         private static void DoTextFieldPrefix(
             TextEditor editor,

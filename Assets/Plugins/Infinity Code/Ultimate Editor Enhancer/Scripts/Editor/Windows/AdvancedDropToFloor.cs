@@ -24,9 +24,8 @@ namespace InfinityCode.UltimateEditorEnhancer.Windows
             binding.OnValidate += OnValidate;
         }
 
-        private void DropRenderer(Renderer renderer)
+        private void DropTarget(Transform transform, Bounds bounds)
         {
-            Bounds bounds = renderer.bounds;
             Vector3 min = bounds.min;
             Vector3 size = bounds.size;
 
@@ -48,10 +47,10 @@ namespace InfinityCode.UltimateEditorEnhancer.Windows
             else if (alignTo == 2) shift = DropToFloor.points.Average(v => v.y) - min.y;
             else if (alignTo == 3) shift = DropToFloor.points.Max(v => v.y) - min.y;
 
-            Undo.RecordObject(renderer.transform, "Drop To Floor");
+            Undo.RecordObject(transform, "Drop To Floor");
 
-            renderer.transform.Translate(0, shift, 0, Space.World);
-            DropToFloor.movedObjects.Add(renderer.transform, shift);
+            transform.Translate(0, shift, 0, Space.World);
+            DropToFloor.movedObjects.Add(transform, shift);
         }
 
         private void DropSelection()
@@ -72,8 +71,8 @@ namespace InfinityCode.UltimateEditorEnhancer.Windows
                 if (raycastFrom == 0)
                 {
                     Renderer renderer = go.GetComponent<Renderer>();
-                    if (renderer != null) DropRenderer(renderer);
-                    else DropTransform(go.transform);
+                    if (renderer) DropTarget(go.transform, renderer.bounds);
+                    else if (!TryDropByChildren(go.transform)) DropTransform(go.transform);
                 }
                 else if (raycastFrom == 1)
                 {
@@ -83,6 +82,21 @@ namespace InfinityCode.UltimateEditorEnhancer.Windows
 
             DropToFloor.movedObjects.Clear();
             Undo.CollapseUndoOperations(group);
+        }
+        
+        private bool TryDropByChildren(Transform transform)
+        {
+            Renderer[] renderers = transform.GetComponentsInChildren<Renderer>();
+            if (renderers.Length == 0) return false;
+            
+            Bounds bounds = renderers[0].bounds;
+            for (int i = 1; i < renderers.Length; i++)
+            {
+                bounds.Encapsulate(renderers[i].bounds);
+            }
+            
+            DropTarget(transform, bounds);
+            return true;
         }
 
         private void DropTransform(Transform transform)

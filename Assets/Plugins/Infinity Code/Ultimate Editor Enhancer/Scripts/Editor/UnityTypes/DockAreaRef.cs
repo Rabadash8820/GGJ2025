@@ -10,8 +10,18 @@ namespace InfinityCode.UltimateEditorEnhancer.UnityTypes
 {
     public static class DockAreaRef
     {
+        private static MethodInfo _addTabMethod;
         private static FieldInfo _panesField;
         private static Type _type;
+
+        private static MethodInfo addTabMethod
+        {
+            get
+            {
+                if (_addTabMethod == null) _addTabMethod = type.GetMethod("AddTab", Reflection.InstanceLookup, null, new[] { typeof(EditorWindow), typeof(bool) }, null);
+                return _addTabMethod;
+            }
+        }
         
         private static FieldInfo panesField
         {
@@ -29,6 +39,11 @@ namespace InfinityCode.UltimateEditorEnhancer.UnityTypes
                 if (_type == null) _type = Reflection.GetEditorType("DockArea");
                 return _type;
             }
+        }
+        
+        public static void AddTab(object dockArea, EditorWindow pane, bool sendPaneEvents = true)
+        {
+            addTabMethod.Invoke(dockArea, new object[] { pane, sendPaneEvents });
         }
         
         public static List<EditorWindow> GetPanes(object dockArea)

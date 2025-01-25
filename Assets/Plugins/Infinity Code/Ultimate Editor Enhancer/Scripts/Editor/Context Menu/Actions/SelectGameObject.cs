@@ -30,12 +30,12 @@ namespace InfinityCode.UltimateEditorEnhancer.EditorMenus.Actions
             List<GameObject> items = UnityEngine.SceneManagement.SceneManager.GetActiveScene().GetRootGameObjects().ToList();
             GenericMenuEx menu = GenericMenuEx.Start();
 
-            for (int i = 0; i < items.Count; i++) GetChilds(items[i].transform, menu, "");
+            for (int i = 0; i < items.Count; i++) GetChildren(items[i].transform, menu, "");
 
             menu.Show();
         }
 
-        private void GetChilds(Transform t, GenericMenuEx menu, string prefix)
+        private void GetChildren(Transform t, GenericMenuEx menu, string prefix)
         {
             string title = prefix + t.name;
 
@@ -47,7 +47,7 @@ namespace InfinityCode.UltimateEditorEnhancer.EditorMenus.Actions
                     SceneViewManager.OnNextGUI += EditorMenu.ShowInLastPosition;
                 });
                 menu.AddSeparator(title + "/");
-                for (int i = 0; i < t.childCount; i++) GetChilds(t.GetChild(i), menu, title + "/");
+                for (int i = 0; i < t.childCount; i++) GetChildren(t.GetChild(i), menu, title + "/");
             }
             else
             {

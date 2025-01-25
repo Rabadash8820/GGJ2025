@@ -4,6 +4,7 @@
 using System;
 using System.Reflection;
 using UnityEditor.IMGUI.Controls;
+using UnityEngine;
 
 namespace InfinityCode.UltimateEditorEnhancer.UnityTypes
 {
@@ -12,10 +13,12 @@ namespace InfinityCode.UltimateEditorEnhancer.UnityTypes
         private static MethodInfo _changeExpandedStateMethod;
         private static PropertyInfo _dataProp;
         private static PropertyInfo _guiProp;
+        private static MethodInfo _onGUIMethod;
+        private static MethodInfo _reloadDataMethod;
         private static Type _type;
         private static MethodInfo _userInputChangedExpandedStateMethod;
         private static FieldInfo _useExpansionAnimation;
-        
+
         public static FieldInfo useExpansionAnimationField
         {
             get
@@ -52,6 +55,24 @@ namespace InfinityCode.UltimateEditorEnhancer.UnityTypes
             }
         }
 
+        private static MethodInfo onGUIMethod
+        {
+            get
+            {
+                if (_onGUIMethod == null) _onGUIMethod = type.GetMethod("OnGUI", Reflection.InstanceLookup, null, new[] { typeof(Rect), typeof(int) }, null); 
+                return _onGUIMethod;
+            }
+        }
+
+        private static MethodInfo reloadDataMethod
+        {
+            get
+            {
+                if (_reloadDataMethod == null) _reloadDataMethod = type.GetMethod("ReloadData", Reflection.InstanceLookup);
+                return _reloadDataMethod;
+            }
+        }
+
         public static Type type
         {
             get
@@ -69,7 +90,7 @@ namespace InfinityCode.UltimateEditorEnhancer.UnityTypes
                 return _userInputChangedExpandedStateMethod;
             }
         }
-        
+
         public static void ChangeExpandedState(object instance, TreeViewItem item, bool expanded, bool includeChildren)
         {
             changeExpandedStateMethod.Invoke(instance, new object[] { item, expanded, includeChildren });
@@ -84,12 +105,22 @@ namespace InfinityCode.UltimateEditorEnhancer.UnityTypes
         {
             return guiProp.GetValue(instance);
         }
-        
+
         public static bool GetUseExpansionAnimation(object instance)
         {
             return (bool)useExpansionAnimationField.GetValue(instance);
         }
-        
+
+        public static void OnGUI(object instance, Rect rect, int keyboardControlID)
+        {
+            onGUIMethod.Invoke(instance, new object[] { rect, keyboardControlID });
+        }
+
+        public static void ReloadData(object instance)
+        {
+            reloadDataMethod.Invoke(instance, null);
+        }
+
         public static void SetUseExpansionAnimation(object instance, bool value)
         {
             useExpansionAnimationField.SetValue(instance, value);

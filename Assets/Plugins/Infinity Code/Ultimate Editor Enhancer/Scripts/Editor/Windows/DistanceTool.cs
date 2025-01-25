@@ -162,7 +162,7 @@ namespace InfinityCode.UltimateEditorEnhancer.Windows
                 message = "Ignored";
                 if (t.transform != null)
                 {
-                    message = position.ToString("F1");
+                    message = t.position.ToString("F1");
                     if (hasPrev)
                     {
                         float d = GetDistance(t.position, prevPosition);
@@ -230,36 +230,6 @@ namespace InfinityCode.UltimateEditorEnhancer.Windows
             }
         }
 
-        private Vector3 GetCurrentPoint()
-        {
-            Event e = Event.current;
-
-            SceneView view = SceneView.lastActiveSceneView;
-            if (view.in2DMode)
-            {
-                Vector3 p = view.camera.ScreenToWorldPoint(new Vector3(e.mousePosition.x, Screen.height - e.mousePosition.y - 40));
-                p.z = 0;
-                return p;
-            }
-
-            GameObject go = HandleUtility.PickGameObject(e.mousePosition, false);
-
-            if (go != null)
-            {
-                if (KeyManager.IsKeyDown(KeyCode.V))
-                {
-                    Vector3 p;
-                    HandleUtilityRef.FindNearestVertex(e.mousePosition, out p);
-                    return p;
-                }
-                Vector3 worldPosition;
-                SceneViewManager.GetWorldPosition(out worldPosition);
-                return worldPosition;
-            }
-
-            return Vector3.zero;
-        }
-
         private void DrawUseCursorSceneGUI(SceneView sceneView)
         {
             if (!lastPointUnderCursor) return;
@@ -301,6 +271,36 @@ namespace InfinityCode.UltimateEditorEnhancer.Windows
                     e.Use();
                 }
             }
+        }
+
+        private Vector3 GetCurrentPoint()
+        {
+            Event e = Event.current;
+
+            SceneView view = SceneView.lastActiveSceneView;
+            if (view.in2DMode)
+            {
+                Vector3 p = view.camera.ScreenToWorldPoint(new Vector3(e.mousePosition.x, Screen.height - e.mousePosition.y - 40));
+                p.z = 0;
+                return p;
+            }
+
+            GameObject go = HandleUtility.PickGameObject(e.mousePosition, false);
+
+            if (go != null)
+            {
+                if (KeyManager.IsKeyDown(KeyCode.V))
+                {
+                    Vector3 p;
+                    HandleUtilityRef.FindNearestVertex(e.mousePosition, out p);
+                    return p;
+                }
+                Vector3 worldPosition;
+                SceneViewManager.GetWorldPosition(out worldPosition);
+                return worldPosition;
+            }
+
+            return Vector3.zero;
         }
 
         public static float GetDistance(Vector3 p, Vector3 prev)

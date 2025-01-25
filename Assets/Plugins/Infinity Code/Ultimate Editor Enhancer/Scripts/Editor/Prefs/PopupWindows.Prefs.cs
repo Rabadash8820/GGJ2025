@@ -111,8 +111,10 @@ namespace InfinityCode.UltimateEditorEnhancer
                 return shortcuts;
             }
 
-            public static void SetState(bool state)
+            public override void SetState(bool state)
             {
+                base.SetState(state);
+                
                 popupWindows = state;
             }
         }

@@ -63,6 +63,13 @@ namespace InfinityCode.UltimateEditorEnhancer
                     new Shortcut("Switch Between Scene View and Game View", "Scene View or Game View", switcherWindowsModifiers, switcherWindowsKeyCode), 
                 };
             }
+
+            public override void SetState(bool state)
+            {
+                base.SetState(state);
+
+                switcher = state;
+            }
         }
     }
 }

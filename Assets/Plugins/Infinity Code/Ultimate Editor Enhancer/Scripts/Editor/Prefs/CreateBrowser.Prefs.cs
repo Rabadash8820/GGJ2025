@@ -64,6 +64,11 @@ namespace InfinityCode.UltimateEditorEnhancer
                 EditorGUI.indentLevel--;
             }
 
+            public string GetMenuName()
+            {
+                return "Create Browser";
+            }
+
             private static void ProcessDragAndDropFolder()
             {
                 Event e = Event.current;
@@ -97,12 +102,7 @@ namespace InfinityCode.UltimateEditorEnhancer
 
             void IStateablePref.SetState(bool state)
             {
-                ObjectPlacerManager.SetState(state);
-            }
-
-            public string GetMenuName()
-            {
-                return "Create Browser";
+                GetManager<ObjectPlacerManager>().SetState(state);
             }
         }
     }

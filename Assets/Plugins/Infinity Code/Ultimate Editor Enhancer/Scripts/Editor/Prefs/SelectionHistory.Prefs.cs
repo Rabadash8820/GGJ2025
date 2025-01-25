@@ -78,6 +78,13 @@ namespace InfinityCode.UltimateEditorEnhancer
                     new Shortcut("Set Next GameObject Selection", "Everywhere", selectionHistoryModifiers, selectionHistoryNextKeyCode),
                 };
             }
+
+            public override void SetState(bool state)
+            {
+                base.SetState(state);
+                
+                selectionHistory = state;
+            }
         }
     }
 }

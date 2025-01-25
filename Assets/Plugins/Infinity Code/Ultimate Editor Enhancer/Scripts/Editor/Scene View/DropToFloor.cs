@@ -21,9 +21,15 @@ namespace InfinityCode.UltimateEditorEnhancer.SceneTools
             binding.OnValidate += OnValidate;
         }
 
-        private static void DropRenderer(Renderer renderer)
+        private static void DropGameObject(GameObject gameObject)
         {
-            Bounds bounds = renderer.bounds;
+            Renderer renderer = gameObject.GetComponent<Renderer>();
+            if (renderer) DropTarget(renderer.transform, renderer.bounds);
+            else if (!TryDropByChildren(gameObject.transform)) DropTransform(gameObject.transform);
+        }
+
+        private static void DropTarget(Transform transform, Bounds bounds)
+        {
             Vector3 min = bounds.min;
             Vector3 size = bounds.size;
 
@@ -39,12 +45,12 @@ namespace InfinityCode.UltimateEditorEnhancer.SceneTools
                 };
             }
 
-            Undo.RecordObject(renderer.transform, "Drop To Floor");
+            Undo.RecordObject(transform, "Drop To Floor");
 
             float shift = points.Average(v => v.y) - min.y;
 
-            renderer.transform.Translate(0, shift, 0, Space.World);
-            movedObjects.Add(renderer.transform, shift);
+            transform.Translate(0, shift, 0, Space.World);
+            movedObjects.Add(transform, shift);
         }
 
         private static void DropTransform(Transform transform)
@@ -75,10 +81,7 @@ namespace InfinityCode.UltimateEditorEnhancer.SceneTools
 
             for (int i = 0; i < targets.Length; i++)
             {
-                GameObject go = targets[i];
-                Renderer renderer = go.GetComponent<Renderer>();
-                if (renderer != null) DropRenderer(renderer);
-                else DropTransform(go.transform);
+                DropGameObject(targets[i]);
             }
 
             movedObjects.Clear();
@@ -98,19 +101,13 @@ namespace InfinityCode.UltimateEditorEnhancer.SceneTools
         public static int RaycastDown(Vector3 point, out Vector3 hitPoint)
         {
             hitPoint = Vector3.zero;
-            RaycastHit hit;
-            if (Physics.Raycast(point, Vector3.down, out hit))
-            {
-                hitPoint = hit.point;
-                float shift;
-                if (movedObjects.TryGetValue(hit.transform, out shift))
-                {
-                    hitPoint.y += shift;
-                    return 1;
-                }
-                return 0;
-            }
-            return -1;
+            if (!Physics.Raycast(point, Vector3.down, out RaycastHit hit)) return -1;
+            
+            hitPoint = hit.point;
+            if (!movedObjects.TryGetValue(hit.transform, out float shift)) return 0;
+            
+            hitPoint.y += shift;
+            return 1;
         }
 
         public static void RaycastRendererPoints(Vector3 min, Vector3 size, CountRays countRays = CountRays.five)
@@ -164,6 +161,21 @@ namespace InfinityCode.UltimateEditorEnhancer.SceneTools
                 points.Clear();
                 points.Add(p);
             }
+        }
+
+        private static bool TryDropByChildren(Transform transform)
+        {
+            Renderer[] renderers = transform.GetComponentsInChildren<Renderer>();
+            if (renderers.Length == 0) return false;
+            
+            Bounds bounds = renderers[0].bounds;
+            for (int i = 1; i < renderers.Length; i++)
+            {
+                bounds.Encapsulate(renderers[i].bounds);
+            }
+            
+            DropTarget(transform, bounds);
+            return true;
         }
 
         public enum CountRays

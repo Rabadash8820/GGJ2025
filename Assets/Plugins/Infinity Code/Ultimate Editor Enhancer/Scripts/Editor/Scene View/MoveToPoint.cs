@@ -15,62 +15,68 @@ namespace InfinityCode.UltimateEditorEnhancer.SceneTools
             SceneViewManager.AddListener(OnSceneGUI, SceneViewOrder.Early);
         }
 
+        private static void MoveRectTransforms(Vector3 worldPosition, Bounds bounds)
+        {
+            Vector3 delta = worldPosition - bounds.center;
+
+            for (int i = 0; i < Selection.gameObjects.Length; i++)
+            {
+                GameObject go = Selection.gameObjects[i];
+                Undo.RecordObject(go.GetComponent<RectTransform>(), "Move To Point");
+                if (bounds.extents != Vector3.zero) go.transform.Translate(delta, Space.World);
+                else go.transform.position = worldPosition;
+            }
+        }
+
+        private static void MoveTransforms(Vector3 normal, Bounds bounds, Vector3 worldPosition)
+        {
+            Vector3 cubeSide = MathHelper.NormalToCubeSide(normal);
+            Vector3 extents = bounds.extents;
+            extents.Scale(cubeSide);
+                    
+            Vector3 delta = worldPosition - bounds.center + new Vector3(extents.x, extents.y, extents.z);
+
+            for (int i = 0; i < Selection.gameObjects.Length; i++)
+            {
+                Transform t = Selection.gameObjects[i].transform;
+                Undo.RecordObject(t, "Move To Point");
+                if (bounds.extents != Vector3.zero) t.Translate(delta, Space.World);
+                else t.position = worldPosition;
+            }
+        }
+
         private static void OnSceneGUI(SceneView view)
         {
-            if (!Prefs.moveToPoint) return;
+            if (!Validate()) return;
 
-            Event e = Event.current;
-            if (e.type != EventType.KeyDown) return;
-            if (e.keyCode != Prefs.moveToPointKeyCode || e.modifiers != Prefs.moveToPointModifiers) return;
-            if (!(EditorWindow.mouseOverWindow is SceneView)) return;
-            if (Selection.objects.Any(o =>
-            {
-                GameObject go = o as GameObject;
-                return go == null || go.scene.name == null;
-            })) return;
-
-            e.Use();
+            Event.current.Use();
 
             Bounds bounds = SelectionBoundsManager.bounds;
-            if (bounds.extents == Vector3.zero) return;
 
             Undo.SetCurrentGroupName("Move To Point");
             int group = Undo.GetCurrentGroup();
 
-            Vector3 worldPosition;
-            Vector3 normal;
+            SceneViewManager.GetWorldPositionAndNormal(out Vector3 worldPosition, out Vector3 normal, Selection.gameObjects);
 
-            SceneViewManager.GetWorldPositionAndNormal(out worldPosition, out normal, Selection.gameObjects);
-
-            bool isRectTransform = SelectionBoundsManager.isRectTransform;
-            if (!isRectTransform)
-            {
-                Vector3 cubeSide = MathHelper.NormalToCubeSide(normal);
-                Vector3 extents = bounds.extents;
-                extents.Scale(cubeSide);
-                    
-                Vector3 delta = worldPosition - bounds.center + new Vector3(extents.x, extents.y, extents.z);
-
-                for (int i = 0; i < Selection.gameObjects.Length; i++)
-                {
-                    GameObject go = Selection.gameObjects[i];
-                    Undo.RecordObject(go.transform, "Move To Point");
-                    go.transform.Translate(delta, Space.World);
-                }
-            }
-            else
-            {
-                Vector3 delta = worldPosition - bounds.center;
-
-                for (int i = 0; i < Selection.gameObjects.Length; i++)
-                {
-                    GameObject go = Selection.gameObjects[i];
-                    Undo.RecordObject(go.GetComponent<RectTransform>(), "Move To Point");
-                    go.transform.Translate(delta, Space.World);
-                }
-            }
+            if (!SelectionBoundsManager.isRectTransform) MoveTransforms(normal, bounds, worldPosition);
+            else MoveRectTransforms(worldPosition, bounds);
 
             Undo.CollapseUndoOperations(group);
+        }
+
+        private static bool Validate()
+        {
+            if (!Prefs.moveToPoint) return false;
+            
+            Event e = Event.current;
+            if (e.type != EventType.KeyDown) return false;
+            if (e.keyCode != Prefs.moveToPointKeyCode || e.modifiers != Prefs.moveToPointModifiers) return false;
+            if (!(WindowsHelper.mouseOverWindow is SceneView)) return false;
+            return !Selection.objects.Any(o =>
+            {
+                GameObject go = o as GameObject;
+                return go == null || go.scene.name == null;
+            });
         }
     }
 }

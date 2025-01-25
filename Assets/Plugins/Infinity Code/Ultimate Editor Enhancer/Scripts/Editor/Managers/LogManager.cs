@@ -13,16 +13,22 @@ namespace InfinityCode.UltimateEditorEnhancer
     [InitializeOnLoad]
     public static class LogManager
     {
+        private const int MaxEntries = 999;
+        
         private const double Frequency = 1;
         private const int ErrorMode = 16640;
         private const int ErrorMode2 = 8405248;
         private const int ExceptionMode = 4325632;
         private const int ExceptionMode2 = 12714240;
 
-        private static Dictionary<int, List<Entry>> entries;
+        private static int countEntries;
+        private static Entry[] entriesArr = new Entry[MaxEntries];
+        private static Entry[] newEntries = new Entry[MaxEntries];
+        private static Dictionary<int, List<Entry>> entriesDict;
         private static double lastUpdatedTime;
         private static bool isDirty;
         private static int lastCount;
+        private static object lastEntry;
 
         static LogManager()
         {
@@ -35,16 +41,25 @@ namespace InfinityCode.UltimateEditorEnhancer
             EditorApplication.update -= OnUpdate;
             EditorApplication.update += OnUpdate;
 
-            entries = new Dictionary<int, List<Entry>>();
+            entriesDict = new Dictionary<int, List<Entry>>();
 
             UpdateEntries();
         }
 
         public static List<Entry> GetEntries(int id)
         {
-            List<Entry> localEntries;
-            if (entries.TryGetValue(id, out localEntries)) return localEntries;
-            return null;
+            List<Entry> _entries;
+            return entriesDict.TryGetValue(id, out _entries) ? _entries : null;
+        }
+
+        private static void InsertNewEntries(int count)
+        {
+            for (int i = Math.Max(countEntries, MaxEntries - count) - 1; i >= 0; i--)
+            {
+                entriesArr[i + count] = entriesArr[i];
+            }
+
+            for (int i = 0; i < count; i++) entriesArr[i] = newEntries[i];
         }
 
         private static void OnLogMessageReceived(string condition, string stacktrace, LogType type)
@@ -56,61 +71,30 @@ namespace InfinityCode.UltimateEditorEnhancer
         {
             if (!Prefs.hierarchyErrorIcons) return;
 
-            if (EditorApplication.timeSinceStartup - lastUpdatedTime > Frequency)
+            if (isDirty)
             {
-                if (!isDirty)
-                {
-                    int currentCount = LogEntriesRef.GetCount();
-                    if (lastCount > currentCount) isDirty = true;
-                    lastCount = currentCount;
-                }
+                UpdateEntries();
             }
-
-            if (isDirty) UpdateEntries();
+            else if (EditorApplication.timeSinceStartup - lastUpdatedTime > Frequency)
+            {
+                int currentCount = LogEntriesRef.GetCount();
+                if (lastCount != currentCount) UpdateEntries();
+                lastCount = currentCount;
+            }
         }
 
         private static void UpdateEntries()
         {
-            entries.Clear();
-
             try
             {
-                int count = LogEntriesRef.StartGettingEntries();
-                object nativeEntry = Activator.CreateInstance(LogEntryRef.type);
-
-                int maxRecords = Mathf.Min(count, 999);
-
-                for (int i = 0; i < maxRecords; i++) 
+                int countNewEntries = UpdateNewEntries();
+                if (countNewEntries != 0)
                 {
-                    LogEntriesRef.GetEntryInternal(i, nativeEntry);
-                    int mode = LogEntryRef.GetMode(nativeEntry);
-                    if (mode != ErrorMode && mode != ErrorMode2 && 
-                        mode != ExceptionMode && mode != ExceptionMode2) continue;
+                    InsertNewEntries(countNewEntries);
+                    UpdateDictionary();
 
-                    
-                    int instanceID = LogEntryRef.GetInstanceID(nativeEntry);
-                    if (instanceID == 0) continue;
-
-                    Entry entry = new Entry(nativeEntry, i);
-                    Object reference = EditorUtility.InstanceIDToObject(instanceID);
-                    if (reference == null) continue;
-
-                    GameObject target = reference as GameObject;
-
-                    if (target == null)
-                    {
-                        Component component = reference as Component;
-                        if (component == null) continue;
-                        target = component.gameObject;
-                    }
-
-                    List<Entry> localEntries;
-                    int id = target.GetInstanceID();
-                    if (entries.TryGetValue(id, out localEntries)) localEntries.Add(entry);
-                    else entries.Add(id, new List<Entry> {entry});
+                    EditorApplication.RepaintHierarchyWindow();
                 }
-
-                EditorApplication.RepaintHierarchyWindow();
             }
             catch (Exception ex)
             {
@@ -122,9 +106,75 @@ namespace InfinityCode.UltimateEditorEnhancer
             isDirty = false;
         }
 
+        private static void UpdateDictionary()
+        {
+            entriesDict.Clear();
+
+            for (int i = 0; i < countEntries; i++)
+            {
+                Entry entry = entriesArr[i];
+                
+                List<Entry> entries;
+                if (!entriesDict.TryGetValue(entry.instanceId, out entries))
+                {
+                    entries = new List<Entry>();
+                    entriesDict[entry.instanceId] = entries;
+                }
+                
+                entries.Add(entry);
+            }
+        }
+
+        private static int UpdateNewEntries()
+        {
+            int count = LogEntriesRef.StartGettingEntries();
+            object nativeEntry = Activator.CreateInstance(LogEntryRef.type);
+
+            int maxRecords = Mathf.Min(count, 999);
+            int countNewEntries = 0;
+
+            for (int i = 0; i < maxRecords; i++)
+            {
+                LogEntriesRef.GetEntryInternal(i, nativeEntry);
+                if (nativeEntry == lastEntry) break;
+                if (i == 0) lastEntry = nativeEntry;
+
+                int mode = LogEntryRef.GetMode(nativeEntry);
+                if (mode != ErrorMode &&
+                    mode != ErrorMode2 &&
+                    mode != ExceptionMode &&
+                    mode != ExceptionMode2)
+                {
+                    continue;
+                }
+                
+                int instanceID = LogEntryRef.GetInstanceID(nativeEntry);
+                if (instanceID == 0) continue;
+
+                Entry entry = new Entry(nativeEntry, i);
+                Object reference = EditorUtility.InstanceIDToObject(instanceID);
+                if (!reference) continue;
+
+                GameObject target = reference as GameObject;
+
+                if (!target)
+                {
+                    Component component = reference as Component;
+                    if (!component) continue;
+                    target = component.gameObject;
+                }
+                
+                entry.instanceId = target.GetInstanceID();
+                newEntries[countNewEntries++] = entry;
+            }
+
+            return countNewEntries;
+        }
+
         public class Entry
         {
             public string message;
+            public int instanceId;
             private int index;
 
             public Entry(object nativeEntry, int index)

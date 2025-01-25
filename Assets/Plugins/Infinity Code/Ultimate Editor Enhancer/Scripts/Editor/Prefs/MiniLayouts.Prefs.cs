@@ -77,8 +77,10 @@ namespace InfinityCode.UltimateEditorEnhancer
                     reorderableList.onReorderCallback += Reorder;
                     reorderableList.elementHeight = 48;
                 }
+                
+                EditorGUILayout.Space();
 
-                Prefs.scrollPosition = EditorGUILayout.BeginScrollView(Prefs.scrollPosition);
+                scrollPosition = EditorGUILayout.BeginScrollView(scrollPosition);
                 
                 reorderableList.DoLayoutList();
 

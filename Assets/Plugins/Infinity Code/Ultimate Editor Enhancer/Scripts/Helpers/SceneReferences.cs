@@ -9,6 +9,7 @@ using UnityEngine.SceneManagement;
 
 namespace InfinityCode.UltimateEditorEnhancer
 {
+    [AddComponentMenu("")]
     public class SceneReferences : MonoBehaviour
     {
         public static Action<SceneReferences> OnCreate;

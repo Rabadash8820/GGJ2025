@@ -20,7 +20,7 @@ namespace InfinityCode.UltimateEditorEnhancer.EditorMenus
         public static bool allowCloseWindow = true;
         public static Func<bool> OnValidateOpen;
 
-        private static List<MainLayoutItem> items;
+        private static MainLayoutItem[] items;
         private static bool _isOpened;
         private static Vector2 _lastPosition;
         private static EditorWindow _lastWindow;
@@ -40,27 +40,8 @@ namespace InfinityCode.UltimateEditorEnhancer.EditorMenus
             AssetPreview.SetPreviewTextureCacheSize(32000);
 
             KeyManager.KeyBinding binding = KeyManager.AddBinding();
-            binding.OnValidate += () =>
-            {
-                if (!Prefs.contextMenuOnHotKey) return false;
-                if (EditorApplication.isPlaying && Prefs.contextMenuDisableInPlayMode && EditorWindow.focusedWindow.GetType() == GameViewRef.type) return false;
-                if (Event.current.keyCode != Prefs.contextMenuHotKey) return false;
-                if (Event.current.modifiers != Prefs.contextMenuHotKeyModifiers) return false;
-                return true;
-            };
-
-            binding.OnPress += () =>
-            {
-                if (!Prefs.contextMenuOnHotKey) return;
-
-                if (EditorWindow.focusedWindow != null)
-                {
-                    Rect rect = EditorWindow.focusedWindow.position;
-                    rect.position += Event.current.mousePosition;
-                    Show(rect.position);
-                }
-                else Show(Event.current.mousePosition);
-            };
+            binding.OnValidate += ValidateShortcut;
+            binding.OnPress += OnShortcutPress;
 
             EventManager.AddBinding(EventManager.ClosePopupEvent).OnInvoke += b => Close();
 
@@ -107,13 +88,10 @@ namespace InfinityCode.UltimateEditorEnhancer.EditorMenus
             bool lastOpened = _isOpened;
 
             _isOpened = false;
-            foreach (MainLayoutItem item in items)
+            if (items.Any(item => EditorWindow.focusedWindow == item.window))
             {
-                if (EditorWindow.focusedWindow == item.window)
-                {
-                    _isOpened = true;
-                    return;
-                }
+                _isOpened = true;
+                return;
             }
 
             if (lastOpened && !_isOpened) EventManager.BroadcastClosePopup();
@@ -136,21 +114,19 @@ namespace InfinityCode.UltimateEditorEnhancer.EditorMenus
             EventManager.BroadcastClosePopup();
         }
 
-        private static void GetWindows()
+        private static void InitLayoutItems()
         {
             if (items != null) return;
 
-            items = new List<MainLayoutItem>();
+            List<MainLayoutItem> temp = new List<MainLayoutItem>();
             Type[] types = typeof(EditorMenu).Assembly.GetTypes();
             foreach (Type type in types)
             {
-                if (!type.IsAbstract && type.IsSubclassOf(typeof(MainLayoutItem)))
-                {
-                    items.Add(Activator.CreateInstance(type, true) as MainLayoutItem);
-                }
+                if (type.IsAbstract || !type.IsSubclassOf(typeof(MainLayoutItem))) continue;
+                temp.Add(Activator.CreateInstance(type, true) as MainLayoutItem);
             }
 
-            items = items.OrderBy(w => w.order).ToList();
+            items = temp.OrderBy(w => w.order).ToArray();
         }
 
         private static void OnCompilationStarted(object obj)
@@ -172,6 +148,19 @@ namespace InfinityCode.UltimateEditorEnhancer.EditorMenus
                 allowCloseWindow = true;
                 EditorApplication.delayCall += CloseAllFloatingWindows;
             }
+        }
+
+        private static void OnShortcutPress()
+        {
+            if (!Prefs.contextMenuOnHotKey) return;
+
+            if (EditorWindow.focusedWindow != null)
+            {
+                Rect rect = EditorWindow.focusedWindow.position;
+                rect.position += Event.current.mousePosition;
+                Show(rect.position);
+            }
+            else Show(Event.current.mousePosition);
         }
 
         private static void Prepare(Vector2 position)
@@ -234,7 +223,7 @@ namespace InfinityCode.UltimateEditorEnhancer.EditorMenus
 #endif
             _lastPosition = position = GUIUtility.GUIToScreenPoint(position);
 
-            GetWindows();
+            InitLayoutItems();
             Prepare(position);
             Show();
         }
@@ -245,7 +234,7 @@ namespace InfinityCode.UltimateEditorEnhancer.EditorMenus
             
             EventManager.BroadcastClosePopup();
 
-            GetWindows();
+            InitLayoutItems();
             Prepare(_lastPosition);
             Show();
         }
@@ -267,6 +256,15 @@ namespace InfinityCode.UltimateEditorEnhancer.EditorMenus
                 }
             }
 
+            return true;
+        }
+
+        private static bool ValidateShortcut()
+        {
+            if (!Prefs.contextMenuOnHotKey) return false;
+            if (EditorApplication.isPlaying && Prefs.contextMenuDisableInPlayMode && EditorWindow.focusedWindow.GetType() == GameViewRef.type) return false;
+            if (Event.current.keyCode != Prefs.contextMenuHotKey) return false;
+            if (Event.current.modifiers != Prefs.contextMenuHotKeyModifiers) return false;
             return true;
         }
     }

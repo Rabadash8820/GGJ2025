@@ -42,7 +42,7 @@ namespace InfinityCode.UltimateEditorEnhancer.HierarchyTools
         private static void DrawHierarchyItem(HierarchyItem item)
         {
             if (!Prefs.highlight) return;
-            if (!(EditorWindow.mouseOverWindow is SceneView)) return;
+            if (!(WindowsHelper.mouseOverWindow is SceneView)) return;
 
             Event e = Event.current;
             if (item.rect.Contains(e.mousePosition))

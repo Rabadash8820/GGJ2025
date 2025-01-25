@@ -13,20 +13,14 @@ namespace InfinityCode.UltimateEditorEnhancer
         [NonSerialized]
         private string _path;
 
-        public override bool isProjectItem
-        {
-            get => true;
-        }
+        public override bool isProjectItem => true;
 
         public string path
         {
             get
             {
 #if UNITY_EDITOR
-                if (_path == null)
-                {
-                    _path = UnityEditor.AssetDatabase.GetAssetPath(target);
-                }
+                if (_path == null) _path = UnityEditor.AssetDatabase.GetAssetPath(target);
 #else
                 _path = null;
 #endif

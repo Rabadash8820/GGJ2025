@@ -244,8 +244,8 @@ namespace InfinityCode.UltimateEditorEnhancer
             SettingsProvider provider = new SettingsProvider(UEESettingsPath, SettingsScope.Project)
             {
                 label = "Ultimate Editor Enhancer",
-                guiHandler = Prefs.OnGUI,
-                keywords = Prefs.GetKeywords()
+                guiHandler = Prefs.DrawGeneralManagers,
+                keywords = Prefs.GetGeneralManagersKeywords()
             };
             return provider;
         }

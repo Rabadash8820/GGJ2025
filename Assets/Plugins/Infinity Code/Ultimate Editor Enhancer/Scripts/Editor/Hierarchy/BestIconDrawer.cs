@@ -1,7 +1,6 @@
 ﻿/*           INFINITY CODE          */
 /*     https://infinity-code.com    */
 
-using System;
 using System.Collections.Generic;
 using InfinityCode.UltimateEditorEnhancer.UnityTypes;
 using UnityEditor;
@@ -17,6 +16,7 @@ namespace InfinityCode.UltimateEditorEnhancer.HierarchyTools
         private const double CacheLifeTimeSec = 5;
         
         private static Texture _prefabIcon;
+        private static Texture _prefabVariantIcon;
         private static Texture _unityLogoTexture;
         private static HashSet<int> hierarchyWindows;
         private static bool inited = false;
@@ -29,6 +29,15 @@ namespace InfinityCode.UltimateEditorEnhancer.HierarchyTools
             {
                 if (_prefabIcon == null) _prefabIcon = EditorIconContents.prefab.image;
                 return _prefabIcon;
+            }
+        }
+
+        private static Texture prefabVariantIcon
+        {
+            get
+            {
+                if (_prefabVariantIcon == null) _prefabVariantIcon = EditorIconContents.prefabVariant.image;
+                return _prefabVariantIcon;
             }
         }
 
@@ -46,18 +55,9 @@ namespace InfinityCode.UltimateEditorEnhancer.HierarchyTools
             hierarchyWindows = new HashSet<int>();
             HierarchyItemDrawer.Register("BestIconDrawer", DrawItem, HierarchyToolOrder.BestIcon);
 
-            //EditorApplication.update += DelayedInit;
             lastUpdateTime = EditorApplication.timeSinceStartup;
         }
-
-        private static void DelayedInit()
-        {
-            if ((EditorApplication.timeSinceStartup - lastUpdateTime) < 1) return;
-            EditorApplication.update -= DelayedInit;
-            
-            Init();
-        }
-
+        
         private static void DrawItem(HierarchyItem item)
         {
             if (!Prefs.hierarchyOverrideMainIcon) return;
@@ -118,10 +118,7 @@ namespace InfinityCode.UltimateEditorEnhancer.HierarchyTools
 
         public static Texture GetGameObjectIcon(GameObject go)
         {
-            if (go.tag == "Collection")
-            {
-                return Icons.collection;
-            }
+            if (go.tag == "Collection") return Icons.collection;
 
             Texture texture = AssetPreview.GetMiniThumbnail(go);
             string textureName = texture.name;
@@ -130,12 +127,17 @@ namespace InfinityCode.UltimateEditorEnhancer.HierarchyTools
             {
                 if (PrefabUtility.IsAnyPrefabInstanceRoot(go)) return prefabIcon;
             }
+            else if (textureName == "PrefabVariant Icon" || textureName == "d_PrefabVariant Icon")
+            {
+                if (PrefabUtility.IsAnyPrefabInstanceRoot(go)) return prefabVariantIcon;
+            }
             else if (textureName != "d_GameObject Icon" && textureName != "GameObject Icon")
             {
                 return texture;
             }
 
             Component best = GetBestComponent(go);
+            if (best && best.GetType().FullName == "Unity.Scenes.SubScene") return EditorIconContents.unityLogo.image;
             texture = AssetPreview.GetMiniThumbnail(best);
 
             if (texture == null) return EditorIconContents.gameObject.image;

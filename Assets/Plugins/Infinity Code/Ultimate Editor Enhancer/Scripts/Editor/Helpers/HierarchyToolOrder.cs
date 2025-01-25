@@ -6,6 +6,7 @@ namespace InfinityCode.UltimateEditorEnhancer
     public static class HierarchyToolOrder
     {
         public const int Background = -50;
+        public const int OddEven = -45;
         public const int Header = -40;
         public const int Error = -10;
         public const int Note = -5;
@@ -17,5 +18,6 @@ namespace InfinityCode.UltimateEditorEnhancer
         public const int IconSelector = 40;
         public const int Highlighter = 50;
         public const int SoloVisibility = 60;
+        public const int SoloPickability = 70;
     }
 }

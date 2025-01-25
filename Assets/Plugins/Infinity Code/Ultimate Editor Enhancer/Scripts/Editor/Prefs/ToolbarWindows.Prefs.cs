@@ -53,6 +53,13 @@ namespace InfinityCode.UltimateEditorEnhancer
                 EditorGUI.indentLevel--;
                 EditorGUI.EndDisabledGroup();
             }
+            
+            public override void SetState(bool state)
+            {
+                base.SetState(state);
+
+                windowsToolbarIcon = state;
+            }
         }
     }
 }

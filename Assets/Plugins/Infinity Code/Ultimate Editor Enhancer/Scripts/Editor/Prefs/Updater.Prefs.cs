@@ -29,6 +29,13 @@ namespace InfinityCode.UltimateEditorEnhancer
             {
                 checkForUpdates = EditorGUILayout.ToggleLeft("Check For Updates", checkForUpdates);
             }
+
+            public override void SetState(bool state)
+            {
+                base.SetState(state);
+
+                checkForUpdates = state;
+            }
         }
     }
 }

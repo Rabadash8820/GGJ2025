@@ -223,11 +223,12 @@ namespace InfinityCode.UltimateEditorEnhancer.InspectorTools
             if (isDisabled) content.tooltip += " (Disabled)";
             
             GUILayoutUtils.BeginDisabledStyle(isDisabled);
-            ButtonEvent buttonEvent = GUILayoutUtils.Button(rect, content, style);
+            EventType eventType = Event.current.type;
+            GUILayoutUtils.Button(rect, content, style);
             GUILayoutUtils.EndDisabledStyle();
 
             Debug.unityLogger.logEnabled = state;
-            ProcessIconEvents(wnd, editorsList, elementIndex, editorIndex, buttonEvent, isActive, editor);
+            ProcessIconEvents(wnd, editorsList, elementIndex, editorIndex, isActive, editor, eventType, rect);
 
             editorIndex++;
         }
@@ -384,57 +385,66 @@ namespace InfinityCode.UltimateEditorEnhancer.InspectorTools
             InjectBar(wnd);
         }
 
-        private static void ProcessIconEvents(EditorWindow wnd, VisualElement editorsList, int elementIndex, int editorIndex, ButtonEvent buttonEvent, bool isActive, Editor editor)
+        private static void ProcessIconClick(EditorWindow wnd, VisualElement editorsList, int elementIndex, int editorIndex, bool isActive, Editor editor)
         {
             Event e = Event.current;
-            if (buttonEvent == ButtonEvent.hover)
+            if (e.button == 0) ProcessIconLeftClick(wnd, editorsList, elementIndex, editorIndex, isActive);
+            else if (e.button == 1) ComponentUtils.ShowContextMenu(editor.target);
+            else if (e.button == 2)
             {
-                wnd.Focus();
-            }
-            else if (buttonEvent == ButtonEvent.click)
-            {
-                if (e.button == 0)
+                Component component = editor.target as Component;
+                if (component != null && ComponentUtils.CanBeDisabled(component))
                 {
-                    if (e.command || e.control || e.shift) ToggleVisible(wnd, editorsList, elementIndex, editorIndex, !isActive);
-                    else
-                    {
-                        if (!isActive) SetSoloVisible(wnd, editorsList, elementIndex, editorIndex, false);
-                        else
-                        {
-                            int countActive = 0;
-                            for (int j = 0; j < editorsList.childCount; j++)
-                            {
-                                VisualElement el2 = editorsList[j];
-                                if (el2.childCount < 2) continue;
-                                StyleEnum<DisplayStyle> display = el2.style.display;
-                                if (display.keyword == StyleKeyword.Null || display == DisplayStyle.Flex) countActive++;
-                            }
-
-                            SetSoloVisible(wnd, editorsList, elementIndex, editorIndex, countActive == 1);
-                        }
-                    }
+                    Undo.RecordObject(component, "Modified Property in " + component.gameObject.name);
+                    ComponentUtils.SetEnabled(component, !ComponentUtils.GetEnabled(component));
+                    EditorUtility.SetDirty(component);
                 }
-                else if (e.button == 1) ComponentUtils.ShowContextMenu(editor.target);
-                else if (e.button == 2)
-                {
-                    Component component = editor.target as Component;
-                    if (component != null && ComponentUtils.CanBeDisabled(component))
-                    {
-                        Undo.RecordObject(component, "Modified Property in " + component.gameObject.name);
-                        ComponentUtils.SetEnabled(component, !ComponentUtils.GetEnabled(component));
-                        EditorUtility.SetDirty(component);
-                    }
                         
-                }
-
-                e.Use();
             }
-            else if (buttonEvent == ButtonEvent.drag)
+
+            e.Use();
+        }
+
+        private static void ProcessIconEvents(EditorWindow wnd, VisualElement editorsList, int elementIndex, int editorIndex, bool isActive, Editor editor, EventType eventType, Rect rect)
+        {
+            Event e = Event.current;
+            if (!rect.Contains(e.mousePosition)) return;
+            if (eventType == EventType.MouseUp)
+            {
+                ProcessIconClick(wnd, editorsList, elementIndex, editorIndex, isActive, editor);
+            }
+            else if (eventType == EventType.MouseDrag)
             {
                 DragAndDrop.PrepareStartDrag();
                 DragAndDrop.objectReferences = editor.targets;
                 DragAndDrop.StartDrag("Drag " + editor.target.name);
                 e.Use();
+            }
+        }
+
+        private static void ProcessIconLeftClick(EditorWindow wnd, VisualElement editorsList, int elementIndex, int editorIndex, bool isActive)
+        {
+            Event e = Event.current;
+
+            if (e.command || e.control || e.shift)
+            {
+                ToggleVisible(wnd, editorsList, elementIndex, editorIndex, !isActive);
+                return;
+            }
+
+            if (!isActive) SetSoloVisible(wnd, editorsList, elementIndex, editorIndex, false);
+            else
+            {
+                int countActive = 0;
+                for (int j = 0; j < editorsList.childCount; j++)
+                {
+                    VisualElement el2 = editorsList[j];
+                    if (el2.childCount < 2) continue;
+                    StyleEnum<DisplayStyle> display = el2.style.display;
+                    if (display.keyword == StyleKeyword.Null || display == DisplayStyle.Flex) countActive++;
+                }
+
+                SetSoloVisible(wnd, editorsList, elementIndex, editorIndex, countActive == 1);
             }
         }
 

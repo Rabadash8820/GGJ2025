@@ -78,7 +78,7 @@ namespace InfinityCode.UltimateEditorEnhancer.Behaviors
             EditorWindow window = EditorWindow.focusedWindow;
             if (window == null)
             {
-                window = EditorWindow.mouseOverWindow;
+                window = WindowsHelper.mouseOverWindow;
                 if (window == null) return;
             }
 

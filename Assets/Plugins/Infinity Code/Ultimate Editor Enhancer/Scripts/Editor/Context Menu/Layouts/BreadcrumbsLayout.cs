@@ -19,7 +19,7 @@ namespace InfinityCode.UltimateEditorEnhancer.EditorMenus.Layouts
         private GUIContent downButtonContent;
         private Vector2 labelSize;
         private bool hasParents;
-        private bool hasChilds;
+        private bool hasChildren;
         private bool hasNeighbors;
         private bool isMultiple;
         private GameObject[] targets;
@@ -37,7 +37,7 @@ namespace InfinityCode.UltimateEditorEnhancer.EditorMenus.Layouts
             int countButtons = 0;
             if (hasParents) countButtons++;
             if (hasNeighbors) countButtons++;
-            if (hasChilds) countButtons++;
+            if (hasChildren) countButtons++;
 
             Vector2 buttonSize = Styles.transparentButton.CalcSize(upButtonContent);
             size.x += (buttonSize.x + Styles.transparentButton.margin.right) * countButtons;
@@ -56,7 +56,7 @@ namespace InfinityCode.UltimateEditorEnhancer.EditorMenus.Layouts
 
         private void DrawChildrenButton()
         {
-            if (!hasChilds) return;
+            if (!hasChildren) return;
             if (!GUILayout.Button(downButtonContent, Styles.transparentButton, GUILayout.Width(12))) return;
 
             GameObject g = Selection.activeGameObject;
@@ -226,7 +226,7 @@ namespace InfinityCode.UltimateEditorEnhancer.EditorMenus.Layouts
             isMultiple = targets.Length > 1;
 
             hasParents = Prefs.breadcrumbsParent && targets.Any(t => t.transform.parent != null);
-            hasChilds = Prefs.breadcrumbsChilds && !isMultiple && targets[0].transform.childCount > 0;
+            hasChildren = Prefs.breadcrumbsChildren && !isMultiple && targets[0].transform.childCount > 0;
             hasNeighbors = false;
             if (Prefs.breadcrumbsNeighbors && !isMultiple)
             {
@@ -257,7 +257,7 @@ namespace InfinityCode.UltimateEditorEnhancer.EditorMenus.Layouts
 
             upButtonContent = new GUIContent(Icons.arrowUp, "Parents");
             rightButtonContent = new GUIContent(Icons.arrowRight, "Neighbors");
-            downButtonContent = new GUIContent(Icons.arrowDown, "Childs");
+            downButtonContent = new GUIContent(Icons.arrowDown, "Children");
 
             CalculateRect(ref position, ref offset, ref flipHorizontal, ref flipVertical);
         }

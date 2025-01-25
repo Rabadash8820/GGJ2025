@@ -15,7 +15,15 @@ namespace InfinityCode.UltimateEditorEnhancer.Editors
             if (!initialized)
             {
                 initialized = true;
-                targetPoint = light.transform.position + light.transform.forward * light.range;
+                targetPoint = light.transform.position;
+                if (light.type == LightType.Spot)
+                {
+                    targetPoint += light.transform.forward * light.range;
+                }
+                else if (light.type == LightType.Directional)
+                {
+                    targetPoint += light.transform.forward * HandleUtility.GetHandleSize(targetPoint);
+                }
                 
                 Undo.undoRedoPerformed -= UndoRedoPerformed;
                 Undo.undoRedoPerformed += UndoRedoPerformed;

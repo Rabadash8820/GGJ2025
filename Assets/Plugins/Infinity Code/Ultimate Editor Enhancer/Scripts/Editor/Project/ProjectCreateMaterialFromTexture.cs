@@ -11,7 +11,7 @@ namespace InfinityCode.UltimateEditorEnhancer.ProjectTools
     {
         static ProjectCreateMaterialFromTexture()
         {
-            ProjectItemDrawer.Register("CREATE_MATERIAL_FROM_TEXTURE", DrawButton, 10);
+            ProjectItemDrawer.Register("CREATE_MATERIAL_FROM_TEXTURE", DrawButton, ProjectToolOrder.CreateMaterialFromTexture);
         }
 
         private static void DrawButton(ProjectItem item)
@@ -19,7 +19,7 @@ namespace InfinityCode.UltimateEditorEnhancer.ProjectTools
             if (!Prefs.projectCreateMaterial) return;
             if (!item.hovered) return;
             Object asset = item.asset;
-            if (asset == null) return;
+            if (!asset) return;
             if (!(asset is Texture2D)) return;
         
             Rect r = item.rect;
@@ -37,12 +37,17 @@ namespace InfinityCode.UltimateEditorEnhancer.ProjectTools
                 Event e = Event.current;
                 if (e.button == 0)
                 {
-                    Selection.activeObject = asset;
-                    Material material = new Material(Shader.Find("Standard"));
-                    material.mainTexture = asset as Texture2D;
-                    ProjectWindowUtil.CreateAsset(material, asset.name + ".mat");
+                    CreateMaterial(asset);
                 }
             }
+        }
+
+        private static void CreateMaterial(Object asset)
+        {
+            Selection.activeObject = asset;
+            Material material = new Material(RenderPipelineHelper.GetDefaultShader());
+            material.mainTexture = asset as Texture2D;
+            ProjectWindowUtil.CreateAsset(material, asset.name + ".mat");
         }
     }
 }

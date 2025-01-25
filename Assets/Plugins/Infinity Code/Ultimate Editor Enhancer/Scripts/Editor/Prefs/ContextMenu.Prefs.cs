@@ -34,12 +34,14 @@ namespace InfinityCode.UltimateEditorEnhancer
                 return "Context Menu";
             }
 
-            public void SetState(bool state)
+            public override void SetState(bool state)
             {
-                ActionsManager.SetState(state);
-                BreadcrumbsManager.SetState(state);
-                ContextMenuMainManager.SetState(state);
-                PopupWindowManager.SetState(state);
+                base.SetState(state);
+                
+                GetManager<ActionsManager>().SetState(state);
+                GetManager<BreadcrumbsManager>().SetState(state);
+                GetManager<ContextMenuMainManager>().SetState(state);
+                GetManager<PopupWindowManager>().SetState(state);
             }
         }
     }

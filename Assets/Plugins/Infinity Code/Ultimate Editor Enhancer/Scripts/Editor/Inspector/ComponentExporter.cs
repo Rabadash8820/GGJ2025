@@ -1,6 +1,7 @@
 ﻿/*           INFINITY CODE          */
 /*     https://infinity-code.com    */
 
+using System;
 using System.Collections.Generic;
 using InfinityCode.UltimateEditorEnhancer.JSON;
 using UnityEditor;
@@ -41,10 +42,11 @@ namespace InfinityCode.UltimateEditorEnhancer.InspectorTools
             JsonObject json = new JsonObject();
 
             if (!p.Next(true)) return json.ToString();
-            
-            do
+
+            do 
             {
-                json.Add(p.name, SerializedPropertyHelper.ToJson(p.Copy()));
+                if (p.name == "m_Script" || p.name == "m_ObjectHideFlags") continue;
+                json.Add(p.name, SerializedPropertyHelper.ToJson(p));
             } while (p.NextVisible(false));
 
             return json.ToString();

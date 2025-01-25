@@ -9,15 +9,18 @@ using UnityEngine;
 
 namespace InfinityCode.UltimateEditorEnhancer
 {
+    [InitializeOnLoad]
     public static class WindowsHelper
     {
         public const string MenuPath = "Tools/Ultimate Editor Enhancer/";
 
-        public static Vector2 GetMousePositionOnFocusedWindow()
+        public static EditorWindow mouseOverWindow { get; private set; }
+
+        static WindowsHelper()
         {
-            return GetMousePositionOnFocusedWindow(Event.current.mousePosition);
+            EditorApplication.update += OnUpdate;
         }
-        
+
         public static Vector2 GetMousePositionOnFocusedWindow(Vector2 mousePosition)
         {
             if (EditorWindow.focusedWindow == null) return HandleUtility.GUIPointToScreenPixelCoordinate(mousePosition);
@@ -47,6 +50,11 @@ namespace InfinityCode.UltimateEditorEnhancer
             if (window == null) return false;
             if (FullscreenEditor.IsFullscreen(window)) return true;
             return window.maximized;
+        }
+
+        private static void OnUpdate()
+        {
+            mouseOverWindow = EditorWindow.mouseOverWindow;
         }
 
         public static void SetMaximized(EditorWindow window, bool maximized)

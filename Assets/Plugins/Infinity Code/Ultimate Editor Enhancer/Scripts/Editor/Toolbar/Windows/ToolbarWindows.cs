@@ -36,7 +36,7 @@ namespace InfinityCode.UltimateEditorEnhancer.Tools
         {
             Type focusedWindowType = EditorWindow.focusedWindow != null ? EditorWindow.focusedWindow.GetType() : null;
             if (lastWindowType == focusedWindowType && windows.Count != 0) return;
-
+            
             if (!IterateActiveWindows(focusedWindowType)) return;
 
             foreach (var pair in windows) pair.Value.used = false;
@@ -198,16 +198,6 @@ namespace InfinityCode.UltimateEditorEnhancer.Tools
                 if (window.maximized)
                 {
                     lastFocusedWindowType = window.GetType();
-
-                    if (windows.Count == 0)
-                    {
-                        window.maximized = false;
-                        window.Repaint();
-                        CacheWindows();
-                        window.maximized = true;
-                        return false;
-                    }
-
                     lastWindowType = focusedWindowType;
                     if (lastWindowType != null) lastFocusedWindowType = lastWindowType;
 

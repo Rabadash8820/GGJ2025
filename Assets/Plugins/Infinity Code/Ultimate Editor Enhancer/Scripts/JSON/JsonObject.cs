@@ -302,16 +302,16 @@ namespace InfinityCode.UltimateEditorEnhancer.JSON
         public override void ToJSON(StringBuilder b)
         {
             b.Append("{");
-            bool hasChilds = false;
+            bool hasChildren = false;
             foreach (KeyValuePair<string, JsonItem> pair in _table)
             {
                 b.Append("\"").Append(pair.Key).Append("\"").Append(":");
                 pair.Value.ToJSON(b);
                 b.Append(",");
-                hasChilds = true;
+                hasChildren = true;
             }
 
-            if (hasChilds) b.Remove(b.Length - 1, 1);
+            if (hasChildren) b.Remove(b.Length - 1, 1);
             b.Append("}");
         }
 

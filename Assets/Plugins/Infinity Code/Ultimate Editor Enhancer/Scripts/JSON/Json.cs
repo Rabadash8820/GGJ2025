@@ -382,7 +382,7 @@ namespace InfinityCode.UltimateEditorEnhancer.JSON
         }
 
         /// <summary>
-        /// Parse JSON string into Dictonary, List and Object
+        /// Parse JSON string into Dictionary, List and Object
         /// </summary>
         /// <param name="json">JSON string</param>
         /// <returns>Root object</returns>

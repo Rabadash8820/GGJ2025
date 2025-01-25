@@ -21,8 +21,7 @@ namespace InfinityCode.UltimateEditorEnhancer.ProjectTools
 
         static ProjectItemDrawer()
         {
-            EditorApplication.projectWindowItemOnGUI -= OnProjectItemGUI;
-            EditorApplication.projectWindowItemOnGUI += OnProjectItemGUI;
+            if (Prefs.projectTools) Enable();
             item = new ProjectItem();
         }
 
@@ -31,6 +30,17 @@ namespace InfinityCode.UltimateEditorEnhancer.ProjectTools
             if (i1.order == i2.order) return 0;
             if (i1.order > i2.order) return 1;
             return -1;
+        }
+
+        public static void Disable()
+        {
+            EditorApplication.projectWindowItemOnGUI -= OnProjectItemGUI;
+        }
+
+        public static void Enable()
+        {
+            EditorApplication.projectWindowItemOnGUI -= OnProjectItemGUI;
+            EditorApplication.projectWindowItemOnGUI += OnProjectItemGUI;
         }
 
         private static void OnProjectItemGUI(string guid, Rect rect)
@@ -43,7 +53,7 @@ namespace InfinityCode.UltimateEditorEnhancer.ProjectTools
                 isDirty = false;
             }
 
-            EditorWindow mouseOverWindow = EditorWindow.mouseOverWindow;
+            EditorWindow mouseOverWindow = WindowsHelper.mouseOverWindow;
             if (mouseOverWindow != null && mouseOverWindow.GetType() == ProjectBrowserRef.type && mouseOverWindow.wantsMouseMove == false)
             {
                 mouseOverWindow.wantsMouseMove = true;

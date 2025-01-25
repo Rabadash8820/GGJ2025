@@ -29,6 +29,7 @@ namespace InfinityCode.UltimateEditorEnhancer.Windows
         private static Texture2D settingsTexture;
         private static Texture2D shortcutsTexture;
         private static Texture2D supportTexture;
+        private static Texture2D teamTexture;
         public static Texture2D updateTexture;
         private static Texture2D urlTexture;
         private static Texture2D videoTexture;
@@ -88,6 +89,11 @@ namespace InfinityCode.UltimateEditorEnhancer.Windows
             if (DrawButton(gettingStartedTexture, "Getting Started", "A quick tour of the main features of Ultimate Editor Enhancer"))
             {
                 GettingStarted.OpenWindow();
+            }
+            
+            if (DrawButton(teamTexture, "Team Work", "If you are working in a team, please see the guidelines."))
+            {
+                Links.OpenDocumentation("team-work");
             }
 
             if (DrawButton(shortcutsTexture, "Shortcuts", "Explore all Ultimate Editor Enhancer shortcuts"))
@@ -177,6 +183,7 @@ namespace InfinityCode.UltimateEditorEnhancer.Windows
             settingsTexture = Resources.Load<Texture2D>("Textures/Welcome/Settings.png");
             shortcutsTexture = Resources.Load<Texture2D>("Textures/Welcome/Shortcuts.png");
             supportTexture = Resources.Load<Texture2D>("Textures/Welcome/Support.png");
+            teamTexture = Resources.Load<Texture2D>("Textures/Welcome/Team.png");
             updateTexture = Resources.Load<Texture2D>("Textures/Welcome/Update.png");
             urlTexture = Resources.Load<Texture2D>("Textures/Welcome/URL.png");
             videoTexture = Resources.Load<Texture2D>("Textures/Welcome/Video.png");
@@ -198,6 +205,7 @@ namespace InfinityCode.UltimateEditorEnhancer.Windows
             Resources.Unload(settingsTexture);
             Resources.Unload(shortcutsTexture);
             Resources.Unload(supportTexture);
+            Resources.Unload(teamTexture);
             Resources.Unload(updateTexture);
             Resources.Unload(urlTexture);
             Resources.Unload(videoTexture);

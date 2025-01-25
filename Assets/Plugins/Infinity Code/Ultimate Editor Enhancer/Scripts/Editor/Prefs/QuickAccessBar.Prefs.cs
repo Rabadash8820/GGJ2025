@@ -737,8 +737,10 @@ namespace InfinityCode.UltimateEditorEnhancer
                 menu.Show();
             }
 
-            public static void SetState(bool state)
+            public override void SetState(bool state)
             {
+                base.SetState(state);
+                
                 quickAccessBar = state;
             }
 
