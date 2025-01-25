@@ -1,4 +1,4 @@
-﻿#if UNITY_5_3 || UNITY_5_4_OR_NEWER
+#if UNITY_5_3 || UNITY_5_4_OR_NEWER
 	#define RH_UNITY_FEATURE_SCENEMANAGMENT
 #endif
 #if UNITY_5_4_OR_NEWER || (UNITY_5 && !UNITY_5_0)
@@ -97,10 +97,7 @@ namespace RenderHeads.SessionRestore
 			SaveState();
 		}
 
-		public static HierarchyNode GetNode()
-		{
-			return GameObject.FindObjectOfType<HierarchyNode>();
-		}
+		public static HierarchyNode GetNode() => GameObject.FindFirstObjectByType<HierarchyNode>();    // Call simplified by Dan Vicarel
 
 		public void SaveState()
 		{
