@@ -8,17 +8,17 @@ namespace GGJ2025
     public class BubbleCollector : MonoBehaviour
     {
         private const float PI_X4 = Mathf.PI * 4f;
-        private const float TRIGGER_OFFSET = 0.02f;
+        private const float TRIGGER_OFFSET = 0.05f;
 
         private SphereCollider _sphereCollider;
+
+        [ShowInInspector, ReadOnly]
+        public float CurrentRadius => _sphereCollider == null ? 0f : _sphereCollider.radius - TRIGGER_OFFSET;
 
         [RequiredIn(PrefabKind.NonPrefabInstance)]
         public GameObject ScaledBubbleObject;
 
         public UnityEvent BubbleCollected = new();
-
-        [ShowInInspector, ReadOnly]
-        public float CurrentRadius => _sphereCollider.radius - TRIGGER_OFFSET;
 
         private void Awake() => _sphereCollider = GetComponent<SphereCollider>();
 
