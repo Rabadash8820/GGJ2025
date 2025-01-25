@@ -1,0 +1,7 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:VisualElement name="grp-main-menu" style="flex-grow: 1; justify-content: center; align-self: center;">
+        <ui:Button text="Play" name="btn-play" />
+        <ui:Button text="Credits" name="btn-credits" />
+        <ui:Button text="Quit" name="btn-quit" />
+    </ui:VisualElement>
+</ui:UXML>
