@@ -14,6 +14,7 @@
     "com.unity.toolchain.win-x86_64-linux-x86_64": "2.0.10",
     "com.unity.ugui": "2.0.0",
     "com.unity.visualscripting": "1.9.5",
+    "org.nuget.microsoft.extensions.logging.abstractions": "9.0.1",
     "rabadash8820.unityutil": "https://github.com/DerploidEntertainment/UnityUtil.git?path=/UnityUtil/Assets/UnityUtil#unity6-dev",
     "rabadash8820.unityutil.triggers": "https://github.com/DerploidEntertainment/UnityUtil.git?path=/UnityUtil/Assets/UnityUtil.Triggers#unity6-dev",
     "rabadash8820.unityutil.ui": "https://github.com/DerploidEntertainment/UnityUtil.git?path=/UnityUtil/Assets/UnityUtil.UI#unity6-dev",
