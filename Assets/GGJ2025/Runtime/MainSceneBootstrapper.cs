@@ -5,16 +5,19 @@ using UnityUtil.DependencyInjection;
 using UnityUtil.Logging;
 using UnityUtil.Updating;
 
-public class MainSceneBootstrapper : MonoBehaviour
+namespace GGJ2025
 {
-    [RequiredIn(PrefabKind.NonPrefabInstance)]
-    public Updater Updater;
-
-    private void Awake()
+    public class MainSceneBootstrapper : MonoBehaviour
     {
-        var loggerFactory = new UnityDebugLoggerFactory();
-        DependencyInjector.Instance.Initialize(loggerFactory);
+        [RequiredIn(PrefabKind.NonPrefabInstance)]
+        public Updater Updater;
 
-        DependencyInjector.Instance.RegisterService<ILoggerFactory>(loggerFactory);
+        private void Awake()
+        {
+            var loggerFactory = new UnityDebugLoggerFactory();
+            DependencyInjector.Instance.Initialize(loggerFactory);
+
+            DependencyInjector.Instance.RegisterService<ILoggerFactory>(loggerFactory);
+        }
     }
 }
