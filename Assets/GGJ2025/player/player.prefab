@@ -765,6 +765,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1353390022531934791}
+        m_TargetAssemblyTypeName: UnityUtil.Triggers.RandomTrigger, UnityUtil.Triggers
+        m_MethodName: Trigger
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &4838815422322940494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -885,6 +897,17 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 6834940749381765259}
   m_SourcePrefab: {fileID: 100100000, guid: 109cf2c552f41504e98c14dc9e7e8e51, type: 3}
+--- !u!114 &1353390022531934791 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4624426362971022907, guid: 109cf2c552f41504e98c14dc9e7e8e51, type: 3}
+  m_PrefabInstance: {fileID: 5973310534823709820}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7847301461567472794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 138414150, guid: 89e0cc21ccdf0144598f97a3ed77427a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &5364954232786299864 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1770287644089034660, guid: 109cf2c552f41504e98c14dc9e7e8e51, type: 3}
