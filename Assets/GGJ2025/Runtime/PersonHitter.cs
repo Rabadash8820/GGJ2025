@@ -10,8 +10,8 @@ namespace GGJ2025
 
         private void OnTriggerEnter(Collider other)
         {
-            Transform hitParentTransform = other.attachedRigidbody?.transform;
-            PersonHead personHead = hitParentTransform?.GetComponentInChildren<PersonHead>();
+            Transform hitParentTransform = other.attachedRigidbody == null ? null : other.attachedRigidbody.transform;
+            PersonHead personHead = hitParentTransform == null ? null : hitParentTransform.GetComponentInChildren<PersonHead>();
             if (personHead == null)
                 return;
 
