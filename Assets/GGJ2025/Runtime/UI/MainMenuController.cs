@@ -43,21 +43,9 @@ namespace GGJ2025.UI
                 QuitSelected.Invoke();
             };
 
-            btnPlay.RegisterCallback<MouseEnterEvent>(e =>
-            {
-                Debug.Log("Play button hovered", context: this);
-                PlayHovered.Invoke();
-            });
-            btnCredits.RegisterCallback<MouseEnterEvent>(e =>
-            {
-                Debug.Log("Credits button hovered", context: this);
-                CreditsHovered.Invoke();
-            });
-            btnQuit.RegisterCallback<MouseEnterEvent>(e =>
-            {
-                Debug.Log("Quit button hovered", context: this);
-                QuitHovered.Invoke();
-            });
+            btnPlay.RegisterCallback<MouseEnterEvent>(e => PlayHovered.Invoke());
+            btnCredits.RegisterCallback<MouseEnterEvent>(e => CreditsHovered.Invoke());
+            btnQuit.RegisterCallback<MouseEnterEvent>(e => { QuitHovered.Invoke(); });
         }
     }
 }

@@ -7,4 +7,17 @@
 .ggj-menu-btn {
     transition-property: scale;
     transition-duration: 0.5s;
+    padding-top: 25px;
+    padding-right: 25px;
+    padding-bottom: 25px;
+    padding-left: 25px;
+    -unity-font-definition: url("project://database/Assets/GGJ2025/ui/menu_art/Super%20Bubble.ttf?fileID=12800000&guid=6f0483e161d16cb69a8dba8d6fbaa3b2&type=3#Super Bubble");
+    color: rgb(6, 0, 176);
+    -unity-background-scale-mode: scale-to-fit;
+    background-image: url("project://database/Assets/GGJ2025/ui/menu_art/Menu%20Bubble.png?fileID=2800000&guid=469fc3d9472f4578ba71c1239d52a3d6&type=3#Menu Bubble");
+    background-color: rgba(0, 0, 0, 0);
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
 }
