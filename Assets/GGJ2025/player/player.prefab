@@ -92,9 +92,9 @@ MonoBehaviour:
   StartHeightIndex: 1
   Transform: {fileID: 8472096987984285446}
   Heights:
-  - 2
-  - 5.5
+  - 3
   - 8
+  - 13
   MovingUp:
     m_PersistentCalls:
       m_Calls:
@@ -286,7 +286,7 @@ Transform:
   m_GameObject: {fileID: 862279510118615749}
   serializedVersion: 2
   m_LocalRotation: {x: 0.2588191, y: -0, z: -0, w: 0.9659258}
-  m_LocalPosition: {x: 0, y: 5, z: -10}
+  m_LocalPosition: {x: 0, y: 6.5, z: -14}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
