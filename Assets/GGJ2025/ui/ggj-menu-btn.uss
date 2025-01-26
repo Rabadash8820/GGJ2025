@@ -1,0 +1,10 @@
+.ggj-menu-btn:hover {
+    transition-property: scale;
+    transition-duration: 0.1s;
+    scale: 1.15 1.15;
+}
+
+.ggj-menu-btn {
+    transition-property: scale;
+    transition-duration: 0.5s;
+}
