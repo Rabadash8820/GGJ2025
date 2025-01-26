@@ -1,11 +1,12 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
     <ui:Template name="hud" src="project://database/Assets/GGJ2025/ui/hud.uxml?fileID=9197481963319205126&amp;guid=31e41c3f5f1ddce4f9409ac10953acda&amp;type=3#hud" />
     <ui:Template name="pause-menu" src="project://database/Assets/GGJ2025/ui/pause-menu.uxml?fileID=9197481963319205126&amp;guid=e90f33b08daeef44a8307ac3d67f0eb9&amp;type=3#pause-menu" />
+    <ui:Template name="game-won" src="project://database/Assets/GGJ2025/ui/game-won.uxml?fileID=9197481963319205126&amp;guid=6997f1d71af197b4f804e3c73431b2c5&amp;type=3#game-won" />
     <ui:VisualElement name="grp-top" style="background-color: rgba(0, 0, 0, 0.78); padding-top: 5px; padding-right: 5px; padding-bottom: 5px; padding-left: 5px;">
         <ui:Instance template="hud" name="hud" />
     </ui:VisualElement>
     <ui:VisualElement name="grp-center" style="flex-grow: 1; justify-content: center; align-self: center;">
         <ui:Instance template="pause-menu" name="pause-menu" style="width: 150px; height: 170px; background-color: rgba(0, 0, 0, 0.78); padding-left: 5px; padding-right: 5px; padding-top: 5px; padding-bottom: 5px; display: none;" />
-        <ui:Instance template="game-won" name="game-won" style="display: flex; background-color: rgba(0, 0, 0, 0.78); padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px;" />
+        <ui:Instance template="game-won" name="game-won" style="display: none; background-color: rgba(0, 0, 0, 0.78); padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px;" />
     </ui:VisualElement>
 </ui:UXML>

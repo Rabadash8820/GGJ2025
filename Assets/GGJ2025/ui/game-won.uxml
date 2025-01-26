@@ -1,0 +1,7 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/GGJ2025/ui/ggj-menu-btn.uss?fileID=7433441132597879392&amp;guid=2cf01173995ed284bb2ca148a82796af&amp;type=3#ggj-menu-btn" />
+    <ui:Label text="Stink! Stank! Stunk!&#10;Nice job!" name="hdr" style="-unity-text-align: upper-center; color: rgb(255, 255, 255); font-size: 20px; -unity-font-definition: url(&quot;project://database/Assets/GGJ2025/ui/menu_art/Super%20Bubble.ttf?fileID=12800000&amp;guid=6f0483e161d16cb69a8dba8d6fbaa3b2&amp;type=3#Super Bubble&quot;);" />
+    <ui:Button text="Play Again" name="btn-play-again" class="ggj-menu-btn" />
+    <ui:Button text="Main Menu" name="btn-main-menu" class="ggj-menu-btn" />
+    <ui:Button text="Quit" name="btn-quit" class="ggj-menu-btn" />
+</ui:UXML>
