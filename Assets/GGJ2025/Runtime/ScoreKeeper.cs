@@ -39,11 +39,24 @@ namespace GGJ2025
                 Debug.Log($"Hit person {PeopleHitCount} / {TotalPeopleCount}, earning {pointsEarned} points with bubble radius {BubbleCollector.CurrentRadius}", context: this);
                 HudController.UpdateScore(PeopleHitCount, Score);
 
-                if (PeopleHitCount == TotalPeopleCount) {
-                    Debug.Log("All people hit!", context: this);
-                    AllPeopleHit.Invoke();
-                }
+                checkIfAllPeopleHit();
             });
+        }
+
+        [Button]
+        public void SetPeopleHitCount(int count)
+        {
+            PeopleHitCount = Mathf.Max(count, 0);
+            checkIfAllPeopleHit();
+        }
+
+        private void checkIfAllPeopleHit()
+        {
+            if (PeopleHitCount == TotalPeopleCount)
+            {
+                Debug.Log("All people hit!", context: this);
+                AllPeopleHit.Invoke();
+            }
         }
     }
 }
