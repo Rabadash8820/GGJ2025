@@ -31,7 +31,7 @@ namespace GGJ2025.Editor
                 PreviousScenePath = activeScene.path;
 
                 string[] beforeScenePaths = new[] {
-                    "Assets/GGJ2025/bootstrap.unity",
+                    "Assets/GGJ2025/scenes/bootstrap.unity",
                 };
 
                 if (EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo()) {
