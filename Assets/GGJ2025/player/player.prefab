@@ -169,6 +169,7 @@ GameObject:
   - component: {fileID: 3825193727418550865}
   - component: {fileID: 6404396581175636119}
   - component: {fileID: 3365897518276198704}
+  - component: {fileID: 2468558394545524537}
   m_Layer: 0
   m_Name: bug
   m_TagString: Untagged
@@ -260,6 +261,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TransformLooking: {fileID: 3825193727418550865}
   TransformTarget: {fileID: 238308871164255750}
+--- !u!135 &2468558394545524537
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 634691446304373168}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.65
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &862279510118615749
 GameObject:
   m_ObjectHideFlags: 0
@@ -677,10 +699,22 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 2468558394545524537}
+        m_TargetAssemblyTypeName: UnityEngine.Collider, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   BubbleCollected:
     m_PersistentCalls:
       m_Calls: []
-  MinRadiusReached:
+  BubblePopping:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 4214180908611633256}
@@ -694,6 +728,18 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2468558394545524537}
+        m_TargetAssemblyTypeName: UnityEngine.Collider, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
         m_CallState: 2
       - m_Target: {fileID: 6834940749381765259}
         m_TargetAssemblyTypeName: UnityUtil.Triggers.StartStoppable, UnityUtil.Triggers
@@ -731,9 +777,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e38ef5489b28ef459f5eeea23c51770, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BubbleCollector: {fileID: 2734217554644328845}
   PersonHit:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2734217554644328845}
+        m_TargetAssemblyTypeName: GGJ2025.BubbleCollector, GGJ2025
+        m_MethodName: PopBubble
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &5973310534823709820
 PrefabInstance:
   m_ObjectHideFlags: 0
