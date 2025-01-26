@@ -2153,6 +2153,18 @@ MonoBehaviour:
           m_StringArgument: main
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 11400000, guid: 0039d3ff5f77ce94d968ab82804bfe24, type: 2}
+        m_TargetAssemblyTypeName: GGJ2025.TimeScaler, GGJ2025
+        m_MethodName: SetTimeScale
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 1
+          m_StringArgument: main-menu
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 11400000, guid: 5aec2b046375a63479b35442f54254f6, type: 2}
         m_TargetAssemblyTypeName: UnityUtil.SceneLoadManager, UnityUtil
         m_MethodName: UnloadSceneAsync
@@ -6860,6 +6872,10 @@ PrefabInstance:
     - target: {fileID: 250297246693034697, guid: 882e3350fcd8abe46923241325d00dda, type: 3}
       propertyPath: m_Name
       value: player
+      objectReference: {fileID: 0}
+    - target: {fileID: 371085144917060182, guid: 882e3350fcd8abe46923241325d00dda, type: 3}
+      propertyPath: m_Constraints
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8472096987984285446, guid: 882e3350fcd8abe46923241325d00dda, type: 3}
       propertyPath: m_LocalPosition.x
