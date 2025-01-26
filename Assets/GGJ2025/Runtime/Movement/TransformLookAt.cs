@@ -2,7 +2,7 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityUtil.Updating;
 
-namespace GGj2025
+namespace GGJ2025.Movement
 {
     public class TransformLookAt : Updatable
     {

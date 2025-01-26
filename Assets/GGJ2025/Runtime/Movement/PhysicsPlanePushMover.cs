@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityUtil.Updating;
 
-namespace GGJ2025
+namespace GGJ2025.Movement
 {
     public class PhysicsPlanePushMover : Updatable
     {

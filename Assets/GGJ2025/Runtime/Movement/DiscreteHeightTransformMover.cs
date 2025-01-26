@@ -1,9 +1,8 @@
-using GGJ2025;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace GGj2025
+namespace GGJ2025.Movement
 {
     public class DiscreteHeightTransformMover : MonoBehaviour
     {
