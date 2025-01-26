@@ -1,10 +1,19 @@
 fileFormatVersion: 2
-guid: 77141eaf07c62140c9b67c1a580a8c2d
+guid: aa174c448a1f9f043a73dfacfbebde41
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2182118969014725280
-    second: Textures-Person_0
+      213: -6023370721768335915
+    second: texture_fart_0
+  - first:
+      213: 9140697069062258239
+    second: texture_fart_1
+  - first:
+      213: -5139497585499003985
+    second: texture_fart_2
+  - first:
+      213: 8620323033688521856
+    second: texture_fart_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -152,13 +161,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Textures-Person_0
+      name: texture_fart_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 64
-        height: 64
+        x: 31
+        y: 8
+        width: 217
+        height: 228
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -167,8 +176,74 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0aaa3c514a1784e10800000000000000
-      internalID: 2182118969014725280
+      spriteID: 5d59282ed30b86ca0800000000000000
+      internalID: -6023370721768335915
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: texture_fart_1
+      rect:
+        serializedVersion: 2
+        x: 71
+        y: 234
+        width: 16
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f3ef8e80e874ade70800000000000000
+      internalID: 9140697069062258239
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: texture_fart_2
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 178
+        width: 17
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa3aa5c1d26dca8b0800000000000000
+      internalID: -5139497585499003985
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: texture_fart_3
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 24
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 08c3f10702a81a770800000000000000
+      internalID: 8620323033688521856
       vertices: []
       indices: 
       edges: []
@@ -187,7 +262,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Textures-Person_0: 2182118969014725280
+      texture_fart_0: -6023370721768335915
+      texture_fart_1: 9140697069062258239
+      texture_fart_2: -5139497585499003985
+      texture_fart_3: 8620323033688521856
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
