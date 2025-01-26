@@ -32,7 +32,7 @@ namespace GGJ2025
             TotalPeopleCount = PeopleParent.GetComponentsInChildren<PersonHead>().Length;
 
             PersonHitter.PersonHit.AddListener(() => {
-                int pointsEarned = ScoreFactor * (int)BubbleCollector.CurrentRadius;
+                int pointsEarned = ScoreFactor * Mathf.CeilToInt(BubbleCollector.CurrentRadius);
                 Score += pointsEarned;
                 ++PeopleHitCount;
 
