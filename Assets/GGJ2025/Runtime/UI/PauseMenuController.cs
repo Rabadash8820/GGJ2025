@@ -21,6 +21,10 @@ namespace GGJ2025
         public UnityEvent ResumeSelected = new();
         public UnityEvent MainMenuSelected = new();
         public UnityEvent QuitSelected = new();
+
+        public UnityEvent ResumeHovered = new();
+        public UnityEvent MainMenuHovered = new();
+        public UnityEvent QuitHovered = new();
         [Space]
         public UnityEvent Paused = new();
         public UnityEvent Resumed = new();
@@ -70,6 +74,10 @@ namespace GGJ2025
                 Debug.Log("Quit button clicked", context: this);
                 QuitSelected.Invoke();
             };
+
+            btnResume.RegisterCallback<MouseEnterEvent>(e => ResumeHovered.Invoke());
+            btnMainMenu.RegisterCallback<MouseEnterEvent>(e => MainMenuHovered.Invoke());
+            btnQuit.RegisterCallback<MouseEnterEvent>(e => { QuitHovered.Invoke(); });
         }
     }
 }

@@ -18,6 +18,10 @@ namespace GGJ2025.UI
         public UnityEvent CreditsSelected = new();
         public UnityEvent QuitSelected = new();
 
+        public UnityEvent PlayHovered = new();
+        public UnityEvent CreditsHovered = new();
+        public UnityEvent QuitHovered = new();
+
         private void Awake() => setupButtons(UIDocument.rootVisualElement);
 
         private void setupButtons(VisualElement root)
@@ -38,6 +42,22 @@ namespace GGJ2025.UI
                 Debug.Log("Quit button clicked", context: this);
                 QuitSelected.Invoke();
             };
+
+            btnPlay.RegisterCallback<MouseEnterEvent>(e =>
+            {
+                Debug.Log("Play button hovered", context: this);
+                PlayHovered.Invoke();
+            });
+            btnCredits.RegisterCallback<MouseEnterEvent>(e =>
+            {
+                Debug.Log("Credits button hovered", context: this);
+                CreditsHovered.Invoke();
+            });
+            btnQuit.RegisterCallback<MouseEnterEvent>(e =>
+            {
+                Debug.Log("Quit button hovered", context: this);
+                QuitHovered.Invoke();
+            });
         }
     }
 }
