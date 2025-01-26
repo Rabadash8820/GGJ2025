@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: c1479eb0819da7f50a40c8bc79bb1221
+guid: 77141eaf07c62140c9b67c1a580a8c2d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1416139046036407812
-    second: Textures-Person-sick_0
+      213: 2182118969014725280
+    second: Textures-Person_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -152,7 +152,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Textures-Person-sick_0
+      name: Textures-Person_0
       rect:
         serializedVersion: 2
         x: 0
@@ -167,8 +167,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: cf970786a0dd85ce0800000000000000
-      internalID: -1416139046036407812
+      spriteID: 0aaa3c514a1784e10800000000000000
+      internalID: 2182118969014725280
       vertices: []
       indices: 
       edges: []
@@ -187,7 +187,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Textures-Person-sick_0: -1416139046036407812
+      Textures-Person_0: 2182118969014725280
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
