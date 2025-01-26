@@ -1,6 +1,7 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 using UnityUtil.Updating;
 
 namespace GGJ2025
@@ -32,7 +33,7 @@ namespace GGJ2025
 
         public UnityEvent FirstBubbleCollected = new();
         public UnityEvent BubbleCollected = new();
-        public UnityEvent MinRadiusReached = new();
+        public UnityEvent BubblePopping = new();
 
         protected override void Awake()
         {
@@ -50,6 +51,24 @@ namespace GGJ2025
                 return;
 
             collectBubble(collectedParentTransform, collectibleBubble);
+        }
+
+        public void PopBubble()
+        {
+            if (!HasBubble)
+                return;
+
+            popBubble();
+        }
+
+        private void popBubble()
+        {
+            if (!HasBubble)
+                return;
+
+            RemoveFixedUpdate();
+            HasBubble = false;
+            BubblePopping.Invoke();
         }
 
         private void collectBubble(Transform collectedParentTransform, CollectibleBubble collectibleBubble)
@@ -92,9 +111,7 @@ namespace GGJ2025
 
             if (newBubbleRadius <= MinRadius) {
                 Debug.Log("Bubble has reached min radius");
-                RemoveFixedUpdate();
-                HasBubble = false;
-                MinRadiusReached.Invoke();
+                popBubble();
             }
         }
     }
