@@ -15,6 +15,9 @@ namespace GGJ2025
         [ShowInInspector, ReadOnly]
         public float CurrentRadius => _sphereCollider == null ? 0f : _sphereCollider.radius - TRIGGER_OFFSET;
 
+        [Tooltip("X-axis is current radius, y-axis is growth increment at that radius")]
+        public AnimationCurve RadiusGrowthCurve;
+
         [RequiredIn(PrefabKind.NonPrefabInstance)]
         public GameObject ScaledBubbleObject;
 
@@ -24,20 +27,20 @@ namespace GGJ2025
 
         private void OnTriggerEnter(Collider other)
         {
-            Transform collectedParentTransform = other.attachedRigidbody.transform;
-            CollectibleBubble collectibleBubble = collectedParentTransform.GetComponentInChildren<CollectibleBubble>();
+            Transform collectedParentTransform = other.attachedRigidbody == null ? null : other.attachedRigidbody.transform;
+            CollectibleBubble collectibleBubble = collectedParentTransform == null ? null : collectedParentTransform.GetComponentInChildren<CollectibleBubble>();
             if (collectibleBubble == null)
                 return;
 
+            float increment = RadiusGrowthCurve.Evaluate(CurrentRadius);
+
             float oldBubbleRadius = CurrentRadius;
-            float collectedSurfaceArea = getSphereSurfaceArea(collectibleBubble.SphereCollider.radius);
-            float currBubbleSurfaceArea = getSphereSurfaceArea(oldBubbleRadius);
-            float newBubbleRadius = Mathf.Sqrt((currBubbleSurfaceArea + collectedSurfaceArea) / PI_X4);
+            float newBubbleRadius = oldBubbleRadius + increment;
             _sphereCollider.radius = newBubbleRadius + TRIGGER_OFFSET;
 
             ScaledBubbleObject.transform.localScale = ScaledBubbleObject.transform.localScale * (newBubbleRadius / oldBubbleRadius);
 
-            Debug.Log($"Collected bubble '{collectedParentTransform.name}' with radius {collectibleBubble.SphereCollider.radius}, new radius: {newBubbleRadius}");
+            Debug.Log($"Collected bubble '{collectedParentTransform.name}', growing by {increment} to new radius: {newBubbleRadius}");
 
             collectibleBubble.Collect();
 

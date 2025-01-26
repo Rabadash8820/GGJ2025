@@ -579,7 +579,7 @@ GameObject:
   - component: {fileID: 2734217554644328845}
   - component: {fileID: 4838815422322940494}
   m_Layer: 0
-  m_Name: collect-trigger
+  m_Name: interact-trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -633,6 +633,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c173c68f14ebb84184da62e3e915e34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RadiusGrowthCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.25
+      inSlope: 0
+      outSlope: -0.0125
+      tangentMode: 65
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 20
+      value: 0
+      inSlope: -0.0125
+      outSlope: -0.00067023066
+      tangentMode: 5
+      weightedMode: 0
+      inWeight: 0.119029805
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   ScaledBubbleObject: {fileID: 4214180908611633256}
   BubbleCollected:
     m_PersistentCalls:
