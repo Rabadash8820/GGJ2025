@@ -1,3 +1,4 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
-    <ui:Label text="Score: 0" name="lbl-score" style="-unity-text-align: upper-center; color: rgb(255, 255, 255); font-size: 24px;" />
+    <ui:Label text="People hit: 0" name="lbl-people" style="-unity-text-align: upper-left; color: rgb(255, 255, 255); font-size: 20px;" />
+    <ui:Label text="Score: 0" name="lbl-score" style="-unity-text-align: upper-left; color: rgb(255, 255, 255); font-size: 20px;" />
 </ui:UXML>
