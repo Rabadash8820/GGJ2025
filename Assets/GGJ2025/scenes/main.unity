@@ -3758,7 +3758,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 47336f8b790e5bc6b8db90d68827e123, type: 3}
       propertyPath: m_Name
-      value: fan
+      value: fan-2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3970,7 +3970,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 47336f8b790e5bc6b8db90d68827e123, type: 3}
       propertyPath: m_Name
-      value: fan
+      value: fan-3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4493,7 +4493,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 47336f8b790e5bc6b8db90d68827e123, type: 3}
       propertyPath: m_Name
-      value: fan
+      value: fan-4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5116,7 +5116,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 47336f8b790e5bc6b8db90d68827e123, type: 3}
       propertyPath: m_Name
-      value: fan
+      value: fan-1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
