@@ -7,6 +7,8 @@ namespace GGJ2025
 {
     public class GameWonMenuController : MonoBehaviour
     {
+        private VisualElement _grpGameWonMenu;
+
         [RequiredIn(PrefabKind.NonPrefabInstance)]
         public UIDocument UIDocument;
 
@@ -25,19 +27,19 @@ namespace GGJ2025
 
         private void Awake()
         {
-            setupButtons(UIDocument.rootVisualElement);
+            _grpGameWonMenu = UIDocument.rootVisualElement.Query<VisualElement>(GrpGameWonMenuName).First();
+            setupButtons(_grpGameWonMenu);
         }
 
         private void setupButtons(VisualElement root)
         {
-            VisualElement grpGameWonMenu = UIDocument.rootVisualElement.Query<VisualElement>(GrpGameWonMenuName).First();
             Button btnPlayAgain = root.Query<Button>(BtnPlayAgainName).First();
             Button btnMainMenu = root.Query<Button>(BtnMainMenuName).First();
             Button btnQuit = root.Query<Button>(BtnQuitName).First();
 
             btnPlayAgain.clicked += () => {
                 Debug.Log("Play Again button clicked", context: this);
-                grpGameWonMenu.style.display = DisplayStyle.Flex;
+                PlayAgainSelected.Invoke();
             };
             btnMainMenu.clicked += () => {
                 Debug.Log("Main Menu button clicked", context: this);
@@ -51,6 +53,12 @@ namespace GGJ2025
             btnPlayAgain.RegisterCallback<MouseEnterEvent>(e => PlayAgainHovered.Invoke());
             btnMainMenu.RegisterCallback<MouseEnterEvent>(e => MainMenuHovered.Invoke());
             btnQuit.RegisterCallback<MouseEnterEvent>(e => { QuitHovered.Invoke(); });
+        }
+
+        public void Show()
+        {
+            Debug.Log("Game won!", context: this);
+            _grpGameWonMenu.style.display = DisplayStyle.Flex;
         }
     }
 }

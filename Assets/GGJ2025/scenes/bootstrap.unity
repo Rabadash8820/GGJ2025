@@ -663,7 +663,19 @@ MonoBehaviour:
         m_CallState: 2
   Started:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: fff056fde0bbbb84690aebabf8cb4fd3, type: 2}
+        m_TargetAssemblyTypeName: GGJ2025.SceneActivator, GGJ2025
+        m_MethodName: SetActiveScene
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: bootstrap
+          m_BoolArgument: 0
+        m_CallState: 2
   Enabled:
     m_PersistentCalls:
       m_Calls: []
