@@ -124,9 +124,9 @@ MonoBehaviour:
   StartHeightIndex: 1
   Transform: {fileID: 8472096987984285446}
   Heights:
-  - 3
-  - 8
-  - 13
+  - 3.5
+  - 8.22
+  - 15
   MovingUp:
     m_PersistentCalls:
       m_Calls:
