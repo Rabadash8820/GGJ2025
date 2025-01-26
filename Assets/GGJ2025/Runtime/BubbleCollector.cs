@@ -1,19 +1,22 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityUtil.Updating;
 
 namespace GGJ2025
 {
     [RequireComponent(typeof(SphereCollider))]
-    public class BubbleCollector : MonoBehaviour
+    public class BubbleCollector : Updatable
     {
-        private const float PI_X4 = Mathf.PI * 4f;
         private const float TRIGGER_OFFSET = 0.05f;
 
         private SphereCollider _sphereCollider;
 
         [ShowInInspector, ReadOnly]
         public float CurrentRadius => _sphereCollider == null ? 0f : _sphereCollider.radius - TRIGGER_OFFSET;
+
+        public float RadiusShrinkSpeed = 0.05f;
+        public float MinRadius = 0.1f;
 
         [Tooltip("X-axis is current radius, y-axis is growth increment at that radius")]
         public AnimationCurve RadiusGrowthCurve;
@@ -22,8 +25,16 @@ namespace GGJ2025
         public GameObject ScaledBubbleObject;
 
         public UnityEvent BubbleCollected = new();
+        public UnityEvent MinRadiusReached = new();
 
-        private void Awake() => _sphereCollider = GetComponent<SphereCollider>();
+        protected override void Awake()
+        {
+            base.Awake();
+
+            _sphereCollider = GetComponent<SphereCollider>();
+
+            AddFixedUpdate(shrink);
+        }
 
         private void OnTriggerEnter(Collider other)
         {
@@ -32,13 +43,11 @@ namespace GGJ2025
             if (collectibleBubble == null)
                 return;
 
-            float increment = RadiusGrowthCurve.Evaluate(CurrentRadius);
-
             float oldBubbleRadius = CurrentRadius;
-            float newBubbleRadius = oldBubbleRadius + increment;
-            _sphereCollider.radius = newBubbleRadius + TRIGGER_OFFSET;
+            float increment = RadiusGrowthCurve.Evaluate(oldBubbleRadius);
 
-            ScaledBubbleObject.transform.localScale = ScaledBubbleObject.transform.localScale * (newBubbleRadius / oldBubbleRadius);
+            float newBubbleRadius = oldBubbleRadius + increment;
+            setRadius(oldBubbleRadius, newBubbleRadius);
 
             Debug.Log($"Collected bubble '{collectedParentTransform.name}', growing by {increment} to new radius: {newBubbleRadius}");
 
@@ -47,6 +56,24 @@ namespace GGJ2025
             BubbleCollected.Invoke();
         }
 
-        private float getSphereSurfaceArea(float radius) => PI_X4 * radius * radius;
+        private void setRadius(float oldRadius, float newRadius)
+        {
+            _sphereCollider.radius = newRadius + TRIGGER_OFFSET;
+
+            ScaledBubbleObject.transform.localScale = ScaledBubbleObject.transform.localScale * (newRadius / oldRadius);
+        }
+
+        private void shrink(float deltaTime)
+        {
+            float oldBubbleRadius = CurrentRadius;
+            float newBubbleRadius = oldBubbleRadius - (RadiusShrinkSpeed * deltaTime);
+            setRadius(oldBubbleRadius, newBubbleRadius);
+
+            if (newBubbleRadius <= MinRadius) {
+                Debug.Log("Bubble has reached min radius");
+                RemoveFixedUpdate();
+                MinRadiusReached.Invoke();
+            }
+        }
     }
 }

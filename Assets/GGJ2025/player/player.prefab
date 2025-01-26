@@ -633,6 +633,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c173c68f14ebb84184da62e3e915e34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RadiusShrinkSpeed: 0.05
+  MinRadius: 0.1
   RadiusGrowthCurve:
     serializedVersion: 2
     m_Curve:
@@ -659,6 +661,9 @@ MonoBehaviour:
     m_RotationOrder: 4
   ScaledBubbleObject: {fileID: 4214180908611633256}
   BubbleCollected:
+    m_PersistentCalls:
+      m_Calls: []
+  MinRadiusReached:
     m_PersistentCalls:
       m_Calls: []
 --- !u!114 &4838815422322940494
