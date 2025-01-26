@@ -35,7 +35,7 @@ namespace GGJ2025
         {
             _grpPauseMenu = UIDocument.rootVisualElement.Query<VisualElement>(GrpPauseMenuName).First();
 
-            setupButtons(UIDocument.rootVisualElement);
+            setupButtons(_grpPauseMenu);
 
             _inputSystemActions = new InputSystemActions();
             _inputSystemActions.Player.Pause.performed += _ => SetPaused(!IsPaused);
