@@ -2,7 +2,9 @@
     "name": "GGJ2025.Editor",
     "rootNamespace": "GGJ2025.Editor",
     "references": [],
-    "includePlatforms": [],
+    "includePlatforms": [
+        "Editor"
+    ],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,
