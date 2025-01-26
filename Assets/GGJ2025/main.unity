@@ -885,7 +885,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UIDocument: {fileID: 1149357191}
   LblScoreName: lbl-score
+  LblPeopleHitName: lbl-people-hit
   ScoreFormatString: 'Score: {0}'
+  PeopleHitFormatString: 'People hit: {0}'
 --- !u!1001 &1288685733
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1142,10 +1144,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 778dbee3191431e479b57e36ea18c048, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ScoreFactor: 5
   PersonHitter: {fileID: 6076916499803917062}
   BubbleCollector: {fileID: 6076916499803917063}
   HudController: {fileID: 1149357193}
+  ScoreFactor: 5
+  PeopleParent: {fileID: 518119841}
+  AllPeopleHit:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1642630827
 GameObject:
   m_ObjectHideFlags: 27
@@ -1425,10 +1431,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: player
       objectReference: {fileID: 0}
-    - target: {fileID: 6404396581175636119, guid: 882e3350fcd8abe46923241325d00dda, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 3896358531305103674, guid: 282c93882764021f7940eb8ef2fea931, type: 3}
     - target: {fileID: 8472096987984285446, guid: 882e3350fcd8abe46923241325d00dda, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
