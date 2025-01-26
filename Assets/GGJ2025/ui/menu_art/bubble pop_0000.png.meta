@@ -183,6 +183,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -573,7 +586,24 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      bubble pop_0000_0: -2269203739310682315
+      bubble pop_0000_1: -5769978617002261754
+      bubble pop_0000_10: 8949913364079898863
+      bubble pop_0000_11: 8697232602442454409
+      bubble pop_0000_12: -1807157745349230739
+      bubble pop_0000_13: 1033587421733848019
+      bubble pop_0000_14: 1197933513475060076
+      bubble pop_0000_15: -6652143196190046928
+      bubble pop_0000_16: 3626222628924801199
+      bubble pop_0000_2: -2868937411912922232
+      bubble pop_0000_3: -3856091605302441523
+      bubble pop_0000_4: 3957180022440861272
+      bubble pop_0000_5: 5772233654241503736
+      bubble pop_0000_6: -8387151473513969961
+      bubble pop_0000_7: 5406271018540855264
+      bubble pop_0000_8: -7262305543944788741
+      bubble pop_0000_9: 8125028725731994761
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
