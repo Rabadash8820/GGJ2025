@@ -31,7 +31,7 @@ namespace GGJ2025
         [RequiredIn(PrefabKind.NonPrefabInstance)]
         public GameObject ScaledBubbleObject;
 
-        public UnityEvent FirstBubbleCollected = new();
+        public UnityEvent NewBubbleCollected = new();
         public UnityEvent BubbleCollected = new();
         public UnityEvent BubblePopping = new();
 
@@ -77,7 +77,7 @@ namespace GGJ2025
                 setRadius(oldRadius: 0f, InitialRadius);
                 HasBubble = true;
                 Debug.Log("Collected new first bubble");
-                FirstBubbleCollected.Invoke();
+                NewBubbleCollected.Invoke();
                 AddFixedUpdate(shrink);
             }
 
