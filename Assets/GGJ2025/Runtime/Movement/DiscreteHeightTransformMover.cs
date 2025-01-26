@@ -32,6 +32,8 @@ namespace GGJ2025.Movement
 
         private void OnDisable() => _inputSystemActions.Player.Disable();
 
+        private void OnDestroy() => _inputSystemActions.Dispose();
+
         private void hover(int delta)
         {
             int prevHeightIndex = _currentHeightIndex;

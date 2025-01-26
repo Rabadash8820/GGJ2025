@@ -41,6 +41,8 @@ namespace GGJ2025.Movement
             _inputSystemActions.Player.Disable();
         }
 
+        private void OnDestroy() => _inputSystemActions.Dispose();
+
         private void move(float deltaTime)
         {
             Vector3 prevVector = _moveVector;
