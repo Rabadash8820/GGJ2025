@@ -15,7 +15,7 @@ namespace GGJ2025
             if (personHead == null)
                 return;
 
-            Debug.Log($"Hit head of person '{hitParentTransform.name}'");
+            Debug.Log($"Hit person head '{hitParentTransform.name}'");
 
             PersonHit.Invoke();
         }

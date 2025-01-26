@@ -673,6 +673,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e38ef5489b28ef459f5eeea23c51770, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BubbleCollector: {fileID: 2734217554644328845}
   PersonHit:
     m_PersistentCalls:
       m_Calls: []
