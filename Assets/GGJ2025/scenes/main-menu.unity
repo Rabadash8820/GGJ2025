@@ -464,11 +464,11 @@ PrefabInstance:
     - target: {fileID: 4782048151417134697, guid: 75958e361eead6c4db3539af9d97aa04, type: 3}
       propertyPath: m_Resource
       value: 
-      objectReference: {fileID: 8300000, guid: 5e9e0c334360f044a83d2645b0c11cd4, type: 3}
+      objectReference: {fileID: 8300000, guid: 0015616549a04a643863ef2515030a2e, type: 3}
     - target: {fileID: 4782048151417134697, guid: 75958e361eead6c4db3539af9d97aa04, type: 3}
       propertyPath: m_audioClip
       value: 
-      objectReference: {fileID: 8300000, guid: 5e9e0c334360f044a83d2645b0c11cd4, type: 3}
+      objectReference: {fileID: 8300000, guid: 0015616549a04a643863ef2515030a2e, type: 3}
     - target: {fileID: 7622490424632984189, guid: 75958e361eead6c4db3539af9d97aa04, type: 3}
       propertyPath: m_Name
       value: background-music
