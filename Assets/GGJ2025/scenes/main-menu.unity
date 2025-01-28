@@ -365,9 +365,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UIDocument: {fileID: 1332727035}
+  GrpMainMenuName: grp-main-menu
   BtnPlayName: btn-play
   BtnCreditsName: btn-credits
   BtnQuitName: btn-quit
+  GrpCreditsName: grp-credits
+  BtnCreditsBackName: btn-credits-back
   PlaySelected:
     m_PersistentCalls:
       m_Calls:
@@ -449,6 +452,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  CreditsBackSelected:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: c404c99b69317bc4fa08de9cb83160f1, type: 2}
+        m_TargetAssemblyTypeName: UnityUtil.Triggers.ApplicationEvent, UnityUtil.Triggers
+        m_MethodName: Invoke
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   PlayHovered:
     m_PersistentCalls:
       m_Calls:
@@ -480,6 +498,21 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   QuitHovered:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: d3ffad33738412e48aeb823790c0b595, type: 2}
+        m_TargetAssemblyTypeName: UnityUtil.Triggers.ApplicationEvent, UnityUtil.Triggers
+        m_MethodName: Invoke
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  CreditsBackHovered:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11400000, guid: d3ffad33738412e48aeb823790c0b595, type: 2}
